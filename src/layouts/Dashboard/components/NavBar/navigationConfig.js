@@ -19,6 +19,10 @@ import PersonIcon from '@material-ui/icons/PersonOutlined';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
+import TravelIcon from '@material-ui/icons/FlightTakeoff';
+import ListIcon from '@material-ui/icons/ListAlt';
+import UsersIcon from '@material-ui/icons/PeopleAlt';
+import BookingIcon from '@material-ui/icons/EventNote';
 
 import { Label } from 'components';
 
@@ -50,42 +54,42 @@ export default [
       {
         title: 'Dashboards',
         href: '/dashboards',
-        icon: DashboardIcon,
-        children: [
-          {
-            title: 'Default',
-            href: '/dashboards/default'
-          },
-          {
-            title: 'Analytics',
-            href: '/dashboards/analytics'
-          }
-        ]
+        icon: DashboardIcon
+        // children: [
+        //   {
+        //     title: 'Default',
+        //     href: '/dashboards/default'
+        //   },
+        //   {
+        //     title: 'Analytics',
+        //     href: '/dashboards/analytics'
+        //   }
+        // ]
       },
+      // {
+      //   title: 'Contacts',
+      //   href: '/contacts',
+      //   icon: BarChartIcon,
+      //   children: [
+      //     {
+      //       title: 'Customers',
+      //       href: '/management/customers',
+      //       icon: BarChartIcon
+      //     },
+      //     {
+      //       title: 'Contributors',
+      //       href: '/management/customers/1/summary'
+      //     },
+      //     {
+      //       title: 'Provider',
+      //       href: '/management/projects'
+      //     }
+      //   ]
+      // },
       {
         title: 'Contacts',
-        href: '/contacts',
-        icon: BarChartIcon,
-        children: [
-          {
-            title: 'Customers',
-            href: '/management/customers',
-            icon: BarChartIcon
-          },
-          {
-            title: 'Contributors',
-            href: '/management/customers/1/summary'
-          },
-          {
-            title: 'Provider',
-            href: '/management/projects'
-          }
-        ]
-      },
-      {
-        title: 'Management',
         href: '/management',
-        icon: BarChartIcon,
+        icon: UsersIcon,
         children: [
           {
             title: 'Customers',
@@ -98,116 +102,145 @@ export default [
           {
             title: 'Customer Details',
             href: '/management/customers/1/summary'
-          },
-          {
-            title: 'Projects',
-            href: '/management/projects'
-          },
-          {
-            title: 'Orders',
-            href: '/management/orders'
-          },
-          {
-            title: 'Order Details',
-            href: '/management/orders/1'
           }
+          // {
+          //   title: 'Projects',
+          //   href: '/management/projects'
+          // },
+          // {
+          //   title: 'Orders',
+          //   href: '/management/orders'
+          // },
+          // {
+          //   title: 'Order Details',
+          //   href: '/management/orders/1'
+          // }
         ]
       },
       {
-        title: 'Social Feed',
-        href: '/social-feed',
-        icon: PeopleIcon
-      },
-      {
-        title: 'Profile',
-        href: '/profile',
-        icon: PersonIcon,
+        title: 'Travels',
+        href: '/travels',
+        icon: TravelIcon,
         children: [
           {
-            title: 'Timeline',
-            href: '/profile/1/timeline'
+            title: 'Trip List',
+            href: '/travel/triplist',
+            icon: ListIcon
           },
           {
-            title: 'Connections',
-            href: '/profile/1/connections'
+            title: '1 Day Tour',
+            href: '/management/trip/oneday'
           },
           {
-            title: 'Projects',
-            href: '/profile/1/projects'
+            title: '2 Days or More',
+            href: '/management/trip/manydays'
           },
           {
-            title: 'Reviews',
-            href: '/profile/1/reviews'
+            title: 'Cruises',
+            href: '/management/trip/cruises'
           }
         ]
       },
       {
-        title: 'Project',
-        href: '/projects',
-        icon: FolderIcon,
-        children: [
-          {
-            title: 'Browse',
-            href: '/projects'
-          },
-          {
-            title: 'Create',
-            href: '/projects/create'
-          },
-          {
-            title: 'Overview',
-            href: '/projects/1/overview'
-          },
-          {
-            title: 'Files',
-            href: '/projects/1/files'
-          },
-          {
-            title: 'Activity',
-            href: '/projects/1/activity'
-          },
-          {
-            title: 'Subscribers',
-            href: '/projects/1/subscribers'
-          }
-        ]
+        title: 'Reservation',
+        href: '/reservation',
+        icon: BookingIcon
       },
-      {
-        title: 'Invoice',
-        href: '/invoices/1',
-        icon: ReceiptIcon
-      },
-      {
-        title: 'Kanban Board',
-        href: '/kanban-board',
-        icon: ListAltIcon
-      },
-      {
-        title: 'Mail',
-        href: '/mail',
-        icon: MailIcon,
-        label: () => (
-          <Label color={colors.red[500]} shape="rounded">
-            2
-          </Label>
-        )
-      },
-      {
-        title: 'Chat',
-        href: '/chat',
-        icon: ChatIcon,
-        label: () => (
-          <Label color={colors.red[500]} shape="rounded">
-            4
-          </Label>
-        )
-      },
-      {
-        title: 'Calendar',
-        href: '/calendar',
-        icon: CalendarTodayIcon,
-        label: () => <Label color={colors.green[500]}>New</Label>
-      },
+      // {
+      //   title: 'Social Feed',
+      //   href: '/social-feed',
+      //   icon: PeopleIcon
+      // },
+      // {
+      //   title: 'Profile',
+      //   href: '/profile',
+      //   icon: PersonIcon,
+      //   children: [
+      //     {
+      //       title: 'Timeline',
+      //       href: '/profile/1/timeline'
+      //     },
+      //     {
+      //       title: 'Connections',
+      //       href: '/profile/1/connections'
+      //     },
+      //     {
+      //       title: 'Projects',
+      //       href: '/profile/1/projects'
+      //     },
+      //     {
+      //       title: 'Reviews',
+      //       href: '/profile/1/reviews'
+      //     }
+      //   ]
+      // },
+      // {
+      //   title: 'Project',
+      //   href: '/projects',
+      //   icon: FolderIcon,
+      //   children: [
+      //     {
+      //       title: 'Browse',
+      //       href: '/projects'
+      //     },
+      //     {
+      //       title: 'Create',
+      //       href: '/projects/create'
+      //     },
+      //     {
+      //       title: 'Overview',
+      //       href: '/projects/1/overview'
+      //     },
+      //     {
+      //       title: 'Files',
+      //       href: '/projects/1/files'
+      //     },
+      //     {
+      //       title: 'Activity',
+      //       href: '/projects/1/activity'
+      //     },
+      //     {
+      //       title: 'Subscribers',
+      //       href: '/projects/1/subscribers'
+      //     }
+      //   ]
+      // },
+      // {
+      //   title: 'Invoice',
+      //   href: '/invoices/1',
+      //   icon: ReceiptIcon
+      // },
+      // {
+      //   title: 'Kanban Board',
+      //   href: '/kanban-board',
+      //   icon: ListAltIcon
+      // },
+      // {
+      //   title: 'Mail',
+      //   href: '/mail',
+      //   icon: MailIcon,
+      //   label: () => (
+      //     <Label color={colors.red[500]} shape="rounded">
+      //       2
+      //     </Label>
+      //   )
+      // },
+      // {
+      //   title: 'Chat',
+      //   href: '/chat',
+      //   icon: ChatIcon,
+      //   label: () => (
+      //     <Label color={colors.red[500]} shape="rounded">
+      //       4
+      //     </Label>
+      //   )
+      // },
+      // {
+      //   title: 'Calendar',
+      //   href: '/calendar',
+      //   icon: CalendarTodayIcon,
+      //   label: () => <Label color={colors.green[500]}>New</Label>
+      // },
       {
         title: 'Settings',
         href: '/settings',
@@ -230,62 +263,62 @@ export default [
             href: '/settings/security'
           }
         ]
-      },
-      {
-        title: 'Authentication',
-        href: '/auth',
-        icon: LockOpenIcon,
-        children: [
-          {
-            title: 'Login',
-            href: '/auth/login'
-          },
-          {
-            title: 'Register',
-            href: '/auth/register'
-          }
-        ]
-      },
-      {
-        title: 'Errors',
-        href: '/errors',
-        icon: ErrorIcon,
-        children: [
-          {
-            title: 'Error 401',
-            href: '/errors/error-401'
-          },
-          {
-            title: 'Error 404',
-            href: '/errors/error-404'
-          },
-          {
-            title: 'Error 500',
-            href: '/errors/error-500'
-          }
-        ]
       }
-    ]
-  },
-  {
-    title: 'Support',
-    pages: [
-      {
-        title: 'Presentation',
-        href: '/presentation',
-        icon: PresentToAllIcon
-      },
-      {
-        title: 'Getting started',
-        href: '/getting-started',
-        icon: CodeIcon
-      },
-      {
-        title: 'Changelog',
-        href: '/changelog',
-        icon: ViewModuleIcon,
-        label: () => <Label color={colors.blue['500']}>v1.2.0</Label>
-      }
+      // {
+      //   title: 'Authentication',
+      //   href: '/auth',
+      //   icon: LockOpenIcon,
+      //   children: [
+      //     {
+      //       title: 'Login',
+      //       href: '/auth/login'
+      //     },
+      //     {
+      //       title: 'Register',
+      //       href: '/auth/register'
+      //     }
+      //   ]
+      // },
+      // {
+      //   title: 'Errors',
+      //   href: '/errors',
+      //   icon: ErrorIcon,
+      //   children: [
+      //     {
+      //       title: 'Error 401',
+      //       href: '/errors/error-401'
+      //     },
+      //     {
+      //       title: 'Error 404',
+      //       href: '/errors/error-404'
+      //     },
+      //     {
+      //       title: 'Error 500',
+      //       href: '/errors/error-500'
+      //     }
+      //   ]
+      // }
     ]
   }
+  // {
+  //   title: 'Support',
+  //   pages: [
+  //     {
+  //       title: 'Presentation',
+  //       href: '/presentation',
+  //       icon: PresentToAllIcon
+  //     },
+  //     {
+  //       title: 'Getting started',
+  //       href: '/getting-started',
+  //       icon: CodeIcon
+  //     },
+  //     {
+  //       title: 'Changelog',
+  //       href: '/changelog',
+  //       icon: ViewModuleIcon,
+  //       label: () => <Label color={colors.blue['500']}>v1.2.0</Label>
+  //     }
+  //   ]
+  // }
 ];

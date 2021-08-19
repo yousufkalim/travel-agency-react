@@ -7,6 +7,8 @@ import { LinearProgress } from '@material-ui/core';
 import { NavBar, TopBar, ChatBar } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 
+import 'antd/dist/antd.css';
+
 const useStyles = makeStyles(() => ({
   root: {
     height: '100%',
@@ -41,9 +43,8 @@ const Dashboard = props => {
   const dispatch = useDispatch();
   const { loggedIn, user } = useSelector(state => state.session);
   useEffect(() => {
-    console.log(user);
     // if (!loggedIn) return props.history.push('/auth/login');
-  }, [dispatch]);
+  }, []);
   const classes = useStyles();
   const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
 

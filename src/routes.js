@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/',
     exact: true,
-    component: () => <Redirect to="/presentation" />
+    component: () => <Redirect to="/dashboards" />
   },
   {
     path: '/auth',
@@ -65,6 +65,16 @@ const routes = [
     component: DashboardLayout,
     routes: [
       {
+        path: '/travel/triplist',
+        exact: true,
+        component: lazy(() => import('views/TravelManagement/TripList'))
+      },
+      {
+        path: '/travels/trip/create',
+        exact: true,
+        component: lazy(() => import('views/TravelManagement/CreateTrip'))
+      },
+      {
         path: '/calendar',
         exact: true,
         component: lazy(() => import('views/Calendar'))
@@ -85,7 +95,7 @@ const routes = [
         component: lazy(() => import('views/Chat'))
       },
       {
-        path: '/dashboards/analytics',
+        path: '/dashboards',
         exact: true,
         component: DashboardAnalyticsView
       },

@@ -6,6 +6,8 @@ const initialState = {
 };
 
 const sessionReducer = (state = initialState, action) => {
+  console.log(action.type);
+  console.log(action.payload);
   switch (action.type) {
     case actionTypes.SESSION_LOGIN: {
       return { loggedIn: true, user: action.payload };

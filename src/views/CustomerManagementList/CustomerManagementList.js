@@ -52,7 +52,7 @@ const CustomerManagementList = () => {
     <Page className={classes.root} title="Customer Management List">
       <Header />
       <SearchBar onFilter={handleFilter} onSearch={handleSearch} />
-      {filteredData && (
+      {customers && (
         <Results className={classes.results} customers={customers} />
       )}
     </Page>
