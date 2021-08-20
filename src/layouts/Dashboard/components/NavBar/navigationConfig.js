@@ -126,19 +126,19 @@ export default [
             title: 'Trip List',
             href: '/travel/triplist',
             icon: ListIcon
-          },
-          {
-            title: '1 Day Tour',
-            href: '/management/trip/oneday'
-          },
-          {
-            title: '2 Days or More',
-            href: '/management/trip/manydays'
-          },
-          {
-            title: 'Cruises',
-            href: '/management/trip/cruises'
           }
+          // {
+          //   title: '1 Day Tour',
+          //   href: '/management/trip/oneday'
+          // },
+          // {
+          //   title: '2 Days or More',
+          //   href: '/management/trip/manydays'
+          // },
+          // {
+          //   title: 'Cruises',
+          //   href: '/management/trip/cruises'
+          // }
         ]
       },
       {
