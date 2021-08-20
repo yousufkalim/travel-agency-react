@@ -44,24 +44,11 @@ const General = props => {
       {...rest}
       className={clsx(classes.root, className)}
       container
-      spacing={3}
-    >
-      <Grid
-        item
-        lg={4}
-        md={6}
-        xl={3}
-        xs={12}
-      >
+      spacing={3}>
+      <Grid item lg={4} md={6} xl={3} xs={12}>
         <ProfileDetails profile={profile} />
       </Grid>
-      <Grid
-        item
-        lg={8}
-        md={6}
-        xl={9}
-        xs={12}
-      >
+      <Grid item lg={8} md={6} xl={9} xs={12}>
         <GeneralSettings profile={profile} />
       </Grid>
     </Grid>

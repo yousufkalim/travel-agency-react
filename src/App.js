@@ -1,12 +1,12 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import MomentUtils from '@date-io/moment';
 import { Provider as StoreProvider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { renderRoutes } from 'react-router-config';
-
+// import renderRoutes from './renderRoutes';
 import theme from './theme';
 import { configureStore } from './store';
 import routes from './routes';
@@ -25,6 +25,9 @@ import './assets/scss/index.scss';
 const history = createBrowserHistory();
 const store = configureStore();
 
+const authed = false; // <-- You can change this
+const authPath = '/login'; // <-- You can change this
+
 const App = () => {
   return (
     <StoreProvider store={store}>
@@ -34,7 +37,7 @@ const App = () => {
             <ScrollReset />
             <GoogleAnalytics />
             <CookiesNotification />
-            {renderRoutes(routes)}
+            {renderRoutes(routes, { hello: true })}
           </Router>
         </MuiPickersUtilsProvider>
       </ThemeProvider>
