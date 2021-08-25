@@ -75,6 +75,11 @@ const routes = [
         component: lazy(() => import('views/TravelManagement/CreateTrip'))
       },
       {
+        path: '/travels/trip/edit/:id',
+        exact: true,
+        component: lazy(() => import('views/TravelManagement/EditTrip'))
+      },
+      {
         path: '/calendar',
         exact: true,
         component: lazy(() => import('views/Calendar'))

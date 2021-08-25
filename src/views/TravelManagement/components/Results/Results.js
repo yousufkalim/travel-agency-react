@@ -136,20 +136,20 @@ const Results = props => {
 
   const tableHeader = [
     {
-      title: 'Title',
-      field: 'title'
+      title: 'Name',
+      field: 'name'
     },
     { title: 'city', field: 'city' },
     { title: 'category', field: 'category' },
     { title: 'size', field: 'tripSize' },
-    { title: 'type', field: 'tourType' },
+    { title: 'dayType', field: 'dayType' },
     {
-      title: 'minBooking',
-      field: 'minBooking'
+      title: 'minReservation',
+      field: 'minReservation'
     },
     {
-      title: 'maxBooking',
-      field: 'maxBooking'
+      title: 'maxReservation',
+      field: 'maxReservation'
     },
     {
       title: 'Active on Site',
@@ -174,7 +174,7 @@ const Results = props => {
           color="primary"
           component={RouterLink}
           size="small"
-          to={`/management/customers/${customer._id}`}
+          to={`/travels/trip/edit/${customer._id}`}
           variant="outlined">
           View
         </Button>

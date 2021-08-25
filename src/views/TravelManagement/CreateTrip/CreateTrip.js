@@ -32,8 +32,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 import { Page } from 'components';
+import { PlusOutlined } from '@ant-design/icons';
 
 import Header from './components/Header';
+import { createTrip } from 'actions/tripActions';
+import { message, Upload } from 'antd';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,6 +54,7 @@ const CreateTrip = props => {
   const { match, history } = props;
   const classes = useStyles();
 
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     name: '',
     organizer: false,
@@ -58,8 +62,8 @@ const CreateTrip = props => {
     organizerComission: 0,
     youtube: '',
     description: '',
-    includes: [''],
-    excludes: [''],
+    includes: [],
+    excludes: [],
     activeOnSite: true,
     archived: false,
     address: '',
@@ -71,6 +75,11 @@ const CreateTrip = props => {
     category: 'Multiple Day',
 
     bedroom: { double: 0, single: 0, twin: 0 },
+    interior: { adultPrice: 0, childPrice: 0 },
+    exterior: { adultPrice: 0, childPrice: 0 },
+    balcony: { adultPrice: 0, childPrice: 0 },
+    suite: { adultPrice: 0, childPrice: 0 },
+
     cabin: {},
     departure: new Date(),
     arrival: new Date(),
@@ -89,8 +98,8 @@ const CreateTrip = props => {
     suite: { adultPrice: 0, childPrice: 0 }
   });
 
-  const [bannerImage, setBannerImage] = useState('');
-  const [gallery, setGallery] = useState([]);
+  const [banner, setBanner] = useState('');
+  // const [gallery, setGallery] = useState([]);
 
   const handleChange = event => {
     setValues({
@@ -110,9 +119,9 @@ const CreateTrip = props => {
 
   const handleCabinPrice = e => {
     const target = e.target.name.split('.');
-    let data = { ...cabin[target[0]] };
+    let data = { ...values[target[0]] };
     data[target[1]] = e.target.value;
-    setCabin({ ...cabin, [target[0]]: data });
+    setValues({ ...values, [target[0]]: data });
   };
 
   /* Include handler  */
@@ -134,47 +143,84 @@ const CreateTrip = props => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-
-    if (values.category === 'Cruises') {
-      setValues({ ...values, ...cabin });
+    setLoading(true);
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(values));
+    if (banner) {
+      formData.append('banner', banner.originFileObj);
     }
+    gallery.forEach(element => {
+      formData.append('gallery', element.originFileObj);
+    });
 
-    console.log(cabin);
-    console.log(values);
-    // const formData = new FormData();
-    // console.log(values);
-    // formData.append('data', JSON.stringify(values));
-
-    // if (bannerImage) {
-    //   formData.append('bannerImage', bannerImage.originFileObj);
-    // }
-    // gallery.forEach(element => {
-    //   formData.append('gallery', element.originFileObj);
-    // });
-
-    // apiServices
-    //   .addTrip(formData)
-    //   .then(res => {
-    //     console.log(res);
-    //     openNotification(
-    //       'success',
-    //       'Trip Created',
-    //       'New trip has been created successfully'
-    //     );
-    //   })
-    //   .catch(err => console.log(err.response));
+    createTrip(formData)
+      .then(res => {
+        setLoading(false);
+        message.success('trip created successfully!');
+        history.push('/travel/triplist');
+      })
+      .catch(err => {
+        setLoading(false);
+        console.log(err.response);
+      });
   };
+
+  const [gallery, setGallery] = useState([]);
 
   return (
     <Page className={classes.root} title="Create New Trip">
       <Header />
       <div className={classes.content}>
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} encType="multipart/form-data">
           <Card>
             <CardHeader title="Trip Info" />
             <Divider />
             <CardContent>
               <Grid container spacing={3}>
+                <Grid item md={2} xs={12}>
+                  <Card>
+                    <CardHeader title="Banner Image" />
+                    <Grid
+                      item
+                      md={12}
+                      xs={12}
+                      style={{ textAlign: 'center', padding: '15px' }}>
+                      <Upload
+                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                        listType="picture-card"
+                        onChange={({ fileList }) => setBanner(fileList[0])}>
+                        {banner ? null : (
+                          <div>
+                            <PlusOutlined />
+                            <div style={{ marginTop: 8 }}>Upload</div>
+                          </div>
+                        )}
+                      </Upload>
+                    </Grid>
+                  </Card>
+                </Grid>
+                <Grid item md={10} xs={12}>
+                  <Card>
+                    <CardHeader title="Gallery Image (Allowed Maximum 5 images *)" />
+                    <Grid item md={12} xs={12} style={{ padding: '15px' }}>
+                      <Upload
+                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                        listType="picture-card"
+                        fileList={gallery}
+                        onChange={({ fileList }) => setGallery(fileList)}
+                        maxCount={5}
+                        multiple={true}>
+                        {gallery.length >= 5 ? null : (
+                          <div>
+                            <PlusOutlined />
+                            <div style={{ marginTop: 8 }}>Upload</div>
+                          </div>
+                        )}
+                      </Upload>
+                    </Grid>
+                  </Card>
+                </Grid>
+
                 <Grid item md={12} sm={12} xs={12}>
                   <TextField
                     fullWidth
@@ -891,7 +937,11 @@ const CreateTrip = props => {
             </CardContent>
             <Divider />
             <CardActions style={{ justifyContent: 'flex-end' }}>
-              <Button variant="contained" color="primary" type="submit">
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={loading}>
                 Create Trip
               </Button>
             </CardActions>
