@@ -1,6 +1,6 @@
 // import axios from 'axios';
 
-// const baseURL = 'http://api.crmviagens.com/api/v1';
+const baseURL = 'http://api.crmviagens.com/api/v1';
 
 // const instance = axios.create({ baseURL });
 
@@ -11,7 +11,8 @@
 
 import axios from 'axios';
 
-const baseURL = 'http://localhost:5000/api/v1';
+const baseURL = 'http://api.crmviagens.com/api/v1';
+// const baseURL = 'http://localhost:5000/api/v1';
 const instance = axios.create({
   //  timeout: 1000,
   // `headers` are custom headers to be sent

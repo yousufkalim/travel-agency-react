@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://api.crmviagens.com/api/v1';
-axios.defaults.baseURL = 'http://localhost:5000/api/v1';
+axios.defaults.baseURL = 'http://api.crmviagens.com/api/v1';
+// axios.defaults.baseURL = 'http://localhost:5000/api/v1';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
