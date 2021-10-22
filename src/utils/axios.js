@@ -1,7 +1,5 @@
 // import axios from 'axios';
 
-const baseURL = 'http://api.crmviagens.com/api/v1';
-
 // const instance = axios.create({ baseURL });
 
 // instance.defaults.withCredentials = true;
