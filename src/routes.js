@@ -99,44 +99,37 @@ const routes = [
       {
         path: '/travel/triplist',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <TripList />
+        component: () => <TripList />
       },
       {
         path: '/travels/trip/create',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <CreateTrip />
+        component: () => <CreateTrip />
       },
       {
         path: '/travels/trip/edit/:id',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <EditTrip />
+        component: () => <EditTrip />
       },
       {
         path: '/calendar',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <Calendar />
+        component: () => <Calendar />
       },
       {
         path: '/changelog',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <Changelog />
+        component: () => <Changelog />
       },
       {
         path: '/chat',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <Chat />
+        component: () => <Chat />
       },
       {
         path: '/chat/:id',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <Chat />
+        component: () => <Chat />
       },
       {
         path: '/dashboards',
@@ -171,14 +164,12 @@ const routes = [
       {
         path: '/kanban-board',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <KanbanBoard />
+        component: () => <KanbanBoard />
       },
       {
         path: '/mail',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <Mail />
+        component: () => <Mail />
       },
       {
         path: '/management/customers',
@@ -253,8 +244,7 @@ const routes = [
       {
         path: '/overview',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <OverviewView />
+        component: () => <OverviewView />
       },
       {
         path: '/presentation',
@@ -269,14 +259,12 @@ const routes = [
       {
         path: '/profile/:id',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <Profile />
+        component: () => <Profile />
       },
       {
         path: '/profile/:id/:tab',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <Profile />
+        component: () => <Profile />
       },
       {
         path: '/projects/create',
@@ -311,26 +299,22 @@ const routes = [
       {
         path: '/projects',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <ProjectList />
+        component: () => <ProjectList />
       },
       {
         path: '/settings',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <Settings />
+        component: () => <Settings />
       },
       {
         path: '/settings/:tab',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <Settings />
+        component: () => <Settings />
       },
       {
         path: '/social-feed',
         exact: true,
-        component: () =>
-          !localStorage.token ? <Redirect to="/auth/login" /> : <SocialFeed />
+        component: () => <SocialFeed />
       },
       {
         path: '/getting-started',

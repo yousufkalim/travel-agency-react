@@ -29,6 +29,7 @@ const authed = false; // <-- You can change this
 const authPath = '/login'; // <-- You can change this
 
 const App = () => {
+  console.log(store);
   return (
     <StoreProvider store={store}>
       <ThemeProvider theme={theme}>
