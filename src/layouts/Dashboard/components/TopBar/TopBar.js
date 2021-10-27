@@ -125,8 +125,7 @@ const TopBar = props => {
   }, []);
 
   const handleLogout = () => {
-    dispatch(logout());
-    history.push('/auth/login');
+    dispatch(logout(history));
   };
 
   const handlePricingOpen = () => {

@@ -11,11 +11,41 @@ import DashboardDefaultView from './views/DashboardDefault';
 import OverviewView from './views/Overview';
 import PresentationView from './views/Presentation';
 
+import Register from 'views/Register';
+import Login from 'views/Login';
+import TripList from 'views/TravelManagement/TripList';
+import CreateTrip from 'views/TravelManagement/CreateTrip';
+import EditTrip from 'views/TravelManagement/EditTrip';
+import Calendar from 'views/Calendar';
+import Changelog from 'views/Changelog';
+import Chat from 'views/Chat';
+import InvoiceDetails from 'views/InvoiceDetails';
+import KanbanBoard from 'views/KanbanBoard';
+import Mail from 'views/Mail';
+import CustomerManagementList from 'views/CustomerManagementList';
+import CustomerCreate from 'views/CustomerManagementList/CustomerCreate';
+import CustomerManagementDetails from 'views/CustomerManagementDetails';
+import ProjectManagementList from 'views/ProjectManagementList';
+import OrderManagementList from 'views/OrderManagementList';
+import OrderManagementDetails from 'views/OrderManagementDetails';
+import Profile from 'views/Profile';
+import ProjectCreate from 'views/ProjectCreate';
+import ProjectDetails from 'views/ProjectDetails';
+import ProjectList from 'views/ProjectList';
+import Settings from 'views/Settings';
+import SocialFeed from 'views/SocialFeed';
+import GettingStarted from 'views/GettingStarted';
+
 const routes = [
   {
     path: '/',
     exact: true,
-    component: () => <Redirect to="/dashboards" />
+    component: () =>
+      localStorage.token ? (
+        <Redirect to="/dashboards" />
+      ) : (
+        <Redirect to="/auth/login" />
+      )
   },
   {
     path: '/auth',
@@ -24,12 +54,14 @@ const routes = [
       {
         path: '/auth/login',
         exact: true,
-        component: lazy(() => import('views/Login'))
+        component: () =>
+          localStorage.token ? <Redirect to="/dashboards" /> : <Login />
       },
       {
         path: '/auth/register',
         exact: true,
-        component: lazy(() => import('views/Register'))
+        component: () =>
+          localStorage.token ? <Redirect to="/dashboards" /> : <Register />
       },
       {
         component: () => <Redirect to="/errors/error-404" />
@@ -67,159 +99,248 @@ const routes = [
       {
         path: '/travel/triplist',
         exact: true,
-        component: lazy(() => import('views/TravelManagement/TripList'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <TripList />
       },
       {
         path: '/travels/trip/create',
         exact: true,
-        component: lazy(() => import('views/TravelManagement/CreateTrip'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <CreateTrip />
       },
       {
         path: '/travels/trip/edit/:id',
         exact: true,
-        component: lazy(() => import('views/TravelManagement/EditTrip'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <EditTrip />
       },
       {
         path: '/calendar',
         exact: true,
-        component: lazy(() => import('views/Calendar'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <Calendar />
       },
       {
         path: '/changelog',
         exact: true,
-        component: lazy(() => import('views/Changelog'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <Changelog />
       },
       {
         path: '/chat',
         exact: true,
-        component: lazy(() => import('views/Chat'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <Chat />
       },
       {
         path: '/chat/:id',
         exact: true,
-        component: lazy(() => import('views/Chat'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <Chat />
       },
       {
         path: '/dashboards',
         exact: true,
-        component: DashboardAnalyticsView
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <DashboardAnalyticsView />
+          )
       },
       {
         path: '/dashboards/default',
         exact: true,
-        component: DashboardDefaultView
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <DashboardDefaultView />
+          )
       },
       {
         path: '/invoices/:id',
         exact: true,
-        component: lazy(() => import('views/InvoiceDetails'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <InvoiceDetails />
+          )
       },
       {
         path: '/kanban-board',
         exact: true,
-        component: lazy(() => import('views/KanbanBoard'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <KanbanBoard />
       },
       {
         path: '/mail',
         exact: true,
-        component: lazy(() => import('views/Mail'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <Mail />
       },
       {
         path: '/management/customers',
         exact: true,
-        component: lazy(() => import('views/CustomerManagementList'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <CustomerManagementList />
+          )
       },
       {
         path: '/management/customer/create',
         exact: true,
-        component: lazy(() =>
-          import('views/CustomerManagementList/CustomerCreate')
-        )
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <CustomerCreate />
+          )
       },
       {
         path: '/management/customers/:id',
         exact: true,
-        component: lazy(() => import('views/CustomerManagementDetails'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <CustomerManagementDetails />
+          )
       },
       {
         path: '/management/customers/:id/:tab',
         exact: true,
-        component: lazy(() => import('views/CustomerManagementDetails'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <CustomerManagementDetails />
+          )
       },
       {
         path: '/management/projects',
         exact: true,
-        component: lazy(() => import('views/ProjectManagementList'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <ProjectManagementList />
+          )
       },
       {
         path: '/management/orders',
         exact: true,
-        component: lazy(() => import('views/OrderManagementList'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <OrderManagementList />
+          )
       },
       {
         path: '/management/orders/:id',
         exact: true,
-        component: lazy(() => import('views/OrderManagementDetails'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <OrderManagementDetails />
+          )
       },
       {
         path: '/overview',
         exact: true,
-        component: OverviewView
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <OverviewView />
       },
       {
         path: '/presentation',
         exact: true,
-        component: PresentationView
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <PresentationView />
+          )
       },
       {
         path: '/profile/:id',
         exact: true,
-        component: lazy(() => import('views/Profile'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <Profile />
       },
       {
         path: '/profile/:id/:tab',
         exact: true,
-        component: lazy(() => import('views/Profile'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <Profile />
       },
       {
         path: '/projects/create',
         exact: true,
-        component: lazy(() => import('views/ProjectCreate'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <ProjectCreate />
+          )
       },
       {
         path: '/projects/:id',
         exact: true,
-        component: lazy(() => import('views/ProjectDetails'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <ProjectDetails />
+          )
       },
       {
         path: '/projects/:id/:tab',
         exact: true,
-        component: lazy(() => import('views/ProjectDetails'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <ProjectDetails />
+          )
       },
       {
         path: '/projects',
         exact: true,
-        component: lazy(() => import('views/ProjectList'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <ProjectList />
       },
       {
         path: '/settings',
         exact: true,
-        component: lazy(() => import('views/Settings'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <Settings />
       },
       {
         path: '/settings/:tab',
         exact: true,
-        component: lazy(() => import('views/Settings'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <Settings />
       },
       {
         path: '/social-feed',
         exact: true,
-        component: lazy(() => import('views/SocialFeed'))
+        component: () =>
+          !localStorage.token ? <Redirect to="/auth/login" /> : <SocialFeed />
       },
       {
         path: '/getting-started',
         exact: true,
-        component: lazy(() => import('views/GettingStarted'))
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <GettingStarted />
+          )
       },
       {
         component: () => <Redirect to="/errors/error-404" />
