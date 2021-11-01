@@ -12,6 +12,7 @@ import {
   Typography,
   Link
 } from '@material-ui/core';
+import { signup } from 'actions'; ////signup from session actions
 
 import useRouter from 'utils/useRouter';
 
@@ -38,7 +39,8 @@ const schema = {
   password: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
-      maximum: 128
+      maximum: 128,
+      minimum: 6 //// minimum requirement 6 characters
     }
   },
   policy: {
@@ -75,7 +77,7 @@ const RegisterForm = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-  const { history } = useRouter();
+  const router = useRouter(); ///obj to access useRouter
 
   const [formState, setFormState] = useState({
     isValid: false,
@@ -115,7 +117,16 @@ const RegisterForm = props => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    history.push('/');
+    // data to send to backend
+    const data = {
+      fullName: `${formState.values.firstName} ${formState.values.lastName}`,
+      email: formState.values.email,
+      type: 'AGENCY',
+      password: formState.values.password,
+      policy: formState.values.policy
+    };
+    // passing data and router to signup action
+    signup(data, router);
   };
 
   const hasError = field =>
@@ -125,8 +136,7 @@ const RegisterForm = props => {
     <form
       {...rest}
       className={clsx(classes.root, className)}
-      onSubmit={handleSubmit}
-    >
+      onSubmit={handleSubmit}>
       <div className={classes.fields}>
         <TextField
           error={hasError('firstName')}
@@ -182,18 +192,14 @@ const RegisterForm = props => {
               name="policy"
               onChange={handleChange}
             />
-            <Typography
-              color="textSecondary"
-              variant="body1"
-            >
+            <Typography color="textSecondary" variant="body1">
               I have read the{' '}
               <Link
                 color="secondary"
                 component={RouterLink}
                 to="#"
                 underline="always"
-                variant="h6"
-              >
+                variant="h6">
                 Terms and Conditions
               </Link>
             </Typography>
@@ -209,8 +215,7 @@ const RegisterForm = props => {
         disabled={!formState.isValid}
         size="large"
         type="submit"
-        variant="contained"
-      >
+        variant="contained">
         Create account
       </Button>
     </form>
