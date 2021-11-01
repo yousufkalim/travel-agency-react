@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import validate from 'validate.js';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -12,9 +12,8 @@ import {
   Typography,
   Link
 } from '@material-ui/core';
-import { signup } from 'actions'; ////signup from session actions
-
-import useRouter from 'utils/useRouter';
+import { signup, fetchSubscriptions } from 'actions'; ////signup from session actions
+import SubscriptionModal from '../Subscription/SubscriptionModal'; //// Pan modal to show on signup
 
 const schema = {
   firstName: {
@@ -77,7 +76,7 @@ const RegisterForm = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-  const router = useRouter(); ///obj to access useRouter
+  const history = useHistory(); ///obj to access useRouter
 
   const [formState, setFormState] = useState({
     isValid: false,
@@ -85,6 +84,9 @@ const RegisterForm = props => {
     touched: {},
     errors: {}
   });
+  const [subscription, setSubscription] = useState([]); ///state for subcription data from
+  const [modalOpen, setModalOpen] = useState(false); //state to open plan modal
+  const [selected, setSelected] = useState(); ///state for selected subscription
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -95,6 +97,13 @@ const RegisterForm = props => {
       errors: errors || {}
     }));
   }, [formState.values]);
+
+  // use effect to fetch all subscription and save into state
+  useEffect(async () => {
+    const temp = await fetchSubscriptions(setSubscription);
+    setSubscription(temp);
+    setSelected(temp[0]._id);
+  }, []);
 
   const handleChange = event => {
     event.persist();
@@ -117,16 +126,24 @@ const RegisterForm = props => {
 
   const handleSubmit = async event => {
     event.preventDefault();
+    // opening modal on submit
+    setModalOpen(true);
     // data to send to backend
+  };
+
+  // dunction to create agency account
+  const onCreateAccount = async () => {
+    // data to submit to db
     const data = {
       fullName: `${formState.values.firstName} ${formState.values.lastName}`,
       email: formState.values.email,
       type: 'AGENCY',
       password: formState.values.password,
-      policy: formState.values.policy
+      policy: formState.values.policy,
+      subscription: selected
     };
-    // passing data and router to signup action
-    signup(data, router);
+    // passing data and history to signup action
+    signup(data, history);
   };
 
   const hasError = field =>
@@ -216,8 +233,17 @@ const RegisterForm = props => {
         size="large"
         type="submit"
         variant="contained">
-        Create account
+        Select Plan
       </Button>
+      {/* modal on select plan button */}
+      <SubscriptionModal
+        open={modalOpen}
+        setOpen={setModalOpen}
+        selected={selected}
+        setSelected={setSelected}
+        subscription={subscription}
+        onCreateAccount={onCreateAccount}
+      />
     </form>
   );
 };

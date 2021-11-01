@@ -11,7 +11,7 @@ export const SESSION_LOGOUT = 'SESSION_LOGOUT';
 toast.configure({ limit: 1 });
 
 // signup action
-export const signup = async (payload, router) => {
+export const signup = async (payload, history) => {
   try {
     // destructuring data from backend response
     const { data } = await axios.post('/auth/register/agency', payload);
@@ -23,7 +23,7 @@ export const signup = async (payload, router) => {
         pauseOnHover: false
       });
       // redirecting to login
-      router.history.push('/');
+      history.push('/');
     }
   } catch (error) {
     // error message
