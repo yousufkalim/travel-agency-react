@@ -126,6 +126,12 @@ export default [
             title: 'Trip List',
             href: '/travel/triplist',
             icon: ListIcon
+          },
+          {
+            ////archve trip sidebar option
+            title: 'Trip Archived',
+            href: '/travel/triparchive',
+            icon: ListIcon
           }
           // {
           //   title: '1 Day Tour',

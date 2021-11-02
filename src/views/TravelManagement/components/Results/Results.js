@@ -179,7 +179,7 @@ const Results = props => {
           size="small"
           to={`/travels/trip/edit/${customer._id}`}
           variant="outlined">
-          View
+          Edit
         </Button>
       ),
       sorting: false
@@ -209,7 +209,7 @@ const Results = props => {
         {Math.ceil(triplist.length / rowsPerPage)}
       </Typography>
       <Card>
-        <CardHeader action={<GenericMoreButton />} title="All customers" />
+        <CardHeader action={<GenericMoreButton />} title="Trips" />
         <Divider />
         <CardContent className={classes.content}>
           <PerfectScrollbar>

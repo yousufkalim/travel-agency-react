@@ -894,6 +894,7 @@ const EditTrip = props => {
                       <Checkbox
                         name="activeOnSite"
                         color="primary"
+                        checked={values.activeOnSite} ////default value
                         onChange={e => {
                           setValues({
                             ...values,
@@ -910,6 +911,7 @@ const EditTrip = props => {
                     control={
                       <Checkbox
                         name="archived"
+                        checked={values.archived} ////default value
                         onChange={e => {
                           setValues({
                             ...values,
@@ -927,6 +929,7 @@ const EditTrip = props => {
                     control={
                       <Checkbox
                         name="organizer"
+                        checked={values.organizer} ////default value
                         onChange={e => {
                           setValues({
                             ...values,
