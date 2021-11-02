@@ -18,21 +18,11 @@ const Header = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Typography
-        component="h2"
-        gutterBottom
-        variant="overline"
-      >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Typography component="h2" gutterBottom variant="overline">
         Customers
       </Typography>
-      <Typography
-        component="h1"
-        variant="h3"
-      >
+      <Typography component="h1" variant="h3">
         {customer.name}
       </Typography>
     </div>

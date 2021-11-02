@@ -54,10 +54,7 @@ const OrderInfo = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Order info" />
       <Divider />
       <CardContent className={classes.content}>
@@ -66,10 +63,7 @@ const OrderInfo = props => {
             <TableRow>
               <TableCell>Customer</TableCell>
               <TableCell>
-                <Link
-                  component={RouterLink}
-                  to="/management/customers/1"
-                >
+                <Link component={RouterLink} to="/management/customers/1">
                   {order.customer.name}
                 </Link>
                 <div>{order.customer.address}</div>
@@ -113,13 +107,9 @@ const OrderInfo = props => {
                   // eslint-disable-next-line react/jsx-sort-props
                   SelectProps={{ native: true }}
                   value={option}
-                  variant="outlined"
-                >
+                  variant="outlined">
                   {options.map(option => (
-                    <option
-                      key={option}
-                      value={option}
-                    >
+                    <option key={option} value={option}>
                       {option}
                     </option>
                   ))}

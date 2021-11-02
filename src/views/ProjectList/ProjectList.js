@@ -26,10 +26,7 @@ const ProjectList = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Projects List"
-    >
+    <Page className={classes.root} title="Projects List">
       <Header className={classes.header} />
       <Filter className={classes.filter} />
       <Results className={classes.results} />

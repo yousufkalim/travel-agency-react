@@ -77,14 +77,8 @@ const LatestOrders = props => {
   }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        action={<GenericMoreButton />}
-        title="Latest Orders"
-      />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <CardHeader action={<GenericMoreButton />} title="Latest Orders" />
       <Divider />
       <CardContent className={classes.content}>
         <PerfectScrollbar options={{ suppressScrollY: true }}>
@@ -94,14 +88,8 @@ const LatestOrders = props => {
                 <TableHead>
                   <TableRow>
                     <TableCell sortDirection="desc">
-                      <Tooltip
-                        enterDelay={300}
-                        title="Sort"
-                      >
-                        <TableSortLabel
-                          active
-                          direction="desc"
-                        >
+                      <Tooltip enterDelay={300} title="Sort">
+                        <TableSortLabel active direction="desc">
                           Date
                         </TableSortLabel>
                       </Tooltip>
@@ -115,10 +103,7 @@ const LatestOrders = props => {
                 </TableHead>
                 <TableBody>
                   {orders.map(order => (
-                    <TableRow
-                      hover
-                      key={order.id}
-                    >
+                    <TableRow hover key={order.id}>
                       <TableCell>{order.ref}</TableCell>
                       <TableCell>{order.customer.name}</TableCell>
                       <TableCell>{order.items}</TableCell>
@@ -128,8 +113,7 @@ const LatestOrders = props => {
                       <TableCell>
                         <Label
                           color={labelColors[order.status]}
-                          variant="outlined"
-                        >
+                          variant="outlined">
                           {order.status}
                         </Label>
                       </TableCell>
@@ -139,8 +123,7 @@ const LatestOrders = props => {
                           component={RouterLink}
                           size="small"
                           to={'management/orders/1'}
-                          variant="outlined"
-                        >
+                          variant="outlined">
                           View
                         </Button>
                       </TableCell>
@@ -158,8 +141,7 @@ const LatestOrders = props => {
           component={RouterLink}
           size="small"
           to="management/orders"
-          variant="text"
-        >
+          variant="text">
           See all
           <ArrowForwardIcon className={classes.arrowForwardIcon} />
         </Button>

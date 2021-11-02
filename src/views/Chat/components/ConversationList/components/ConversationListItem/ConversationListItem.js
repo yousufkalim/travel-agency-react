@@ -55,8 +55,7 @@ const ConversationListItem = props => {
         className
       )}
       component={RouterLink}
-      to={`/chat/${conversation.id}`}
-    >
+      to={`/chat/${conversation.id}`}>
       <ListItemAvatar>
         <Avatar
           alt="Person"
@@ -77,10 +76,7 @@ const ConversationListItem = props => {
         }}
       />
       <div className={classes.details}>
-        <Typography
-          noWrap
-          variant="body2"
-        >
+        <Typography noWrap variant="body2">
           {moment(lastMessage.created_at).isSame(moment(), 'day')
             ? moment(lastMessage.created_at).format('LT')
             : moment(lastMessage.created_at).fromNow()}
@@ -89,8 +85,7 @@ const ConversationListItem = props => {
           <Label
             className={classes.unread}
             color={colors.red[500]}
-            shape="rounded"
-          >
+            shape="rounded">
             {conversation.unread}
           </Label>
         )}

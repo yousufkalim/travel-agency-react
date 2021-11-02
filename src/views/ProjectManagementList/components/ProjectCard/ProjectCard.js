@@ -75,17 +75,13 @@ const ProjectCard = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent className={classes.content}>
         <div className={classes.header}>
           <Avatar
             alt="Author"
             className={classes.avatar}
-            src={project.author.avatar}
-          >
+            src={project.author.avatar}>
             {getInitials(project.author.name)}
           </Avatar>
           <div>
@@ -94,8 +90,7 @@ const ProjectCard = props => {
               component={RouterLink}
               noWrap
               to="#"
-              variant="h5"
-            >
+              variant="h5">
               {project.title}
             </Link>
             <Typography variant="body2">
@@ -104,8 +99,7 @@ const ProjectCard = props => {
                 color="textPrimary"
                 component={RouterLink}
                 to="/management/customers/1"
-                variant="h6"
-              >
+                variant="h6">
                 {project.author.name}
               </Link>
             </Typography>
@@ -137,18 +131,13 @@ const ProjectCard = props => {
         <div className={classes.stats}>
           <Typography
             style={{ color: statusColors[project.status] }}
-            variant="h6"
-          >
+            variant="h6">
             {project.status}
           </Typography>
           <Typography variant="body2">Project status</Typography>
         </div>
         <div className={classes.actions}>
-          <Button
-            color="primary"
-            size="small"
-            variant="outlined"
-          >
+          <Button color="primary" size="small" variant="outlined">
             View
           </Button>
         </div>

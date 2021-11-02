@@ -53,8 +53,7 @@ const Label = props => {
       {...rest}
       className={rootClassName}
       style={finalStyle}
-      variant="overline"
-    >
+      variant="overline">
       {children}
     </Typography>
   );

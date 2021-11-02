@@ -59,30 +59,18 @@ const Projects = props => {
   }, []);
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.header}>
-        <Typography
-          className={classes.title}
-          variant="h5"
-        >
+        <Typography className={classes.title} variant="h5">
           Active Projects
         </Typography>
-        <Button
-          component={RouterLink}
-          to="/profile/user/projects"
-        >
+        <Button component={RouterLink} to="/profile/user/projects">
           See all
           <KeyboardArrowRightIcon className={classes.arrowIcon} />
         </Button>
       </div>
       {projects.map(project => (
-        <ProjectCard
-          key={project.id}
-          project={project}
-        />
+        <ProjectCard key={project.id} project={project} />
       ))}
     </div>
   );

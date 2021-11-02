@@ -62,29 +62,17 @@ const TaskList = props => {
     <div
       {...rest}
       className={clsx(classes.root, className)}
-      ref={provided.innerRef}
-    >
+      ref={provided.innerRef}>
       <div className={classes.header}>
-        <Typography
-          color="inherit"
-          variant="h5"
-        >
+        <Typography color="inherit" variant="h5">
           {title}
         </Typography>
-        <Typography
-          className={classes.counter}
-          color="inherit"
-          variant="h6"
-        >
+        <Typography className={classes.counter} color="inherit" variant="h6">
           - {total}
         </Typography>
         <div className={classes.headerAction}>
           <Tooltip title="Add task">
-            <IconButton
-              color="inherit"
-              edge="end"
-              variant="contained"
-            >
+            <IconButton color="inherit" edge="end" variant="contained">
               <AddIcon />
             </IconButton>
           </Tooltip>
@@ -93,8 +81,7 @@ const TaskList = props => {
       <div
         className={clsx(classes.content, {
           [classes.isDraggingOver]: snapshot.isDraggingOver
-        })}
-      >
+        })}>
         <PerfectScrollbar options={{ suppressScrollX: true }}>
           <div className={classes.inner}>{children}</div>
         </PerfectScrollbar>

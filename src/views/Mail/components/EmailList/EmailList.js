@@ -44,10 +44,7 @@ const EmailList = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <EmailToolbar
         onBack={onBack}
         onDeselectAll={handleDeselectAll}

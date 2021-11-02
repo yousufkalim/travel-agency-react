@@ -95,14 +95,8 @@ const Chart = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Bar
-        data={data}
-        options={options}
-      />
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Bar data={data} options={options} />
     </div>
   );
 };

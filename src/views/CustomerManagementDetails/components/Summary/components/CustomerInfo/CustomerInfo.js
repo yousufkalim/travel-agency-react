@@ -55,10 +55,7 @@ const CustomerInfo = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Customer info" />
       <Divider />
       <CardContent className={classes.content}>
@@ -72,8 +69,7 @@ const CustomerInfo = props => {
                   <Label
                     color={
                       customer.verified ? colors.green[600] : colors.orange[600]
-                    }
-                  >
+                    }>
                     {customer.verified
                       ? 'Email verified'
                       : 'Email not verified'}

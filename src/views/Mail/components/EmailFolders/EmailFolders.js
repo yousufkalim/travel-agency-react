@@ -102,16 +102,9 @@ const EmailFolders = props => {
   ];
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.toolbar}>
-        <Button
-          color="primary"
-          fullWidth
-          variant="contained"
-        >
+        <Button color="primary" fullWidth variant="contained">
           <AddIcon className={classes.addIcon} />
           Compose message
         </Button>
@@ -119,24 +112,17 @@ const EmailFolders = props => {
       <Divider />
       <List>
         {folders.map(folder => (
-          <ListItem
-            className={classes.listItem}
-            key={folder.title}
-          >
+          <ListItem className={classes.listItem} key={folder.title}>
             <Button
               className={clsx(classes.button, {
                 [classes.active]: active === folder.id
               })}
               fullWidth
-              onClick={() => handleSelect(folder)}
-            >
+              onClick={() => handleSelect(folder)}>
               {folder.icon}
               {folder.title}
               {folder.total_items > 0 && (
-                <Typography
-                  className={classes.totalItems}
-                  variant="body2"
-                >
+                <Typography className={classes.totalItems} variant="body2">
                   ({folder.total_items > 99 ? '99+' : folder.total_items})
                 </Typography>
               )}
@@ -145,8 +131,7 @@ const EmailFolders = props => {
                   className={classes.newItems}
                   color={colors.red[600]}
                   shape="rounded"
-                  variant="contained"
-                >
+                  variant="contained">
                   {folder.new_items}
                 </Label>
               )}

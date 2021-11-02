@@ -65,10 +65,7 @@ const NavBar = props => {
           src={session.user.avatar}
           to="/profile/1/timeline"
         />
-        <Typography
-          className={classes.name}
-          variant="h4"
-        >
+        <Typography className={classes.name} variant="h4">
           {session.user.first_name} {session.user.last_name}
         </Typography>
         <Typography variant="body2">{session.user.bio}</Typography>
@@ -94,12 +91,8 @@ const NavBar = props => {
           anchor="left"
           onClose={onMobileClose}
           open={openMobile}
-          variant="temporary"
-        >
-          <div
-            {...rest}
-            className={clsx(classes.root, className)}
-          >
+          variant="temporary">
+          <div {...rest} className={clsx(classes.root, className)}>
             {navbarContent}
           </div>
         </Drawer>
@@ -109,8 +102,7 @@ const NavBar = props => {
           {...rest}
           className={clsx(classes.root, className)}
           elevation={1}
-          square
-        >
+          square>
           {navbarContent}
         </Paper>
       </Hidden>

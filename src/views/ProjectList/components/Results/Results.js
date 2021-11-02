@@ -101,23 +101,16 @@ const Projects = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.header}>
-        <Typography
-          className={classes.title}
-          variant="h5"
-        >
+        <Typography className={classes.title} variant="h5">
           Showing {projects.length} projects
         </Typography>
         <div className={classes.actions}>
           <Button
             className={classes.sortButton}
             onClick={handleSortOpen}
-            ref={sortRef}
-          >
+            ref={sortRef}>
             {selectedSort}
             <ArrowDropDownIcon />
           </Button>
@@ -125,26 +118,21 @@ const Projects = props => {
             exclusive
             onChange={handleModeChange}
             size="small"
-            value={mode}
-          >
+            value={mode}>
             <ToggleButton value="grid">
               <ViewModuleIcon />
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
       </div>
-      <Grid
-        container
-        spacing={3}
-      >
+      <Grid container spacing={3}>
         {projects.map(project => (
           <Grid
             item
             key={project.id}
             md={mode === 'grid' ? 4 : 12}
             sm={mode === 'grid' ? 6 : 12}
-            xs={12}
-          >
+            xs={12}>
             <ProjectCard project={project} />
           </Grid>
         ))}
@@ -156,15 +144,13 @@ const Projects = props => {
         anchorEl={sortRef.current}
         className={classes.menu}
         onClose={handleSortClose}
-        open={openSort}
-      >
+        open={openSort}>
         {['Most recent', 'Popular', 'Price high', 'Price low', 'On sale'].map(
           option => (
             <MenuItem
               className={classes.menuItem}
               key={option}
-              onClick={() => handleSortSelect(option)}
-            >
+              onClick={() => handleSortSelect(option)}>
               <ListItemText primary={option} />
             </MenuItem>
           )

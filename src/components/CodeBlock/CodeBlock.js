@@ -57,11 +57,7 @@ const CodeBlock = props => {
 
   return (
     <pre className={`language-${language}`}>
-      <Component
-        {...rest}
-        className={clsx(classes.root, className)}
-        ref={ref}
-      >
+      <Component {...rest} className={clsx(classes.root, className)} ref={ref}>
         {trimCode(source)}
       </Component>
     </pre>

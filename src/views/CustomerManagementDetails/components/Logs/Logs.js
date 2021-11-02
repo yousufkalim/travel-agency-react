@@ -62,10 +62,7 @@ const Logs = props => {
   }, []);
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Card>
         <CardHeader title="Customer logs" />
         <Divider />
@@ -85,8 +82,7 @@ const Logs = props => {
                             log.status === 200
                               ? colors.green[600]
                               : colors.red[600]
-                          }
-                        >
+                          }>
                           {log.status}
                         </Label>
                       </TableCell>

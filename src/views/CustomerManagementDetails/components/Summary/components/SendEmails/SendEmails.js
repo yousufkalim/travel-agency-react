@@ -53,10 +53,7 @@ const SendEmails = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Send emails" />
       <Divider />
       <CardContent className={classes.content}>
@@ -68,21 +65,14 @@ const SendEmails = props => {
           // eslint-disable-next-line react/jsx-sort-props
           SelectProps={{ native: true }}
           value={option}
-          variant="outlined"
-        >
+          variant="outlined">
           {options.map(option => (
-            <option
-              key={option}
-              value={option}
-            >
+            <option key={option} value={option}>
               {option}
             </option>
           ))}
         </TextField>
-        <Button
-          className={classes.sendButton}
-          variant="contained"
-        >
+        <Button className={classes.sendButton} variant="contained">
           <MaiIcon className={classes.mailIcon} />
           Send email
         </Button>

@@ -44,35 +44,17 @@ const TableEditBar = props => {
       open={open}
       // eslint-disable-next-line react/jsx-sort-props
       PaperProps={{ elevation: 1 }}
-      variant="persistent"
-    >
-      <div
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
-        <Grid
-          alignItems="center"
-          container
-          spacing={2}
-        >
+      variant="persistent">
+      <div {...rest} className={clsx(classes.root, className)}>
+        <Grid alignItems="center" container spacing={2}>
           <Hidden smDown>
-            <Grid
-              item
-              md={3}
-            >
-              <Typography
-                color="textSecondary"
-                variant="subtitle1"
-              >
+            <Grid item md={3}>
+              <Typography color="textSecondary" variant="subtitle1">
                 {selected.length} selected
               </Typography>
             </Grid>
           </Hidden>
-          <Grid
-            item
-            md={6}
-            xs={12}
-          >
+          <Grid item md={6} xs={12}>
             <div className={classes.actions}>
               <Button onClick={onMarkPaid}>
                 <MessageIcon className={classes.buttonIcon} />
@@ -86,7 +68,6 @@ const TableEditBar = props => {
                 <DeleteIcon className={classes.buttonIcon} />
                 Delete
               </Button>
-         
             </div>
           </Grid>
         </Grid>

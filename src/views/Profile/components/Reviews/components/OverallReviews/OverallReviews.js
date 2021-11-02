@@ -25,32 +25,20 @@ const OverallReviews = props => {
   let rating = 0;
 
   if (ratings.length > 0) {
-    rating = ratings.reduce((prev, current) => prev + current, 0) / ratings.length;
+    rating =
+      ratings.reduce((prev, current) => prev + current, 0) / ratings.length;
   }
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent>
-        <Grid
-          alignItems="center"
-          container
-          spacing={3}
-        >
+        <Grid alignItems="center" container spacing={3}>
           <Grid item>
             <Typography variant="h5">Overall Reviews</Typography>
           </Grid>
-          <Grid
-            className={classes.stars}
-            item
-          >
+          <Grid className={classes.stars} item>
             <ReviewStars value={rating} />
-            <Typography
-              className={classes.rating}
-              variant="h6"
-            >
+            <Typography className={classes.rating} variant="h6">
               {rating}
             </Typography>
           </Grid>
@@ -58,8 +46,7 @@ const OverallReviews = props => {
             <Typography
               className={classes.total}
               color="textSecondary"
-              variant="body2"
-            >
+              variant="body2">
               {ratings.length} reviews in total
             </Typography>
           </Grid>

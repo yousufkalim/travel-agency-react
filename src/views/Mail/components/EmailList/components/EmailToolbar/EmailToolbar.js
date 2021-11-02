@@ -99,16 +99,12 @@ const EmailToolbar = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Tooltip title="Back">
         <IconButton
           className={classes.backButton}
           onClick={onBack}
-          size="small"
-        >
+          size="small">
           <ArrowBackIcon />
         </IconButton>
       </Tooltip>
@@ -124,10 +120,7 @@ const EmailToolbar = props => {
         />
         <Typography variant="h6">Select all</Typography>
       </div>
-      <Paper
-        className={classes.search}
-        elevation={1}
-      >
+      <Paper className={classes.search} elevation={1}>
         <SearchIcon className={classes.searchIcon} />
         <Input
           className={classes.searchInput}
@@ -136,18 +129,12 @@ const EmailToolbar = props => {
         />
       </Paper>
       <Tooltip title="Refresh">
-        <IconButton
-          className={classes.refreshButton}
-          size="small"
-        >
+        <IconButton className={classes.refreshButton} size="small">
           <RefreshIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="More options">
-        <IconButton
-          className={classes.moreButton}
-          size="small"
-        >
+        <IconButton className={classes.moreButton} size="small">
           <MoreIcon />
         </IconButton>
       </Tooltip>
@@ -157,10 +144,7 @@ const EmailToolbar = props => {
             <KeyboardArrowLeftIcon />
           </IconButton>
         </Tooltip>
-        <Typography
-          className={classes.paginationDetails}
-          variant="body2"
-        >
+        <Typography className={classes.paginationDetails} variant="body2">
           1 - 50 of 200
         </Typography>
         <Tooltip title="Previous page">

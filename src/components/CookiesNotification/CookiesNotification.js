@@ -55,15 +55,9 @@ const CookiesNotification = () => {
   }
 
   return (
-    <Paper
-      className={classes.root}
-      elevation={3}
-    >
+    <Paper className={classes.root} elevation={3}>
       <div className={classes.media}>
-        <img
-          alt="Cookies"
-          src="/images/undraw_cookie_love_ulvn.svg"
-        />
+        <img alt="Cookies" src="/images/undraw_cookie_love_ulvn.svg" />
       </div>
       <div className={classes.content}>
         <Typography variant="body1">
@@ -73,8 +67,7 @@ const CookiesNotification = () => {
             className={classes.link}
             component="a"
             href="https://devias.io/privacy-policy"
-            target="_blank"
-          >
+            target="_blank">
             Privacy Policy
           </Link>
           .
@@ -85,8 +78,7 @@ const CookiesNotification = () => {
           className={classes.agreeButton}
           color="primary"
           onClick={handleClose}
-          variant="contained"
-        >
+          variant="contained">
           I Agree
         </Button>
       </div>

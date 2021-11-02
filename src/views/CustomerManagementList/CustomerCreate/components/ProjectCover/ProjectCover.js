@@ -16,10 +16,7 @@ const ProjectCover = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Project cover" />
       <CardContent>
         <FilesDropzone />

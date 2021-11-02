@@ -63,32 +63,19 @@ const EmailDetails = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <EmailToolbar onBack={onEmailClose} />
       <Divider />
       <div className={classes.header}>
         <div className={classes.receiver}>
-          <Avatar
-            className={classes.avatar}
-            src={email.receiver.avatar}
-          >
+          <Avatar className={classes.avatar} src={email.receiver.avatar}>
             {getInitials(email.receiver.name)}
           </Avatar>
           <div>
-            <Typography
-              display="inline"
-              variant="h5"
-            >
+            <Typography display="inline" variant="h5">
               {email.receiver.name}
             </Typography>{' '}
-            <Link
-              color="textSecondary"
-              display="inline"
-              variant="body2"
-            >
+            <Link color="textSecondary" display="inline" variant="body2">
               {email.receiver.email}
             </Link>
             <Typography variant="subtitle2">
@@ -102,26 +89,17 @@ const EmailDetails = props => {
         </div>
         <div className={classes.actions}>
           <Tooltip title="Reply">
-            <IconButton
-              className={classes.moreButton}
-              size="small"
-            >
+            <IconButton className={classes.moreButton} size="small">
               <ReplyIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Reply all">
-            <IconButton
-              className={classes.moreButton}
-              size="small"
-            >
+            <IconButton className={classes.moreButton} size="small">
               <ReplyAllIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="More options">
-            <IconButton
-              className={classes.moreButton}
-              size="small"
-            >
+            <IconButton className={classes.moreButton} size="small">
               <MoreIcon />
             </IconButton>
           </Tooltip>
@@ -130,10 +108,7 @@ const EmailDetails = props => {
       <Divider />
       <div className={classes.content}>
         <Typography variant="h1">{email.subject}</Typography>
-        <Markdown
-          className={classes.message}
-          source={email.message}
-        />
+        <Markdown className={classes.message} source={email.message} />
       </div>
       <Divider />
       <EmailForm />

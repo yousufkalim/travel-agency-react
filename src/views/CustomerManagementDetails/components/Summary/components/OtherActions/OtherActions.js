@@ -42,10 +42,7 @@ const OtherActions = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Other actions" />
       <Divider />
       <CardContent>
@@ -59,10 +56,7 @@ const OtherActions = props => {
             Export client data
           </Button>
         </div>
-        <Typography
-          className={classes.notice}
-          variant="body2"
-        >
+        <Typography className={classes.notice} variant="body2">
           Remove this this customer’s data if he requested that, if not please
           be aware that what has been deleted can never brough back
         </Typography>

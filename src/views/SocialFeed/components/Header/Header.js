@@ -14,21 +14,11 @@ const Header = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Typography
-        component="h2"
-        gutterBottom
-        variant="overline"
-      >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Typography component="h2" gutterBottom variant="overline">
         Social Feed
       </Typography>
-      <Typography
-        component="h1"
-        variant="h3"
-      >
+      <Typography component="h1" variant="h3">
         Here's what your connections posted
       </Typography>
     </div>

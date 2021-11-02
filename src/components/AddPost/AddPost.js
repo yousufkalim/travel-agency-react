@@ -57,15 +57,9 @@ const AddPost = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent className={classes.content}>
-        <Paper
-          className={classes.paper}
-          elevation={1}
-        >
+        <Paper className={classes.paper} elevation={1}>
           <Input
             className={classes.input}
             disableUnderline
@@ -80,26 +74,16 @@ const AddPost = props => {
         </Tooltip>
         <Divider className={classes.divider} />
         <Tooltip title="Attach image">
-          <IconButton
-            edge="end"
-            onClick={handleAttach}
-          >
+          <IconButton edge="end" onClick={handleAttach}>
             <AddPhotoIcon />
           </IconButton>
         </Tooltip>
         <Tooltip title="Attach file">
-          <IconButton
-            edge="end"
-            onClick={handleAttach}
-          >
+          <IconButton edge="end" onClick={handleAttach}>
             <AttachFileIcon />
           </IconButton>
         </Tooltip>
-        <input
-          className={classes.fileInput}
-          ref={fileInputRef}
-          type="file"
-        />
+        <input className={classes.fileInput} ref={fileInputRef} type="file" />
       </CardContent>
     </Card>
   );

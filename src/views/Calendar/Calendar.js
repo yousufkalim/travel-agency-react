@@ -203,10 +203,7 @@ const Calendar = () => {
   };
 
   return (
-    <Page
-      className={classes.root}
-      title="Calendar"
-    >
+    <Page className={classes.root} title="Calendar">
       <Toolbar
         date={date}
         onDateNext={handleDateNext}
@@ -243,10 +240,7 @@ const Calendar = () => {
           />
         </CardContent>
       </Card>
-      <Modal
-        onClose={handleModalClose}
-        open={eventModal.open}
-      >
+      <Modal onClose={handleModalClose} open={eventModal.open}>
         <AddEditEvent
           event={eventModal.event}
           onAdd={handleEventAdd}

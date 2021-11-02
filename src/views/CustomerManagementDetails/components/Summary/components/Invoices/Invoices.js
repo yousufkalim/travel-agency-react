@@ -64,10 +64,7 @@ const Invoices = props => {
   const [incomeInvoices, incomeTotal] = getSum(customer.invoices, 'income');
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Invoices/Billing" />
       <Divider />
       <CardContent className={classes.content}>
@@ -81,8 +78,7 @@ const Invoices = props => {
                   <Label
                     color={
                       customer.autoCC ? colors.green[600] : colors.red[600]
-                    }
-                  >
+                    }>
                     {customer.autoCC ? 'YES' : 'NO'}
                   </Label>
                 </div>

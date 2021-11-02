@@ -76,27 +76,16 @@ const Activity = props => {
       : '/projects/1/overview';
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       {avatars[activity.action_type]}
       <Card className={classes.card}>
         <Typography variant="body1">
-          <Link
-            color="textPrimary"
-            component={RouterLink}
-            to={to}
-            variant="h6"
-          >
+          <Link color="textPrimary" component={RouterLink} to={to} variant="h6">
             {activity.subject}
           </Link>{' '}
           {activity.action_desc}
         </Typography>
-        <Typography
-          className={classes.date}
-          variant="body2"
-        >
+        <Typography className={classes.date} variant="body2">
           {moment(activity.created_at).fromNow()}
         </Typography>
       </Card>

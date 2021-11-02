@@ -68,33 +68,15 @@ const CustomerEdit = props => {
   };
 
   return (
-    <Modal
-      onClose={onClose}
-      open={open}
-    >
-      <Card
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+    <Modal onClose={onClose} open={open}>
+      <Card {...rest} className={clsx(classes.root, className)}>
         <form>
           <CardContent>
-            <Typography
-              align="center"
-              gutterBottom
-              variant="h3"
-            >
+            <Typography align="center" gutterBottom variant="h3">
               Edit Customer
             </Typography>
-            <Grid
-              className={classes.container}
-              container
-              spacing={3}
-            >
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+            <Grid className={classes.container} container spacing={3}>
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Email address"
@@ -104,11 +86,7 @@ const CustomerEdit = props => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Full name"
@@ -118,11 +96,7 @@ const CustomerEdit = props => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Phone number"
@@ -132,11 +106,7 @@ const CustomerEdit = props => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="State/Region"
@@ -146,11 +116,7 @@ const CustomerEdit = props => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Country"
@@ -160,11 +126,7 @@ const CustomerEdit = props => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Address 1"
@@ -174,11 +136,7 @@ const CustomerEdit = props => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Address 2"
@@ -189,11 +147,7 @@ const CustomerEdit = props => {
                 />
               </Grid>
               <Grid item />
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <Typography variant="h5">Email Verified</Typography>
                 <Typography variant="body2">
                   Disabling this will automatically send the user a verification
@@ -208,11 +162,7 @@ const CustomerEdit = props => {
                   value={formState.verified}
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <Typography variant="h5">Discounted Prices</Typography>
                 <Typography variant="body2">
                   This will give the user discountedprices for all products
@@ -229,17 +179,13 @@ const CustomerEdit = props => {
             </Grid>
           </CardContent>
           <CardActions className={classes.actions}>
-            <Button
-              onClick={onClose}
-              variant="contained"
-            >
+            <Button onClick={onClose} variant="contained">
               Close
             </Button>
             <Button
               className={classes.saveButton}
               onClick={onClose}
-              variant="contained"
-            >
+              variant="contained">
               Save
             </Button>
           </CardActions>

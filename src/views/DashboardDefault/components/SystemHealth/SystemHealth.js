@@ -43,16 +43,9 @@ const SystemHealth = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <div className={classes.content}>
-        <Typography
-          component="h3"
-          gutterBottom
-          variant="overline"
-        >
+        <Typography component="h3" gutterBottom variant="overline">
           System Health
         </Typography>
         <div className={classes.details}>

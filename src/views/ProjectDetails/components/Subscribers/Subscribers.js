@@ -20,15 +20,9 @@ const Subscribers = props => {
       {...rest}
       className={clsx(classes.root, className)}
       container
-      spacing={3}
-    >
+      spacing={3}>
       {subscribers.map(subscriber => (
-        <Grid
-          item
-          key={subscriber.id}
-          lg={4}
-          xs={12}
-        >
+        <Grid item key={subscriber.id} lg={4} xs={12}>
           <SubscriberCard subscriber={subscriber} />
         </Grid>
       ))}

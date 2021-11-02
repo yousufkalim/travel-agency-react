@@ -26,16 +26,10 @@ const Preferences = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Preferences" />
       <CardContent>
-        <Typography
-          gutterBottom
-          variant="h6"
-        >
+        <Typography gutterBottom variant="h6">
           Privacy
         </Typography>
         <Typography variant="body2">

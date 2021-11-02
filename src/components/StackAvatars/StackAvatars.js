@@ -31,23 +31,14 @@ const StackAvatars = props => {
   const classes = useStyles();
 
   const avatarNodes = avatars.slice(0, limit).map(item => (
-    <Tooltip
-      key={uuid()}
-      title="View"
-    >
-      <Avatar
-        className={classes.avatar}
-        src={item}
-      />
+    <Tooltip key={uuid()} title="View">
+      <Avatar className={classes.avatar} src={item} />
     </Tooltip>
   ));
 
   if (avatars.length > limit) {
     avatarNodes.push(
-      <Tooltip
-        key={uuid()}
-        title="View"
-      >
+      <Tooltip key={uuid()} title="View">
         <Avatar className={clsx(classes.avatar, classes.more)}>
           +{avatars.length - limit}
         </Avatar>
@@ -56,10 +47,7 @@ const StackAvatars = props => {
   }
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       {avatarNodes}
     </div>
   );

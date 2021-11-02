@@ -28,76 +28,31 @@ const DashboardDefault = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Default Dashboard"
-    >
+    <Page className={classes.root} title="Default Dashboard">
       <Header />
-      <Grid
-        className={classes.container}
-        container
-        spacing={3}
-      >
-        <Grid
-          item
-          lg={3}
-          sm={6}
-          xs={12}
-        >
+      <Grid className={classes.container} container spacing={3}>
+        <Grid item lg={3} sm={6} xs={12}>
           <TodaysMoney />
         </Grid>
-        <Grid
-          item
-          lg={3}
-          sm={6}
-          xs={12}
-        >
+        <Grid item lg={3} sm={6} xs={12}>
           <NewProjects />
         </Grid>
-        <Grid
-          item
-          lg={3}
-          sm={6}
-          xs={12}
-        >
+        <Grid item lg={3} sm={6} xs={12}>
           <SystemHealth />
         </Grid>
-        <Grid
-          item
-          lg={3}
-          sm={6}
-          xs={12}
-        >
+        <Grid item lg={3} sm={6} xs={12}>
           <RoiPerCustomer />
         </Grid>
-        <Grid
-          item
-          lg={3}
-          xs={12}
-        >
+        <Grid item lg={3} xs={12}>
           <RealTime />
         </Grid>
-        <Grid
-          item
-          lg={9}
-          xs={12}
-        >
+        <Grid item lg={9} xs={12}>
           <PerformanceOverTime />
         </Grid>
-        <Grid
-          item
-          lg={5}
-          xl={4}
-          xs={12}
-        >
+        <Grid item lg={5} xl={4} xs={12}>
           <TeamTasks />
         </Grid>
-        <Grid
-          item
-          lg={7}
-          xl={8}
-          xs={12}
-        >
+        <Grid item lg={7} xl={8} xs={12}>
           <LatestProjects />
         </Grid>
       </Grid>

@@ -30,14 +30,8 @@ const Changelog = () => {
   }, []);
 
   return (
-    <Page
-      className={classes.root}
-      title="Changelog"
-    >
-      <Typography
-        gutterBottom
-        variant="overline"
-      >
+    <Page className={classes.root} title="Changelog">
+      <Typography gutterBottom variant="overline">
         Support
       </Typography>
       <Typography variant="h3">Changelog</Typography>

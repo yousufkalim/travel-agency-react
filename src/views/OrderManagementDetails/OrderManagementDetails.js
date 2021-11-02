@@ -42,30 +42,13 @@ const OrderManagementDetails = () => {
   }
 
   return (
-    <Page
-      className={classes.root}
-      title="Order Management Details"
-    >
+    <Page className={classes.root} title="Order Management Details">
       <Header order={order} />
-      <Grid
-        className={classes.container}
-        container
-        spacing={3}
-      >
-        <Grid
-          item
-          md={4}
-          xl={3}
-          xs={12}
-        >
+      <Grid className={classes.container} container spacing={3}>
+        <Grid item md={4} xl={3} xs={12}>
           <OrderInfo order={order} />
         </Grid>
-        <Grid
-          item
-          md={8}
-          xl={9}
-          xs={12}
-        >
+        <Grid item md={8} xl={9} xs={12}>
           <OrderItems order={order} />
         </Grid>
       </Grid>

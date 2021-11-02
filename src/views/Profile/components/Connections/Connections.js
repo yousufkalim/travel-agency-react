@@ -130,17 +130,11 @@ const Connections = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Connections" />
       <Divider />
       <div className={classes.search}>
-        <SearchIcon
-          className={classes.searchIcon}
-          color="inherit"
-        />
+        <SearchIcon className={classes.searchIcon} color="inherit" />
         <Input
           className={classes.searchInput}
           color="inherit"
@@ -157,8 +151,7 @@ const Connections = props => {
                 className={classes.listItem}
                 disableGutters
                 divider={i < connections.length - 1}
-                key={connection.id}
-              >
+                key={connection.id}>
                 <ListItemAvatar>
                   <Avatar
                     alt="Profile image"
@@ -178,8 +171,7 @@ const Connections = props => {
                     className={classes.connectButton}
                     onClick={() => handleConnectToggle(connection.id)}
                     size="small"
-                    variant="contained"
-                  >
+                    variant="contained">
                     <PersonAddIcon className={classes.buttonIcon} />
                     Connect
                   </Button>
@@ -189,8 +181,7 @@ const Connections = props => {
                     className={classes.pendingButton}
                     onClick={() => handleConnectToggle(connection.id)}
                     size="small"
-                    variant="contained"
-                  >
+                    variant="contained">
                     <PersonAddIcon className={classes.buttonIcon} />
                     Pending
                   </Button>
@@ -200,8 +191,7 @@ const Connections = props => {
                     className={classes.connectedButton}
                     onClick={() => handleConnectToggle(connection.id)}
                     size="small"
-                    variant="contained"
-                  >
+                    variant="contained">
                     <CheckIcon className={classes.buttonIcon} />
                     Connected
                   </Button>
@@ -218,10 +208,7 @@ const Connections = props => {
         }}
         autoHideDuration={6000}
         message={
-          <Typography
-            color="inherit"
-            variant="h6"
-          >
+          <Typography color="inherit" variant="h6">
             Sent connection request
           </Typography>
         }
