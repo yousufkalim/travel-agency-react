@@ -44,6 +44,9 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import moment from 'moment';
 
+import { deleteTrip } from 'actions/tripActions'; ///delete trip action
+import { message } from 'antd'; ////toast messages from antd
+
 const useStyles = makeStyles(theme => ({
   root: {},
   content: { padding: 0 },
@@ -182,6 +185,23 @@ const Results = props => {
       sorting: false
     }
   ];
+
+  ////Delete function
+
+  const onDelete = () => {
+    // data object with array of trip ids
+    const data = {
+      ids: selectedCustomers
+    };
+    // passing data to delete trip function and handling response
+    deleteTrip(data).then(response => {
+      if (response.data.message) {
+        message.success(response.data.message);
+        window.location.reload();
+      }
+    });
+  };
+
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <Typography color="textSecondary" gutterBottom variant="body2">
@@ -314,6 +334,7 @@ const Results = props => {
       <TableEditBar
         selected={selectedCustomers}
         onMarkPaid={() => console.log(selectedCustomers)}
+        onDelete={onDelete} /// passing trip delete function to edit bar
       />
     </div>
   );

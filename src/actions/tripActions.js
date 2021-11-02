@@ -31,3 +31,14 @@ export const deleteGalleryImage = (tripId, payload) => {
     withCredentials: true
   });
 };
+
+// delete trip
+export const deleteTrip = payload => {
+  return axios.delete(
+    '/trips/delete',
+    {
+      data: { ...payload }
+    },
+    { withCredentials: true }
+  );
+};
