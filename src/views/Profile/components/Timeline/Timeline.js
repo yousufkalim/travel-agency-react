@@ -41,18 +41,11 @@ const Timeline = props => {
   }, []);
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <AddPost />
       <div className={classes.posts}>
         {posts.map(post => (
-          <PostCard
-            className={classes.post}
-            key={post.id}
-            post={post}
-          />
+          <PostCard className={classes.post} key={post.id} post={post} />
         ))}
       </div>
     </div>

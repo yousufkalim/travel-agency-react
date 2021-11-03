@@ -87,8 +87,7 @@ const Chat = () => {
         [classes.root]: true,
         [classes.openConversion]: selectedConversation
       })}
-      title="Chat"
-    >
+      title="Chat">
       <ConversationList
         className={classes.conversationList}
         conversations={conversations}

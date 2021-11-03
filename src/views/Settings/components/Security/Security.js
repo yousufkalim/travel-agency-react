@@ -45,24 +45,13 @@ const Security = props => {
   const valid = values.password && values.password === values.confirm;
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Change password" />
       <Divider />
       <CardContent>
         <form>
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-              item
-              md={4}
-              sm={6}
-              xs={12}
-            >
+          <Grid container spacing={3}>
+            <Grid item md={4} sm={6} xs={12}>
               <TextField
                 fullWidth
                 label="Security"
@@ -73,12 +62,7 @@ const Security = props => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={4}
-              sm={6}
-              xs={12}
-            >
+            <Grid item md={4} sm={6} xs={12}>
               <TextField
                 fullWidth
                 label="Confirm password"
@@ -97,8 +81,7 @@ const Security = props => {
         <Button
           className={classes.saveButton}
           disabled={!valid}
-          variant="contained"
-        >
+          variant="contained">
           Save changes
         </Button>
       </CardActions>

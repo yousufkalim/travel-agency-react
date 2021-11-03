@@ -46,24 +46,16 @@ const CustomerManagementDetails = props => {
   }
 
   return (
-    <Page
-      className={classes.root}
-      title="Customer Management Details"
-    >
+    <Page className={classes.root} title="Customer Management Details">
       <Header />
       <Tabs
         className={classes.tabs}
         onChange={handleTabsChange}
         scrollButtons="auto"
         value={tab}
-        variant="scrollable"
-      >
+        variant="scrollable">
         {tabs.map(tab => (
-          <Tab
-            key={tab.value}
-            label={tab.label}
-            value={tab.value}
-          />
+          <Tab key={tab.value} label={tab.label} value={tab.value} />
         ))}
       </Tabs>
       <Divider className={classes.divider} />

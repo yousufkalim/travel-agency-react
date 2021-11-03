@@ -28,26 +28,11 @@ const SourceFiles = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.inner}>
-        <Grid
-          alignItems="center"
-          container
-          justify="space-between"
-        >
-          <Grid
-            item
-            lg={3}
-            md={6}
-            xs={12}
-          >
-            <Typography
-              gutterBottom
-              variant="h3"
-            >
+        <Grid alignItems="center" container justify="space-between">
+          <Grid item lg={3} md={6} xs={12}>
+            <Typography gutterBottom variant="h3">
               Source Files
             </Typography>
             <Typography variant="subtitle2">
@@ -56,17 +41,8 @@ const SourceFiles = props => {
               allows you to change the main colors as you like.
             </Typography>
           </Grid>
-          <Grid
-            className={classes.media}
-            item
-            lg={4}
-            md={6}
-            xs={12}
-          >
-            <img
-              alt="User flows"
-              src="/images/presentation/source_files.png"
-            />
+          <Grid className={classes.media} item lg={4} md={6} xs={12}>
+            <img alt="User flows" src="/images/presentation/source_files.png" />
           </Grid>
         </Grid>
       </div>

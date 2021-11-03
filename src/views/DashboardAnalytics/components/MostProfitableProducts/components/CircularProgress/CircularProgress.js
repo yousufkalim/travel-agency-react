@@ -32,10 +32,7 @@ const CircularProgress = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <svg viewBox="0 0 36 36">
         <path
           className={classes.circle1}

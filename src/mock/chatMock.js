@@ -23,7 +23,7 @@ mock.onGet('/api/chat/conversations').reply(200, {
             lastActivity: moment()
           },
           content:
-            'Hey, nice projects! I really liked the one in react. What\'s your quote on kinda similar project?',
+            "Hey, nice projects! I really liked the one in react. What's your quote on kinda similar project?",
           contentType: 'text',
           created_at: moment().subtract(10, 'hours')
         },
@@ -47,7 +47,7 @@ mock.onGet('/api/chat/conversations').reply(200, {
             avatar: '/images/avatars/avatar_7.png'
           },
           content:
-            'Well it\'s a really easy one, I\'m sure we can make it half of the price.',
+            "Well it's a really easy one, I'm sure we can make it half of the price.",
           contentType: 'text',
           created_at: moment().subtract(5, 'minutes')
         },
@@ -59,7 +59,7 @@ mock.onGet('/api/chat/conversations').reply(200, {
             avatar: '/images/avatars/avatar_11.png'
           },
           content:
-            'Then why don\'t you make it if it\'s that easy? Sorry I\'m not interetes, have fantastic day Adam!',
+            "Then why don't you make it if it's that easy? Sorry I'm not interetes, have fantastic day Adam!",
           contentType: 'text',
           created_at: moment().subtract(3, 'minutes')
         },
@@ -116,7 +116,7 @@ mock.onGet('/api/chat/conversations').reply(200, {
             name: 'Ekaterina Tankova',
             avatar: '/images/avatars/avatar_2.png'
           },
-          content: 'I don\'t think that\'s ideal',
+          content: "I don't think that's ideal",
           contentType: 'text',
           created_at: moment().subtract(5, 'minutes')
         }
@@ -189,7 +189,7 @@ mock.onGet('/api/chat/conversations').reply(200, {
             avatar: '/images/avatars/avatar_11.png'
           },
           content:
-            'Hi Kwak! I\'ve seen your projects and we can work together on a project. Will send you the details later.',
+            "Hi Kwak! I've seen your projects and we can work together on a project. Will send you the details later.",
           contentType: 'text',
           created_at: moment().subtract(3, 'days')
         },
@@ -200,7 +200,7 @@ mock.onGet('/api/chat/conversations').reply(200, {
             name: 'Kwak Seong-Min',
             avatar: '/images/avatars/avatar_10.png'
           },
-          content: 'Haha, right, we\'ll do it',
+          content: "Haha, right, we'll do it",
           contentType: 'text',
           created_at: moment().subtract(2, 'days')
         }
@@ -235,7 +235,7 @@ mock.onGet('/api/chat/conversations').reply(200, {
             name: 'Cao Yu',
             avatar: '/images/avatars/avatar_3.png'
           },
-          content: 'I\'m not sure, but I will check it later',
+          content: "I'm not sure, but I will check it later",
           contentType: 'text',
           created_at: moment().subtract(2, 'days')
         }
@@ -270,7 +270,7 @@ mock.onGet('/api/chat/conversations').reply(200, {
             name: 'Shen Zhi',
             avatar: '/images/avatars/avatar_11.png'
           },
-          content: 'Haha thank you Clarke, I\'m doing our best',
+          content: "Haha thank you Clarke, I'm doing our best",
           contentType: 'text',
           created_at: moment().subtract(3, 'days')
         }

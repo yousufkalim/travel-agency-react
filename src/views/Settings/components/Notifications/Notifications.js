@@ -37,36 +37,17 @@ const Notifications = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Notifications" />
       <Divider />
       <CardContent>
         <form>
-          <Grid
-            container
-            spacing={6}
-            wrap="wrap"
-          >
-            <Grid
-              className={classes.item}
-              item
-              md={4}
-              sm={6}
-              xs={12}
-            >
-              <Typography
-                gutterBottom
-                variant="h6"
-              >
+          <Grid container spacing={6} wrap="wrap">
+            <Grid className={classes.item} item md={4} sm={6} xs={12}>
+              <Typography gutterBottom variant="h6">
                 System
               </Typography>
-              <Typography
-                gutterBottom
-                variant="body2"
-              >
+              <Typography gutterBottom variant="body2">
                 You will recieve emails in your business email address
               </Typography>
               <FormControlLabel
@@ -108,23 +89,11 @@ const Notifications = props => {
                 }
               />
             </Grid>
-            <Grid
-              className={classes.item}
-              item
-              md={4}
-              sm={6}
-              xs={12}
-            >
-              <Typography
-                gutterBottom
-                variant="h6"
-              >
+            <Grid className={classes.item} item md={4} sm={6} xs={12}>
+              <Typography gutterBottom variant="h6">
                 Chat App
               </Typography>
-              <Typography
-                gutterBottom
-                variant="body2"
-              >
+              <Typography gutterBottom variant="body2">
                 You will recieve emails in your business email address
               </Typography>
               <FormControlLabel
@@ -151,10 +120,7 @@ const Notifications = props => {
       </CardContent>
       <Divider />
       <CardActions>
-        <Button
-          className={classes.saveButton}
-          variant="contained"
-        >
+        <Button className={classes.saveButton} variant="contained">
           Save changes
         </Button>
       </CardActions>

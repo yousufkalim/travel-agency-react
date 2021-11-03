@@ -26,28 +26,14 @@ const Overview = props => {
       {...rest}
       className={clsx(classes.root, className)}
       container
-      spacing={3}
-    >
-      <Grid
-        item
-        lg={8}
-        xl={9}
-        xs={12}
-      >
+      spacing={3}>
+      <Grid item lg={8} xl={9} xs={12}>
         <Brief brief={project.brief} />
         <Deliverables className={classes.deliverables} />
       </Grid>
-      <Grid
-        item
-        lg={4}
-        xl={3}
-        xs={12}
-      >
+      <Grid item lg={4} xl={3} xs={12}>
         <Holder project={project} />
-        <Members
-          className={classes.members}
-          members={project.members}
-        />
+        <Members className={classes.members} members={project.members} />
       </Grid>
     </Grid>
   );

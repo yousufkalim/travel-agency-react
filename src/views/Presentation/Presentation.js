@@ -18,10 +18,7 @@ const Presentation = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Presentation"
-    >
+    <Page className={classes.root} title="Presentation">
       <Header />
       <UserFlows />
       <PluginsSupport />

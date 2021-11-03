@@ -38,8 +38,7 @@ const GenericMoreButton = props => {
           {...props}
           onClick={handleMenuOpen}
           ref={moreRef}
-          size="small"
-        >
+          size="small">
           <MoreIcon />
         </IconButton>
       </Tooltip>
@@ -55,8 +54,7 @@ const GenericMoreButton = props => {
         transformOrigin={{
           vertical: 'top',
           horizontal: 'left'
-        }}
-      >
+        }}>
         <MenuItem>
           <ListItemIcon>
             <GetAppIcon />

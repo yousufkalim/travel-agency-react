@@ -57,10 +57,7 @@ const PostCard = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         avatar={
           <Avatar
@@ -85,39 +82,26 @@ const PostCard = props => {
             color="textPrimary"
             component={RouterLink}
             to="/profile/1/timeline"
-            variant="h6"
-          >
+            variant="h6">
             {post.author.name}
           </Link>
         }
       />
       <CardContent className={classes.content}>
-        <Typography
-          className={classes.message}
-          variant="body1"
-        >
+        <Typography className={classes.message} variant="body1">
           {post.message}
         </Typography>
         {post.media && (
           <CardActionArea className={classes.mediaArea}>
-            <CardMedia
-              className={classes.media}
-              image={post.media}
-            />
+            <CardMedia className={classes.media} image={post.media} />
           </CardActionArea>
         )}
-        <Reactions
-          className={classes.reactions}
-          post={post}
-        />
+        <Reactions className={classes.reactions} post={post} />
         <Divider className={classes.divider} />
         {post.comments && (
           <div className={classes.comments}>
             {post.comments.map(comment => (
-              <CommentBubble
-                comment={comment}
-                key={comment.id}
-              />
+              <CommentBubble comment={comment} key={comment.id} />
             ))}
           </div>
         )}

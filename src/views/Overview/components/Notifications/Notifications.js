@@ -61,16 +61,12 @@ const Notifications = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <List>
         {notifications.map((notification, i) => (
           <ListItem
             divider={i < notifications.length - 1}
-            key={notification.id}
-          >
+            key={notification.id}>
             <ListItemIcon>{icons[notification.type]}</ListItemIcon>
             <ListItemText>
               <Typography variant="body1">
@@ -81,10 +77,7 @@ const Notifications = props => {
             </ListItemText>
             <ListItemSecondaryAction>
               <Tooltip title="View">
-                <IconButton
-                  edge="end"
-                  size="small"
-                >
+                <IconButton edge="end" size="small">
                   <ArrowForwardIcon />
                 </IconButton>
               </Tooltip>

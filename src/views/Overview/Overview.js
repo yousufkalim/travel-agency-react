@@ -35,10 +35,7 @@ const Overview = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Overview"
-    >
+    <Page className={classes.root} title="Overview">
       <Header />
       <Statistics className={classes.statistics} />
       <Notifications className={classes.notifications} />

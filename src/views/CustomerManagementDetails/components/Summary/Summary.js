@@ -44,42 +44,17 @@ const Summary = props => {
       {...rest}
       className={clsx(classes.root, className)}
       container
-      spacing={3}
-    >
-      <Grid
-        item
-        lg={4}
-        md={6}
-        xl={3}
-        xs={12}
-      >
+      spacing={3}>
+      <Grid item lg={4} md={6} xl={3} xs={12}>
         <CustomerInfo customer={customer} />
       </Grid>
-      <Grid
-        item
-        lg={4}
-        md={6}
-        xl={3}
-        xs={12}
-      >
+      <Grid item lg={4} md={6} xl={3} xs={12}>
         <Invoices customer={customer} />
       </Grid>
-      <Grid
-        item
-        lg={4}
-        md={6}
-        xl={3}
-        xs={12}
-      >
+      <Grid item lg={4} md={6} xl={3} xs={12}>
         <SendEmails customer={customer} />
       </Grid>
-      <Grid
-        item
-        lg={4}
-        md={6}
-        xl={3}
-        xs={12}
-      >
+      <Grid item lg={4} md={6} xl={3} xs={12}>
         <OtherActions />
       </Grid>
     </Grid>

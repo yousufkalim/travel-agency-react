@@ -48,27 +48,10 @@ const Overview = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Grid
-        alignItems="center"
-        container
-        justify="space-between"
-      >
-        <Grid
-          className={classes.item}
-          item
-          md={3}
-          sm={6}
-          xs={12}
-        >
-          <Typography
-            component="h2"
-            gutterBottom
-            variant="overline"
-          >
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <Grid alignItems="center" container justify="space-between">
+        <Grid className={classes.item} item md={3} sm={6} xs={12}>
+          <Typography component="h2" gutterBottom variant="overline">
             Total Income
           </Typography>
           <div className={classes.valueContainer}>
@@ -76,24 +59,13 @@ const Overview = props => {
             <Label
               className={classes.label}
               color={colors.green[600]}
-              variant="contained"
-            >
+              variant="contained">
               +25%
             </Label>
           </div>
         </Grid>
-        <Grid
-          className={classes.item}
-          item
-          md={3}
-          sm={6}
-          xs={12}
-        >
-          <Typography
-            component="h2"
-            gutterBottom
-            variant="overline"
-          >
+        <Grid className={classes.item} item md={3} sm={6} xs={12}>
+          <Typography component="h2" gutterBottom variant="overline">
             Total Expanses
           </Typography>
           <div className={classes.valueContainer}>
@@ -101,24 +73,13 @@ const Overview = props => {
             <Label
               className={classes.label}
               color={colors.green[600]}
-              variant="contained"
-            >
+              variant="contained">
               +12%
             </Label>
           </div>
         </Grid>
-        <Grid
-          className={classes.item}
-          item
-          md={3}
-          sm={6}
-          xs={12}
-        >
-          <Typography
-            component="h2"
-            gutterBottom
-            variant="overline"
-          >
+        <Grid className={classes.item} item md={3} sm={6} xs={12}>
+          <Typography component="h2" gutterBottom variant="overline">
             Net Profit
           </Typography>
           <div className={classes.valueContainer}>
@@ -126,24 +87,13 @@ const Overview = props => {
             <Label
               className={classes.label}
               color={colors.red[600]}
-              variant="contained"
-            >
+              variant="contained">
               -20%
             </Label>
           </div>
         </Grid>
-        <Grid
-          className={classes.item}
-          item
-          md={3}
-          sm={6}
-          xs={12}
-        >
-          <Typography
-            component="h2"
-            gutterBottom
-            variant="overline"
-          >
+        <Grid className={classes.item} item md={3} sm={6} xs={12}>
+          <Typography component="h2" gutterBottom variant="overline">
             Active Subscriptions
           </Typography>
           <div className={classes.valueContainer}>

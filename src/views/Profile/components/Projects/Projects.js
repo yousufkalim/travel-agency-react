@@ -36,23 +36,10 @@ const Projects = props => {
   }, []);
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Grid
-        container
-        spacing={3}
-      >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Grid container spacing={3}>
         {projects.map(project => (
-          <Grid
-            item
-            key={project.id}
-            lg={4}
-            lx={4}
-            md={6}
-            xs={12}
-          >
+          <Grid item key={project.id} lg={4} lx={4} md={6} xs={12}>
             <ProjectCard project={project} />
           </Grid>
         ))}

@@ -45,10 +45,7 @@ const InvoiceDetails = () => {
   }
 
   return (
-    <Page
-      className={classes.root}
-      title="Invoice Details"
-    >
+    <Page className={classes.root} title="Invoice Details">
       <Header invoice={invoice} />
       <Divider className={classes.divider} />
       <Details invoice={invoice} />

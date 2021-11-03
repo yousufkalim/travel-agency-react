@@ -72,19 +72,14 @@ const NotificationList = props => {
   };
 
   return (
-    <List
-      {...rest}
-      className={clsx(classes.root, className)}
-      disablePadding
-    >
+    <List {...rest} className={clsx(classes.root, className)} disablePadding>
       {notifications.map((notification, i) => (
         <ListItem
           className={classes.listItem}
           component={RouterLink}
           divider={i < notifications.length - 1}
           key={notification.id}
-          to="#"
-        >
+          to="#">
           <ListItemAvatar>{avatars[notification.type]}</ListItemAvatar>
           <ListItemText
             primary={notification.title}

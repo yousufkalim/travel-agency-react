@@ -69,23 +69,13 @@ const GeneralSettings = props => {
   const states = ['Alabama', 'New York', 'San Francisco'];
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <form onSubmit={handleSubmit}>
         <CardHeader title="Profile" />
         <Divider />
         <CardContent>
-          <Grid
-            container
-            spacing={4}
-          >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+          <Grid container spacing={4}>
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 helperText="Please specify the first name"
@@ -97,11 +87,7 @@ const GeneralSettings = props => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Last name"
@@ -112,11 +98,7 @@ const GeneralSettings = props => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Email Address"
@@ -127,11 +109,7 @@ const GeneralSettings = props => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Phone Number"
@@ -142,11 +120,7 @@ const GeneralSettings = props => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Select State"
@@ -156,23 +130,15 @@ const GeneralSettings = props => {
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
                 value={values.state}
-                variant="outlined"
-              >
+                variant="outlined">
                 {states.map(state => (
-                  <option
-                    key={state}
-                    value={state}
-                  >
+                  <option key={state} value={state}>
                     {state}
                   </option>
                 ))}
               </TextField>
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
                 label="Country"
@@ -183,11 +149,7 @@ const GeneralSettings = props => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <Typography variant="h6">Make Contact Info Public</Typography>
               <Typography variant="body2">
                 Means that anyone viewing your profile will be able to see your
@@ -201,11 +163,7 @@ const GeneralSettings = props => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <Typography variant="h6">Available to hire</Typography>
               <Typography variant="body2">
                 Toggling this will let your teamates know that you are available
@@ -226,16 +184,12 @@ const GeneralSettings = props => {
           <Button
             className={classes.saveButton}
             type="submit"
-            variant="contained"
-          >
+            variant="contained">
             Save Changes
           </Button>
         </CardActions>
       </form>
-      <SuccessSnackbar
-        onClose={handleSnackbarClose}
-        open={openSnackbar}
-      />
+      <SuccessSnackbar onClose={handleSnackbarClose} open={openSnackbar} />
     </Card>
   );
 };

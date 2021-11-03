@@ -169,18 +169,13 @@ const Filter = props => {
       classes={{ paper: classes.drawer }}
       onClose={onClose}
       open={open}
-      variant="temporary"
-    >
+      variant="temporary">
       <form
         {...rest}
         className={clsx(classes.root, className)}
-        onSubmit={handleSubmit}
-      >
+        onSubmit={handleSubmit}>
         <div className={classes.header}>
-          <Button
-            onClick={onClose}
-            size="small"
-          >
+          <Button onClick={onClose} size="small">
             <CloseIcon className={classes.buttonIcon} />
             Close
           </Button>
@@ -189,8 +184,7 @@ const Filter = props => {
           <div className={classes.contentSection}>
             <div
               className={classes.contentSectionHeader}
-              onClick={handleToggleProject}
-            >
+              onClick={handleToggleProject}>
               <Typography variant="h5">Project</Typography>
               {expandProject ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </div>
@@ -215,17 +209,10 @@ const Filter = props => {
                     // eslint-disable-next-line react/jsx-sort-props
                     SelectProps={{ native: true }}
                     value={values.paymentStatus}
-                    variant="outlined"
-                  >
-                    <option
-                      disabled
-                      value=""
-                    />
+                    variant="outlined">
+                    <option disabled value="" />
                     {paymentStatusOptions.map(option => (
-                      <option
-                        key={option}
-                        value={option}
-                      >
+                      <option key={option} value={option}>
                         {option}
                       </option>
                     ))}
@@ -247,8 +234,7 @@ const Filter = props => {
                     <Button
                       className={classes.addButton}
                       onClick={handleTagAdd}
-                      size="small"
-                    >
+                      size="small">
                       <AddIcon className={classes.addIcon} />
                       Add
                     </Button>
@@ -265,18 +251,11 @@ const Filter = props => {
                   </div>
                 </div>
                 <div className={classes.formGroup}>
-                  <Typography
-                    component="p"
-                    gutterBottom
-                    variant="overline"
-                  >
+                  <Typography component="p" gutterBottom variant="overline">
                     Project amount
                   </Typography>
                   <div className={classes.fieldGroup}>
-                    <Typography
-                      className={classes.minAmount}
-                      variant="body1"
-                    >
+                    <Typography className={classes.minAmount} variant="body1">
                       ${values.amount[0]}K
                     </Typography>
                     <Slider
@@ -289,20 +268,13 @@ const Filter = props => {
                       value={values.amount}
                       valueLabelDisplay="auto"
                     />
-                    <Typography
-                      className={classes.maxAmount}
-                      variant="body1"
-                    >
+                    <Typography className={classes.maxAmount} variant="body1">
                       ${values.amount[1]}K
                     </Typography>
                   </div>
                 </div>
                 <div className={classes.formGroup}>
-                  <Typography
-                    component="p"
-                    gutterBottom
-                    variant="overline"
-                  >
+                  <Typography component="p" gutterBottom variant="overline">
                     Project status
                   </Typography>
                   <div className={classes.fieldGroup}>
@@ -316,8 +288,7 @@ const Filter = props => {
                           event.target.value
                         )
                       }
-                      value={values.projectStatus}
-                    >
+                      value={values.projectStatus}>
                       <FormControlLabel
                         control={<Radio color="primary" />}
                         label="Ended"
@@ -347,8 +318,7 @@ const Filter = props => {
           <div className={classes.contentSection}>
             <div
               className={classes.contentSectionHeader}
-              onClick={handleToggleCustomer}
-            >
+              onClick={handleToggleCustomer}>
               <Typography variant="h5">Customer</Typography>
               {expandCustomer ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </div>
@@ -382,12 +352,8 @@ const Filter = props => {
                       }
                       size="small"
                       value={values.customerType}
-                      variant="outlined"
-                    >
-                      <ToggleButton
-                        color="primary"
-                        value="projectOwner"
-                      >
+                      variant="outlined">
+                      <ToggleButton color="primary" value="projectOwner">
                         Project owner
                       </ToggleButton>
                       <ToggleButton value="freelancer">Freelancer</ToggleButton>
@@ -447,17 +413,10 @@ const Filter = props => {
                       // eslint-disable-next-line react/jsx-sort-props
                       SelectProps={{ native: true }}
                       value={values.customerAge}
-                      variant="outlined"
-                    >
-                      <option
-                        disabled
-                        value=""
-                      />
+                      variant="outlined">
+                      <option disabled value="" />
                       {customerAgeOption.map(option => (
-                        <option
-                          key={option}
-                          value={option}
-                        >
+                        <option key={option} value={option}>
                           {option}
                         </option>
                       ))}
@@ -469,20 +428,11 @@ const Filter = props => {
           </div>
         </div>
         <div className={classes.actions}>
-          <Button
-            fullWidth
-            onClick={handleClear}
-            variant="contained"
-          >
+          <Button fullWidth onClick={handleClear} variant="contained">
             <DeleteIcon className={classes.buttonIcon} />
             Clear
           </Button>
-          <Button
-            color="primary"
-            fullWidth
-            type="submit"
-            variant="contained"
-          >
+          <Button color="primary" fullWidth type="submit" variant="contained">
             Apply filters
           </Button>
         </div>

@@ -53,10 +53,7 @@ const MultiSelect = props => {
 
   return (
     <Fragment>
-      <Button
-        onClick={handleMenuOpen}
-        ref={anchorRef}
-      >
+      <Button onClick={handleMenuOpen} ref={anchorRef}>
         {label}
         <ArrowDropDownIcon />
       </Button>
@@ -66,13 +63,9 @@ const MultiSelect = props => {
         onClose={handleMenuClose}
         open={openMenu}
         // eslint-disable-next-line react/jsx-sort-props
-        PaperProps={{ style: { width: 250 } }}
-      >
+        PaperProps={{ style: { width: 250 } }}>
         {options.map(option => (
-          <MenuItem
-            className={classes.menuItem}
-            key={option}
-          >
+          <MenuItem className={classes.menuItem} key={option}>
             <FormControlLabel
               className={classes.formControlLabel}
               control={

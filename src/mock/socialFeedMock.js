@@ -11,7 +11,7 @@ mock.onGet('/api/social-feed').reply(200, {
         name: 'Kwak Seong-Min',
         avatar: '/images/avatars/avatar_10.png'
       },
-      message: 'Hey guys! What\'s your favorite framework?',
+      message: "Hey guys! What's your favorite framework?",
       liked: true,
       likes: 1,
       comments: [
@@ -21,7 +21,7 @@ mock.onGet('/api/social-feed').reply(200, {
             name: 'Merrile Burgett',
             avatar: '/images/avatars/avatar_12.png'
           },
-          message: 'I\'ve been using Angular for the past 3 years',
+          message: "I've been using Angular for the past 3 years",
           created_at: moment().subtract(3, 'hours')
         }
       ],

@@ -16,10 +16,7 @@ const Brief = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent>
         <Markdown source={brief} />
       </CardContent>

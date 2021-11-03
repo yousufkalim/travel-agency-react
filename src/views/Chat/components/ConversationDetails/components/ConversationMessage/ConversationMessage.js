@@ -61,8 +61,7 @@ const ConversationMessage = props => {
           [classes.authUser]: message.sender.authUser
         },
         className
-      )}
-    >
+      )}>
       <div className={classes.inner}>
         <Avatar
           className={classes.avatar}
@@ -77,8 +76,7 @@ const ConversationMessage = props => {
                 color="inherit"
                 component={RouterLink}
                 to="/profile/1/timeline"
-                variant="h6"
-              >
+                variant="h6">
                 {message.sender.authUser ? 'Me' : message.sender.name}
               </Link>
             </div>
@@ -90,20 +88,14 @@ const ConversationMessage = props => {
                   src={message.content}
                 />
               ) : (
-                <Typography
-                  color="inherit"
-                  variant="body1"
-                >
+                <Typography color="inherit" variant="body1">
                   {message.content}
                 </Typography>
               )}
             </div>
           </div>
           <div className={classes.footer}>
-            <Typography
-              className={classes.time}
-              variant="body2"
-            >
+            <Typography className={classes.time} variant="body2">
               {moment(message.created_at).fromNow()}
             </Typography>
           </div>

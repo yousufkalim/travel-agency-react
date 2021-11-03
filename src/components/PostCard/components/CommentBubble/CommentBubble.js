@@ -36,10 +36,7 @@ const CommentBubble = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Avatar
         alt="Person"
         component={RouterLink}
@@ -52,21 +49,14 @@ const CommentBubble = props => {
             color="textPrimary"
             component={RouterLink}
             to="/profile/1/timeline"
-            variant="h6"
-          >
+            variant="h6">
             {comment.author.name}
           </Link>
-          <Typography
-            className={classes.time}
-            variant="body2"
-          >
+          <Typography className={classes.time} variant="body2">
             {moment(comment.created_at).fromNow()}
           </Typography>
         </div>
-        <Typography
-          className={classes.message}
-          variant="body1"
-        >
+        <Typography className={classes.message} variant="body1">
           {comment.message}
         </Typography>
       </div>

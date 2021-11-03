@@ -32,10 +32,7 @@ const ConversationList = props => {
   const selectedConversation = router.match.params.id;
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Toolbar>
         <Input
           className={classes.searchInput}

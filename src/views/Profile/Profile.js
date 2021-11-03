@@ -48,24 +48,16 @@ const Profile = props => {
   }
 
   return (
-    <Page
-      className={classes.root}
-      title="Profile"
-    >
+    <Page className={classes.root} title="Profile">
       <Header />
       <div className={classes.inner}>
         <Tabs
           onChange={handleTabsChange}
           scrollButtons="auto"
           value={tab}
-          variant="scrollable"
-        >
+          variant="scrollable">
           {tabs.map(tab => (
-            <Tab
-              key={tab.value}
-              label={tab.label}
-              value={tab.value}
-            />
+            <Tab key={tab.value} label={tab.label} value={tab.value} />
           ))}
         </Tabs>
         <Divider className={classes.divider} />

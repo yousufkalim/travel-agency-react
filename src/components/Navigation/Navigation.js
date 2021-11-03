@@ -49,8 +49,7 @@ const reduceChildRoutes = props => {
         key={page.title}
         label={page.label}
         open={Boolean(open)}
-        title={page.title}
-      >
+        title={page.title}>
         <NavigationList
           depth={depth + 1}
           pages={page.children}
@@ -81,16 +80,9 @@ const Navigation = props => {
   const router = useRouter();
 
   return (
-    <Component
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Component {...rest} className={clsx(classes.root, className)}>
       {title && <Typography variant="overline">{title}</Typography>}
-      <NavigationList
-        depth={0}
-        pages={pages}
-        router={router}
-      />
+      <NavigationList depth={0} pages={pages} router={router} />
     </Component>
   );
 };

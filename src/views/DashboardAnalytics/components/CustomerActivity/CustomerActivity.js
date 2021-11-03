@@ -66,10 +66,7 @@ const CustomerActivity = props => {
   }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Customer Activity" />
       <Divider />
       <div className={classes.statsContainer}>
@@ -78,14 +75,10 @@ const CustomerActivity = props => {
             align="center"
             component="h4"
             gutterBottom
-            variant="overline"
-          >
+            variant="overline">
             Registered
           </Typography>
-          <Typography
-            align="center"
-            variant="h3"
-          >
+          <Typography align="center" variant="h3">
             15,245
           </Typography>
         </div>
@@ -95,14 +88,10 @@ const CustomerActivity = props => {
             align="center"
             component="h4"
             gutterBottom
-            variant="overline"
-          >
+            variant="overline">
             Online
           </Typography>
-          <Typography
-            align="center"
-            variant="h3"
-          >
+          <Typography align="center" variant="h3">
             357
           </Typography>
         </div>
@@ -111,17 +100,13 @@ const CustomerActivity = props => {
       <CardContent className={classes.content}>
         <List disablePadding>
           {customers.map((customer, i) => (
-            <ListItem
-              divider={i < customers.length - 1}
-              key={customer.id}
-            >
+            <ListItem divider={i < customers.length - 1} key={customer.id}>
               <ListItemAvatar>
                 <Avatar
                   alt="Customer"
                   component={RouterLink}
                   src={customer.author.avatar}
-                  to="/management/customers/1"
-                >
+                  to="/management/customers/1">
                   {getInitials(customer.author.name)}
                 </Avatar>
               </ListItemAvatar>
@@ -131,8 +116,7 @@ const CustomerActivity = props => {
                   <Typography
                     component={RouterLink}
                     to="/management/customers/1"
-                    variant="h6"
-                  >
+                    variant="h6">
                     {customer.author.name}
                   </Typography>
                 }
@@ -140,21 +124,14 @@ const CustomerActivity = props => {
                   <Typography variant="body2">
                     {customer.description} |{' '}
                     {customer.type === 'payment' && (
-                      <Link
-                        color="inherit"
-                        component={RouterLink}
-                        to="#"
-                      >
+                      <Link color="inherit" component={RouterLink} to="#">
                         See invoice
                       </Link>
                     )}
                   </Typography>
                 }
               />
-              <Typography
-                className={classes.date}
-                variant="body2"
-              >
+              <Typography className={classes.date} variant="body2">
                 {moment(customer.created_at).fromNow()}
               </Typography>
             </ListItem>

@@ -67,29 +67,20 @@ const Application = props => {
   };
 
   return (
-    <Dialog
-      maxWidth="lg"
-      onClose={onClose}
-      open={open}
-    >
-      <div
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+    <Dialog maxWidth="lg" onClose={onClose} open={open}>
+      <div {...rest} className={clsx(classes.root, className)}>
         <div className={classes.header}>
           <Typography
             align="center"
             className={classes.title}
             gutterBottom
-            variant="h3"
-          >
+            variant="h3">
             The project owner requires an introduction
           </Typography>
           <Typography
             align="center"
             className={classes.subtitle}
-            variant="subtitle2"
-          >
+            variant="subtitle2">
             Write down a short note with your application regarding why you
             think you'd be a good fit for this position.
           </Typography>
@@ -111,11 +102,7 @@ const Application = props => {
             variant="outlined"
           />
           <div className={classes.author}>
-            <Avatar
-              alt="Author"
-              className={classes.avatar}
-              src={author.avatar}
-            >
+            <Avatar alt="Author" className={classes.avatar} src={author.avatar}>
               {getInitials(author.name)}
             </Avatar>
             <div>
@@ -128,8 +115,7 @@ const Application = props => {
           <Button
             className={classes.applyButton}
             onClick={onApply}
-            variant="contained"
-          >
+            variant="contained">
             Apply for a role
           </Button>
         </div>

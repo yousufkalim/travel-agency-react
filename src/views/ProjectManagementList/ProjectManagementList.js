@@ -48,29 +48,16 @@ const ProjectManagementList = () => {
   const handleSearch = () => {};
 
   return (
-    <Page
-      className={classes.root}
-      title="Project Management List"
-    >
+    <Page className={classes.root} title="Project Management List">
       <Header />
-      <SearchBar
-        onFilter={handleFilter}
-        onSearch={handleSearch}
-      />
+      <SearchBar onFilter={handleFilter} onSearch={handleSearch} />
       <div className={classes.results}>
-        <Typography
-          color="textSecondary"
-          gutterBottom
-          variant="body2"
-        >
+        <Typography color="textSecondary" gutterBottom variant="body2">
           {projects.length} Records found. Page {page + 1} of{' '}
           {Math.ceil(projects.length / rowsPerPage)}
         </Typography>
         {projects.map(project => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-          />
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
       <div className={classes.paginate}>

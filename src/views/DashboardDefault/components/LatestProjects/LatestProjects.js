@@ -79,14 +79,8 @@ const LatestProjects = props => {
   }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        action={<GenericMoreButton />}
-        title="Latest projects"
-      />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <CardHeader action={<GenericMoreButton />} title="Latest projects" />
       <Divider />
       <CardContent className={classes.content}>
         <PerfectScrollbar options={{ suppressScrollY: true }}>
@@ -95,14 +89,8 @@ const LatestProjects = props => {
               <TableHead>
                 <TableRow>
                   <TableCell sortDirection="desc">
-                    <Tooltip
-                      enterDelay={300}
-                      title="Sort"
-                    >
-                      <TableSortLabel
-                        active
-                        direction="desc"
-                      >
+                    <Tooltip enterDelay={300} title="Sort">
+                      <TableSortLabel active direction="desc">
                         Name
                       </TableSortLabel>
                     </Tooltip>
@@ -115,18 +103,14 @@ const LatestProjects = props => {
               </TableHead>
               <TableBody>
                 {projects.map(project => (
-                  <TableRow
-                    hover
-                    key={project.id}
-                  >
+                  <TableRow hover key={project.id}>
                     <TableCell>{project.title}</TableCell>
                     <TableCell>
                       <div className={classes.author}>
                         <Avatar
                           alt="Author"
                           className={classes.avatar}
-                          src={project.author.avatar}
-                        >
+                          src={project.author.avatar}>
                           {getInitials(project.author.name)}
                         </Avatar>
                         {project.author.name}
@@ -139,10 +123,7 @@ const LatestProjects = props => {
                     <TableCell>
                       <div className={classes.tags}>
                         {project.tags.map(tag => (
-                          <Label
-                            color={tag.color}
-                            key={tag.text}
-                          >
+                          <Label color={tag.color} key={tag.text}>
                             {tag.text}
                           </Label>
                         ))}
@@ -154,8 +135,7 @@ const LatestProjects = props => {
                         component={RouterLink}
                         size="small"
                         to="/projects/1/overview"
-                        variant="outlined"
-                      >
+                        variant="outlined">
                         View
                       </Button>
                     </TableCell>
@@ -172,8 +152,7 @@ const LatestProjects = props => {
           component={RouterLink}
           size="small"
           to="/management/projects"
-          variant="text"
-        >
+          variant="text">
           See all
           <ArrowForwardIcon className={classes.arrowForwardIcon} />
         </Button>

@@ -103,18 +103,10 @@ const AddEditEvent = forwardRef((props, ref) => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-      ref={ref}
-    >
+    <Card {...rest} className={clsx(classes.root, className)} ref={ref}>
       <form>
         <CardContent>
-          <Typography
-            align="center"
-            gutterBottom
-            variant="h3"
-          >
+          <Typography align="center" gutterBottom variant="h3">
             {mode === 'add' ? 'Add Event' : 'Edit Event'}
           </Typography>
           <TextField
@@ -170,33 +162,27 @@ const AddEditEvent = forwardRef((props, ref) => {
         </CardContent>
         <Divider />
         <CardActions>
-          <IconButton
-            edge="start"
-            onClick={handleDelete}
-          >
+          <IconButton edge="start" onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
           <Button
             className={classes.cancelButton}
             onClick={onCancel}
-            variant="contained"
-          >
+            variant="contained">
             Cancel
           </Button>
           {mode === 'add' ? (
             <Button
               className={classes.confirmButton}
               onClick={handleAdd}
-              variant="contained"
-            >
+              variant="contained">
               Add
             </Button>
           ) : (
             <Button
               className={classes.confirmButton}
               onClick={handleEdit}
-              variant="contained"
-            >
+              variant="contained">
               Save
             </Button>
           )}

@@ -81,17 +81,13 @@ const FilesDropzone = props => {
   });
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div
         className={clsx({
           [classes.dropZone]: true,
           [classes.dragActive]: isDragActive
         })}
-        {...getRootProps()}
-      >
+        {...getRootProps()}>
         <input {...getInputProps()} />
         <div>
           <img
@@ -101,17 +97,13 @@ const FilesDropzone = props => {
           />
         </div>
         <div>
-          <Typography
-            gutterBottom
-            variant="h3"
-          >
+          <Typography gutterBottom variant="h3">
             Select files
           </Typography>
           <Typography
             className={classes.info}
             color="textSecondary"
-            variant="body1"
-          >
+            variant="body1">
             Drop files here or click <Link underline="always">browse</Link>{' '}
             thorough your machine
           </Typography>
@@ -122,10 +114,7 @@ const FilesDropzone = props => {
           <PerfectScrollbar options={{ suppressScrollX: true }}>
             <List className={classes.list}>
               {files.map((file, i) => (
-                <ListItem
-                  divider={i < files.length - 1}
-                  key={uuid()}
-                >
+                <ListItem divider={i < files.length - 1} key={uuid()}>
                   <ListItemIcon>
                     <FileCopyIcon />
                   </ListItemIcon>
@@ -144,17 +133,10 @@ const FilesDropzone = props => {
             </List>
           </PerfectScrollbar>
           <div className={classes.actions}>
-            <Button
-              onClick={handleRemoveAll}
-              size="small"
-            >
+            <Button onClick={handleRemoveAll} size="small">
               Remove all
             </Button>
-            <Button
-              color="secondary"
-              size="small"
-              variant="contained"
-            >
+            <Button color="secondary" size="small" variant="contained">
               Upload files
             </Button>
           </div>

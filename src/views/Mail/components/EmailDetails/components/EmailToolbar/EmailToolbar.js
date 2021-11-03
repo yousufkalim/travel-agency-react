@@ -50,23 +50,16 @@ const EmailToolbar = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Tooltip title="Back">
         <IconButton
           className={classes.backButton}
           onClick={onBack}
-          size="small"
-        >
+          size="small">
           <ArrowBackIcon />
         </IconButton>
       </Tooltip>
-      <Paper
-        className={classes.search}
-        elevation={1}
-      >
+      <Paper className={classes.search} elevation={1}>
         <SearchIcon className={classes.searchIcon} />
         <Input
           className={classes.searchInput}
@@ -75,34 +68,22 @@ const EmailToolbar = props => {
         />
       </Paper>
       <Tooltip title="Delete">
-        <IconButton
-          className={classes.moreButton}
-          size="small"
-        >
+        <IconButton className={classes.moreButton} size="small">
           <DeleteIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="More options">
-        <IconButton
-          className={classes.moreButton}
-          size="small"
-        >
+        <IconButton className={classes.moreButton} size="small">
           <MoreIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Previous email">
-        <IconButton
-          className={classes.previousButton}
-          size="small"
-        >
+        <IconButton className={classes.previousButton} size="small">
           <KeyboardArrowLeftIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Next email">
-        <IconButton
-          className={classes.nextButton}
-          size="small"
-        >
+        <IconButton className={classes.nextButton} size="small">
           <KeyboardArrowRightIcon />
         </IconButton>
       </Tooltip>

@@ -68,10 +68,7 @@ const EarningsSegmentation = props => {
   }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         action={<GenericMoreButton />}
         title="Earnings Segmentation"
@@ -79,30 +76,20 @@ const EarningsSegmentation = props => {
       <Divider />
       <CardContent className={classes.content}>
         <div className={classes.chartContainer}>
-          <Chart
-            className={classes.chart}
-            data={earnings}
-          />
+          <Chart className={classes.chart} data={earnings} />
         </div>
         <Divider />
         <div className={classes.statsContainer}>
           {earnings.map(earning => (
-            <div
-              className={classes.statsItem}
-              key={earning.id}
-            >
+            <div className={classes.statsItem} key={earning.id}>
               <Typography
                 align="center"
                 component="h6"
                 gutterBottom
-                variant="overline"
-              >
+                variant="overline">
                 {earning.label}
               </Typography>
-              <Typography
-                align="center"
-                variant="h4"
-              >
+              <Typography align="center" variant="h4">
                 {earning.value}%
               </Typography>
             </div>

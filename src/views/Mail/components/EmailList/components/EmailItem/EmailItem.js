@@ -147,8 +147,7 @@ const EmailItem = props => {
         },
         className
       )}
-      divider
-    >
+      divider>
       <Checkbox
         checked={selected}
         className={classes.checkbox}
@@ -156,10 +155,7 @@ const EmailItem = props => {
         onChange={onToggle}
       />
       <Tooltip title="Add to favs">
-        <IconButton
-          className={classes.favoriteButton}
-          onClick={handleFavorite}
-        >
+        <IconButton className={classes.favoriteButton} onClick={handleFavorite}>
           {favorited ? (
             <StarIcon
               className={clsx(classes.starIcon, classes.starFilledIcon)}
@@ -169,14 +165,8 @@ const EmailItem = props => {
           )}
         </IconButton>
       </Tooltip>
-      <div
-        className={classes.details}
-        onClick={onOpen}
-      >
-        <Avatar
-          className={classes.avatar}
-          src={email.receiver.avatar}
-        >
+      <div className={classes.details} onClick={onOpen}>
+        <Avatar className={classes.avatar} src={email.receiver.avatar}>
           {getInitials(email.receiver.name)}
         </Avatar>
         <div className={classes.content}>
@@ -190,18 +180,12 @@ const EmailItem = props => {
           </Typography>
           <div className={classes.labels}>
             {email.labels.map((label, i) => (
-              <Label
-                color={label.color}
-                key={i}
-              >
+              <Label color={label.color} key={i}>
                 {label.text}
               </Label>
             ))}
           </div>
-          <Typography
-            className={classes.date}
-            variant="body2"
-          >
+          <Typography className={classes.date} variant="body2">
             {moment(email.created_at).format('DD MMM YYYY')}
           </Typography>
         </div>

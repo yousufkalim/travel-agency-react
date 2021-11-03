@@ -25,10 +25,7 @@ const EmptyList = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.image} />
       <Typography variant="h4">There's nothing here...</Typography>
     </div>

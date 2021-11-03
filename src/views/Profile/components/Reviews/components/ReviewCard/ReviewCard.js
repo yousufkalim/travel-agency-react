@@ -57,17 +57,13 @@ const ReviewCard = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         avatar={
           <Avatar
             alt="Reviewer"
             className={classes.avatar}
-            src={review.reviewer.avatar}
-          >
+            src={review.reviewer.avatar}>
             {getInitials(review.reviewer.name)}
           </Avatar>
         }
@@ -77,10 +73,7 @@ const ReviewCard = props => {
           <div className={classes.subheader}>
             <div className={classes.stars}>
               <ReviewStars value={review.rating} />
-              <Typography
-                className={classes.rating}
-                variant="h6"
-              >
+              <Typography className={classes.rating} variant="h6">
                 {review.rating}
               </Typography>
             </div>
@@ -90,8 +83,7 @@ const ReviewCard = props => {
                 color="textPrimary"
                 component={RouterLink}
                 to="/profile/1/timeline"
-                variant="h6"
-              >
+                variant="h6">
                 {review.reviewer.name}
               </Link>{' '}
               | {moment(review.created_at).fromNow()}
@@ -103,8 +95,7 @@ const ReviewCard = props => {
             color="textPrimary"
             component={RouterLink}
             to="/projects/1/overview"
-            variant="h5"
-          >
+            variant="h5">
             {review.project.title}
           </Link>
         }
@@ -119,8 +110,7 @@ const ReviewCard = props => {
             alignItems="center"
             container
             justify="space-between"
-            spacing={3}
-          >
+            spacing={3}>
             <Grid item>
               <Typography variant="h5">
                 {review.currency}

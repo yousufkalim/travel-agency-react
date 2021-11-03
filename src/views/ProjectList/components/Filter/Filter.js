@@ -114,10 +114,7 @@ const Filter = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <div className={classes.keywords}>
         <SearchIcon className={classes.searchIcon} />
         <Input

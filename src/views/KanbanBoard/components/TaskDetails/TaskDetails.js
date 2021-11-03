@@ -29,14 +29,8 @@ const TaskDetails = props => {
   }
 
   return (
-    <Modal
-      onClose={onClose}
-      open={open}
-    >
-      <Card
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+    <Modal onClose={onClose} open={open}>
+      <Card {...rest} className={clsx(classes.root, className)}>
         <CardContent>
           <Typography variant="h6">{task.title}</Typography>
           <Typography variant="body1">{task.desc}</Typography>

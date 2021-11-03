@@ -24,10 +24,7 @@ const ConversationDetails = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <ConversationToolbar conversation={conversation} />
       <Divider />
       <ConversationMessages messages={conversation.messages} />

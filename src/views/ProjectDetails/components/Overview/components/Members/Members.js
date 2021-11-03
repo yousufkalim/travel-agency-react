@@ -40,10 +40,7 @@ const Members = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         className={classes.header}
         title="Project members"
@@ -54,16 +51,12 @@ const Members = props => {
       <CardContent className={classes.content}>
         <List>
           {members.map(member => (
-            <ListItem
-              disableGutters
-              key={member.id}
-            >
+            <ListItem disableGutters key={member.id}>
               <ListItemAvatar>
                 <Avatar
                   alt="Author"
                   className={classes.avatar}
-                  src={member.avatar}
-                >
+                  src={member.avatar}>
                   {getInitials(member.name)}
                 </Avatar>
               </ListItemAvatar>

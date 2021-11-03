@@ -99,16 +99,10 @@ const Todos = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         action={
-          <Button
-            color="primary"
-            size="small"
-          >
+          <Button color="primary" size="small">
             <AddIcon className={classes.addIcon} />
             Add
           </Button>
@@ -119,10 +113,7 @@ const Todos = props => {
       <CardContent className={classes.content}>
         <List>
           {todos.map((todo, i) => (
-            <ListItem
-              divider={i < todos.length - 1}
-              key={todo.id}
-            >
+            <ListItem divider={i < todos.length - 1} key={todo.id}>
               <ListItemIcon>
                 <Radio
                   checked={todo.done}
@@ -134,8 +125,7 @@ const Todos = props => {
                   className={clsx({
                     [classes.done]: todo.done
                   })}
-                  variant="body1"
-                >
+                  variant="body1">
                   {todo.title}
                 </Typography>
               </ListItemText>

@@ -37,10 +37,7 @@ const OrderManagementList = () => {
   }, []);
 
   return (
-    <Page
-      className={classes.root}
-      title="Orders Management List"
-    >
+    <Page className={classes.root} title="Orders Management List">
       <Header />
       <SearchBar />
       <Results

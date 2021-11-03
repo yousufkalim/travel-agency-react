@@ -151,8 +151,7 @@ const ButtonBase = props => {
         {...rest}
         className={clsx(classes.button, {
           [classes.activeButton]: active
-        })}
-      >
+        })}>
         {children}
       </Button>
     </Tooltip>
@@ -201,8 +200,7 @@ const BlockTypeButtons = props => {
             active={active}
             key={button.blockType}
             onClick={event => handleClick(event, button.blockType)}
-            tooltip={button.tooltip}
-          >
+            tooltip={button.tooltip}>
             {button.icon ? <button.icon /> : button.text}
           </ButtonBase>
         );
@@ -233,8 +231,7 @@ const InlineStyleButtons = props => {
           active={currentStyle.has(button.inlineStyle)}
           key={button.inlineStyle}
           onClick={event => handleClick(event, button.inlineStyle)}
-          tooltip={button.tooltip}
-        >
+          tooltip={button.tooltip}>
           {button.icon ? <button.icon /> : button.text}
         </ButtonBase>
       ))}
@@ -253,20 +250,11 @@ const EditorToolbar = props => {
   const classes = useStyles1();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <PerfectScrollbar>
         <div className={classes.inner}>
-          <BlockTypeButtons
-            editorState={editorState}
-            onToggle={onToggle}
-          />
-          <InlineStyleButtons
-            editorState={editorState}
-            onToggle={onToggle}
-          />
+          <BlockTypeButtons editorState={editorState} onToggle={onToggle} />
+          <InlineStyleButtons editorState={editorState} onToggle={onToggle} />
         </div>
       </PerfectScrollbar>
     </div>

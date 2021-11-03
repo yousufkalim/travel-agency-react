@@ -95,23 +95,13 @@ const Results = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Typography
-        color="textSecondary"
-        gutterBottom
-        variant="body2"
-      >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Typography color="textSecondary" gutterBottom variant="body2">
         {orders.length} Records found. Page {page + 1} of{' '}
         {Math.ceil(orders.length / rowsPerPage)}
       </Typography>
       <Card>
-        <CardHeader
-          action={<GenericMoreButton />}
-          title="Orders"
-        />
+        <CardHeader action={<GenericMoreButton />} title="Orders" />
         <Divider />
         <CardContent className={classes.content}>
           <PerfectScrollbar>
@@ -142,8 +132,7 @@ const Results = props => {
                   {orders.slice(0, rowsPerPage).map(order => (
                     <TableRow
                       key={order.id}
-                      selected={selectedOrders.indexOf(order.id) !== -1}
-                    >
+                      selected={selectedOrders.indexOf(order.id) !== -1}>
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={selectedOrders.indexOf(order.id) !== -1}
@@ -170,8 +159,7 @@ const Results = props => {
                       <TableCell>
                         <Label
                           color={paymentStatusColors[order.payment.status]}
-                          variant="outlined"
-                        >
+                          variant="outlined">
                           {order.payment.status}
                         </Label>
                       </TableCell>
@@ -181,8 +169,7 @@ const Results = props => {
                           component={RouterLink}
                           size="small"
                           to={'/management/orders/1'}
-                          variant="outlined"
-                        >
+                          variant="outlined">
                           View
                         </Button>
                       </TableCell>
@@ -205,7 +192,10 @@ const Results = props => {
           />
         </CardActions>
       </Card>
-      <TableEditBar selected={selectedOrders} onMarkPaid={()=>alert('Hello')}/>
+      <TableEditBar
+        selected={selectedOrders}
+        onMarkPaid={() => alert('Hello')}
+      />
     </div>
   );
 };

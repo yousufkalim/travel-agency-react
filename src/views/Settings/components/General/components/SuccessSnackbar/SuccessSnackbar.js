@@ -30,8 +30,7 @@ const SuccessSnackbar = props => {
       }}
       autoHideDuration={6000}
       onClose={onClose}
-      open={open}
-    >
+      open={open}>
       <SnackbarContent
         className={classes.content}
         message={

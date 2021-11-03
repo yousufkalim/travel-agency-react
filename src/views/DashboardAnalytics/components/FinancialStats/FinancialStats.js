@@ -50,23 +50,13 @@ const FinancialStats = props => {
   ];
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        action={<GenericMoreButton />}
-        title="Financial Stats"
-      />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <CardHeader action={<GenericMoreButton />} title="Financial Stats" />
       <Divider />
       <CardContent className={classes.content}>
         <PerfectScrollbar>
           <div className={classes.inner}>
-            <Chart
-              className={classes.chart}
-              data={data}
-              labels={labels}
-            />
+            <Chart className={classes.chart} data={data} labels={labels} />
           </div>
         </PerfectScrollbar>
       </CardContent>
