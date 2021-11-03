@@ -37,6 +37,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import Header from './components/Header';
 import { createTrip } from 'actions/tripActions';
 import { message, Upload } from 'antd';
+import { useHistory } from 'react-router-dom'; ///useHistory for redirecting
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,9 +52,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CreateTrip = props => {
-  const { match, history } = props;
   const classes = useStyles();
-
+  const history = useHistory(); ///useHistory obj
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     name: '',

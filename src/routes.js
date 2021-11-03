@@ -14,6 +14,7 @@ import PresentationView from './views/Presentation';
 import Register from 'views/Register';
 import Login from 'views/Login';
 import TripList from 'views/TravelManagement/TripList';
+import TripArchived from 'views/TravelManagement/TripArchived';
 import CreateTrip from 'views/TravelManagement/CreateTrip';
 import EditTrip from 'views/TravelManagement/EditTrip';
 import Calendar from 'views/Calendar';
@@ -100,6 +101,11 @@ const routes = [
         path: '/travel/triplist',
         exact: true,
         component: () => <TripList />
+      },
+      {
+        path: '/travel/triparchive',
+        exact: true,
+        component: () => <TripArchived />
       },
       {
         path: '/travels/trip/create',

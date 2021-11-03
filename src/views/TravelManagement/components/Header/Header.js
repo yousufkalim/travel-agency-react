@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Header = props => {
-  const { className, ...rest } = props;
+  const { className, compName, ...rest } = props; /// compName holding name of prev component
 
   const classes = useStyles();
 
@@ -21,19 +21,29 @@ const Header = props => {
           <Typography component="h2" gutterBottom variant="overline">
             Travels
           </Typography>
-          <Typography component="h1" variant="h3">
-            Trip List
-          </Typography>
+          {/* checking previous component and showing title */}
+          {compName === 'archived' ? (
+            <Typography component="h1" variant="h3">
+              Trip Archive
+            </Typography>
+          ) : (
+            <Typography component="h1" variant="h3">
+              Trip List
+            </Typography>
+          )}
         </Grid>
-        <Grid item>
-          <Button
-            color="primary"
-            variant="contained"
-            component={Link}
-            to="/travels/trip/create">
-            Create Trip
-          </Button>
-        </Grid>
+        {/* Showing create button if prev component is not archived */}
+        {compName !== 'archived' && (
+          <Grid item>
+            <Button
+              color="primary"
+              variant="contained"
+              component={Link}
+              to="/travels/trip/create">
+              Create Trip
+            </Button>
+          </Grid>
+        )}
       </Grid>
     </div>
   );

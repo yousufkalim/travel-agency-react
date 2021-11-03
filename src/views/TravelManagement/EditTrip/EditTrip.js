@@ -46,6 +46,8 @@ import {
 import { message, Upload } from 'antd';
 import { useEffect } from 'react';
 
+import { useParams, useHistory } from 'react-router-dom'; ///useParams to get id and useHistory for redirecting
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: theme.breakpoints.values.lg,
@@ -59,9 +61,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EditTrip = props => {
-  const { match, history } = props;
   const classes = useStyles();
-
+  const params = useParams(); ///useParams obj
+  const history = useHistory(); ///useHistory obj
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     name: '',
@@ -110,15 +112,17 @@ const EditTrip = props => {
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
-    getSingleTrip(match.params.id).then(({ data }) => {
-      setValues({ ...values, ...data.data });
+    getSingleTrip(params.id).then(({ data }) => {
+      setValues({ ...values, ...data.trip }); ///data.trip from db response
       setTimeout(() => {
-        setValues({ ...values, ...data.data });
-        if (data.data?.gallery) {
-          setGallery(data.data?.gallery);
+        setValues({ ...values, ...data.trip }); ///setting intial values
+        ////checling for trip and getting gallery
+        if (data.trip?.gallery) {
+          setGallery(data.trip?.gallery);
         }
-        if (data.data?.banner) {
-          setBanner([data.data.banner]);
+        ////checling for trip and getting banner
+        if (data.trip?.banner) {
+          setBanner([data.trip.banner]);
         }
       }, 500);
     });
@@ -176,7 +180,7 @@ const EditTrip = props => {
       formData.append('gallery', element.originFileObj);
     });
 
-    updateTrip(match.params.id, formData)
+    updateTrip(params.id, formData)
       .then(res => {
         setLoading(false);
         message.success('trip updated successfully!');
@@ -189,10 +193,10 @@ const EditTrip = props => {
   };
 
   const handleDeleteBanner = img => {
-    deleteBannerImage(match.params.id, img).then(res => console.log(res));
+    deleteBannerImage(params.id, img).then(res => console.log(res));
   };
   const handleDeleteGallery = img => {
-    deleteGalleryImage(match.params.id, img).then(res => console.log(res));
+    deleteGalleryImage(params.id, img).then(res => console.log(res));
   };
   return (
     <Page className={classes.root} title="Create New Trip">
@@ -890,6 +894,7 @@ const EditTrip = props => {
                       <Checkbox
                         name="activeOnSite"
                         color="primary"
+                        checked={values.activeOnSite} ////default value
                         onChange={e => {
                           setValues({
                             ...values,
@@ -906,6 +911,7 @@ const EditTrip = props => {
                     control={
                       <Checkbox
                         name="archived"
+                        checked={values.archived} ////default value
                         onChange={e => {
                           setValues({
                             ...values,
@@ -923,6 +929,7 @@ const EditTrip = props => {
                     control={
                       <Checkbox
                         name="organizer"
+                        checked={values.organizer} ////default value
                         onChange={e => {
                           setValues({
                             ...values,
@@ -972,7 +979,7 @@ const EditTrip = props => {
                 color="primary"
                 type="submit"
                 disabled={loading}>
-                Create Trip
+                Update Trip
               </Button>
             </CardActions>
           </Card>
