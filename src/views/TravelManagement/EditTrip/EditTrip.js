@@ -74,8 +74,7 @@ const EditTrip = props => {
     description: '',
     includes: [],
     excludes: [],
-    activeOnSite: true,
-    archived: false,
+    status: 'published', //////status can either be published or archived
     address: '',
     city: '',
     zipcode: '',
@@ -888,7 +887,7 @@ const EditTrip = props => {
                     </FormControl>
                   </Grid>
                 </Grid>
-                <Grid item md={2} xs={12}>
+                {/* <Grid item md={2} xs={12}>
                   <FormControlLabel
                     control={
                       <Checkbox
@@ -905,18 +904,24 @@ const EditTrip = props => {
                     }
                     label="Active on site"
                   />
-                </Grid>
+                </Grid> */}
                 <Grid item md={2} xs={12}>
                   <FormControlLabel
                     control={
                       <Checkbox
                         name="archived"
-                        checked={values.archived} ////default value
+                        checked={values.status === 'archived'} ////default value
                         onChange={e => {
-                          setValues({
-                            ...values,
-                            [e.target.name]: e.target.checked
-                          });
+                          // if checked then its archived else it is pubished
+                          e.target.checked
+                            ? setValues({
+                                ...values,
+                                ['status']: 'archived'
+                              })
+                            : setValues({
+                                ...values,
+                                ['status']: 'published'
+                              });
                         }}
                         color="primary"
                       />
