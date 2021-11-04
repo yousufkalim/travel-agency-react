@@ -916,11 +916,11 @@ const EditTrip = props => {
                           e.target.checked
                             ? setValues({
                                 ...values,
-                                ['status']: 'archived'
+                                status: 'archived'
                               })
                             : setValues({
                                 ...values,
-                                ['status']: 'published'
+                                status: 'published'
                               });
                         }}
                         color="primary"
