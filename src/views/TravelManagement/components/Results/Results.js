@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -86,8 +86,23 @@ const Results = props => {
   const classes = useStyles();
 
   const [selectedCustomers, setSelectedCustomers] = useState([]);
+  const [filterValues, setFilterValues] = useState({
+    category: '',
+    tripSize: '',
+    dayType: '',
+    minReservation: '',
+    maxReservation: '',
+    archived: 0,
+    date: 'mm/dd/yyyy'
+  }); ///state for filter tabs
+  const [filteredList, setFilteredList] = useState([]); ///filtered List array
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  // useEffect to set filtered list with the current trips list
+  useEffect(() => {
+    setFilteredList(triplist);
+  }, [triplist]);
 
   const handleSelectAll = event => {
     const selectedCustomers = event.target.checked
@@ -155,12 +170,9 @@ const Results = props => {
       field: 'maxReservation'
     },
     {
-      title: 'Active on Site',
-      field: 'activeOnSite'
-    },
-    {
-      title: 'Archived',
-      field: 'archived'
+      //// table column for status
+      title: 'Status',
+      field: 'status'
     },
     {
       title: 'Created',
@@ -186,6 +198,33 @@ const Results = props => {
     }
   ];
 
+  // Filter function
+  const onFilter = (value, name) => {
+    let tempArray = [];
+    if (value !== 'all' && value !== '') {
+      tempArray.push(
+        ...triplist.filter(item => {
+          if (name === 'minReservation' || name === 'maxReservation') {
+            // check for min/max reservation
+            return item[name] === parseInt(value);
+          } else if (name === 'date') {
+            // check for date
+            return moment(moment(item.createdAt).format('DD-MMM-YYYY')).isSame(
+              moment(value).format('DD-MMM-YYYY')
+            );
+          } else {
+            // check for all dropdowns
+            return item[name] === value;
+          }
+        })
+      );
+      setFilteredList(tempArray);
+    } else {
+      setFilteredList(triplist);
+    }
+    setFilterValues({ ...filterValues, [name]: value });
+  };
+
   ////Delete function
 
   const onDelete = () => {
@@ -204,30 +243,134 @@ const Results = props => {
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
+      {/* filter tabs state */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}>
+        <select
+          name="category"
+          style={{
+            width: 180,
+            padding: 10,
+            marginBottom: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+          defaultValue={filterValues.category}
+          onChange={e => onFilter(e.target.value, e.target.name)}>
+          <option value="" disabled selected>
+            Category
+          </option>
+          <option value="all">All</option>
+          <option value="Single Day">Single Day</option>
+          <option value="Multiple Day">Multiple Day</option>
+          <option value="Cruises">Cruises</option>
+        </select>
+
+        <select
+          name="tripSize"
+          style={{
+            width: 180,
+            padding: 10,
+            marginBottom: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+          defaultValue={filterValues.tripSize}
+          onChange={e => onFilter(e.target.value, e.target.name)}>
+          <option value="" disabled selected>
+            Trip Size
+          </option>
+          <option value="all">All</option>
+          <option value="Individual">Individual</option>
+          <option value="Group">Group</option>
+          <option value="Both">Both</option>
+        </select>
+
+        <select
+          name="dayType"
+          style={{
+            width: 180,
+            padding: 10,
+            marginBottom: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+          defaultValue={filterValues.dayType}
+          onChange={e => onFilter(e.target.value, e.target.name)}>
+          <option value="" disabled selected>
+            Day Type
+          </option>
+          <option value="all">All</option>
+          <option value="Weekday">Weekday</option>
+          <option value="Weekend">Weekend</option>
+        </select>
+
+        <input
+          type="number"
+          name="minReservation"
+          placeholder="Min Reservation"
+          value={filterValues.minReservation}
+          onChange={e => onFilter(e.target.value, e.target.name)}
+          style={{
+            width: 180,
+            padding: 10,
+            marginBottom: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+        />
+
+        <input
+          type="number"
+          name="maxReservation"
+          placeholder="Max Reservation"
+          value={filterValues.maxReservation}
+          onChange={e => onFilter(e.target.value, e.target.name)}
+          style={{
+            width: 180,
+            padding: 10,
+            marginBottom: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+        />
+
+        <input
+          style={{
+            width: 180,
+            padding: 10,
+            marginBottom: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+          onChange={e => onFilter(e.target.value, e.target.name)}
+          placeholder="date"
+          name="date"
+          type="date"
+        />
+      </div>
+
       <Typography color="textSecondary" gutterBottom variant="body2">
         {triplist.length} Records found. Page {page + 1} of{' '}
         {Math.ceil(triplist.length / rowsPerPage)}
       </Typography>
-      <Card>
+      {/* <Card>
         <CardHeader action={<GenericMoreButton />} title="Trips" />
         <Divider />
-        <CardContent className={classes.content}>
-          <PerfectScrollbar>
-            <div className={classes.inner}>
-              <MaterialTable
-                icons={tableIcons}
-                columns={tableHeader}
-                data={triplist}
-                options={{
-                  // filtering: true,
-                  showTitle: false,
-                  selection: true,
-                  headerStyle: { backgroundColor: '#fafafa', color: '#000' },
-                  exportButton: true
-                }}
-                onSelectionChange={rows => selectAllCustomer(rows)}
-              />
-              {/* <Table>
+        <CardContent className={classes.content}> */}
+      <PerfectScrollbar>
+        <div className={classes.inner}>
+          <MaterialTable
+            title={<h2 style={{ marginTop: 10 }}>Trips</h2>}
+            icons={tableIcons}
+            columns={tableHeader}
+            data={filteredList}
+            options={{
+              selection: true,
+              headerStyle: { backgroundColor: '#fafafa', color: '#000' },
+              exportButton: true,
+              sorting: true
+            }}
+            onSelectionChange={rows => selectAllCustomer(rows)}
+          />
+          {/* <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell padding="checkbox">
@@ -316,11 +459,11 @@ const Results = props => {
                     ))}
                 </TableBody>
               </Table> */}
-            </div>
-          </PerfectScrollbar>
-        </CardContent>
-        <CardActions className={classes.actions}>
-          {/* <TablePagination
+        </div>
+      </PerfectScrollbar>
+      {/*</CardContent>
+        <CardActions className={classes.actions}> */}
+      {/* <TablePagination
             component="div"
             count={triplist.length}
             onChangePage={handleChangePage}
@@ -329,8 +472,8 @@ const Results = props => {
             rowsPerPage={rowsPerPage}
             rowsPerPageOptions={[5, 10, 25, 50, 100]}
           /> */}
-        </CardActions>
-      </Card>
+      {/* </CardActions>
+      </Card> */}
       <TableEditBar
         selected={selectedCustomers}
         onMarkPaid={() => console.log(selectedCustomers)}
