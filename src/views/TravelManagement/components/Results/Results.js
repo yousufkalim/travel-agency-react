@@ -92,7 +92,6 @@ const Results = props => {
     dayType: '',
     minReservation: '',
     maxReservation: '',
-    activeOnSite: '',
     archived: 0,
     date: 'mm/dd/yyyy'
   }); ///state for filter tabs
@@ -171,12 +170,9 @@ const Results = props => {
       field: 'maxReservation'
     },
     {
-      title: 'Active on Site',
-      field: 'activeOnSite'
-    },
-    {
-      title: 'Archived',
-      field: 'archived'
+      //// table column for status
+      title: 'Status',
+      field: 'status'
     },
     {
       title: 'Created',
@@ -208,28 +204,17 @@ const Results = props => {
     if (value !== 'all' && value !== '') {
       tempArray.push(
         ...triplist.filter(item => {
-          if (name === 'category') {
-            return item.category === value;
-          } else if (name === 'tripSize') {
-            return item.tripSize === value;
-          } else if (name === 'dayType') {
-            return item.dayType === value;
-          } else if (name === 'activeOnSite') {
-            return value === 'true'
-              ? item.activeOnSite === true
-              : item.activeOnSite === false;
-          } else if (name === 'archived') {
-            return value === 'true'
-              ? item.activeOnSite === true
-              : item.activeOnSite === false;
-          } else if (name === 'minReservation') {
-            return item.minReservation === parseInt(value);
-          } else if (name === 'maxReservation') {
-            return item.maxReservation === parseInt(value);
-          } else if ((name = 'date')) {
+          if (name === 'minReservation' || name === 'maxReservation') {
+            // check for min/max reservation
+            return item[name] === parseInt(value);
+          } else if (name === 'date') {
+            // check for date
             return moment(moment(item.createdAt).format('DD-MMM-YYYY')).isSame(
               moment(value).format('DD-MMM-YYYY')
             );
+          } else {
+            // check for all dropdowns
+            return item[name] === value;
           }
         })
       );
@@ -262,12 +247,12 @@ const Results = props => {
       <div
         style={{
           display: 'flex',
-          justifyContent: 'space-Between'
+          justifyContent: 'space-between'
         }}>
         <select
           name="category"
           style={{
-            width: 120,
+            width: 180,
             padding: 10,
             marginBottom: 15,
             border: '1px solid 	rgb(128,128,128,0.4)'
@@ -282,10 +267,11 @@ const Results = props => {
           <option value="Multiple Day">Multiple Day</option>
           <option value="Cruises">Cruises</option>
         </select>
+
         <select
           name="tripSize"
           style={{
-            width: 120,
+            width: 180,
             padding: 10,
             marginBottom: 15,
             border: '1px solid 	rgb(128,128,128,0.4)'
@@ -300,10 +286,11 @@ const Results = props => {
           <option value="Group">Group</option>
           <option value="Both">Both</option>
         </select>
+
         <select
           name="dayType"
           style={{
-            width: 120,
+            width: 180,
             padding: 10,
             marginBottom: 15,
             border: '1px solid 	rgb(128,128,128,0.4)'
@@ -325,7 +312,7 @@ const Results = props => {
           value={filterValues.minReservation}
           onChange={e => onFilter(e.target.value, e.target.name)}
           style={{
-            width: 140,
+            width: 180,
             padding: 10,
             marginBottom: 15,
             border: '1px solid 	rgb(128,128,128,0.4)'
@@ -339,52 +326,16 @@ const Results = props => {
           value={filterValues.maxReservation}
           onChange={e => onFilter(e.target.value, e.target.name)}
           style={{
-            width: 140,
+            width: 180,
             padding: 10,
             marginBottom: 15,
             border: '1px solid 	rgb(128,128,128,0.4)'
           }}
         />
 
-        <select
-          name="activeOnSite"
-          style={{
-            width: 134,
-            padding: 10,
-            marginBottom: 15,
-            border: '1px solid 	rgb(128,128,128,0.4)'
-          }}
-          defaultValue={filterValues.activeOnSite}
-          onChange={e => onFilter(e.target.value, e.target.name)}>
-          <option value="" disabled selected>
-            Active On Site
-          </option>
-          <option value="all">All</option>
-          <option value="true">true</option>
-          <option value="false">false</option>
-        </select>
-
-        <select
-          name="archived"
-          style={{
-            width: 120,
-            padding: 10,
-            marginBottom: 15,
-            border: '1px solid 	rgb(128,128,128,0.4)'
-          }}
-          defaultValue={filterValues.archived}
-          onChange={e => onFilter(e.target.value, e.target.name)}>
-          <option value="" disabled selected>
-            Archived
-          </option>
-          <option value="all">All</option>
-          <option value="true">true</option>
-          <option value="false">false</option>
-        </select>
-
         <input
           style={{
-            width: 160,
+            width: 180,
             padding: 10,
             marginBottom: 15,
             border: '1px solid 	rgb(128,128,128,0.4)'
