@@ -41,6 +41,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomerInfo = props => {
+  ///customer and set customer from parent
   const { customer, className, setCustomer, ...rest } = props;
 
   const classes = useStyles();
