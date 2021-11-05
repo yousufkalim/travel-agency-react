@@ -58,7 +58,7 @@ const Summary = props => {
         <SendEmails customer={customer} />
       </Grid> */}
       <Grid item lg={6} md={6} xl={3} xs={12}>
-        <OtherActions />
+        <OtherActions customerId={customer._id} />
       </Grid>
     </Grid>
   );

@@ -121,10 +121,10 @@ const CustomerInfo = props => {
           <EditIcon className={classes.buttonIcon} />
           Edit
         </Button>
-        <Button>
+        {/* <Button>
           <LockOpenIcon className={classes.buttonIcon} />
           Reset &amp; Send Password
-        </Button>
+        </Button> */}
       </CardActions>
       <CustomerEdit
         customer={customer}

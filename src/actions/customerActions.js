@@ -31,3 +31,19 @@ export const updateCustomer = (id, payload) => {
 export const fetchCustomer = id => {
   return axios.get(`/agency/customer/${id}`, { withCredentials: true });
 };
+
+// delete by customer id
+export const deleteCustomer = id => {
+  return axios.delete(`/agency/customer/${id}`, { withCredentials: true });
+};
+
+// deleteMany by customer
+export const deleteManyCustomer = payload => {
+  return axios.delete(
+    `/customer/deleteMany`,
+    {
+      data: { ...payload }
+    },
+    { withCredentials: true }
+  );
+};

@@ -37,7 +37,7 @@ import SuccessSnackbar from 'views/Settings/components/General/components/Succes
 import { message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCustomer } from 'actions';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'; //// useHistory for navigation
 
 const tagList = ['Hiking', 'Singing'];
 
@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
 const CustomerCreate = props => {
   const dispatch = useDispatch();
   const customs = useSelector(state => state.customers);
-  const history = useHistory();
+  const history = useHistory(); //// initilizing useHistory object
 
   const classes = useStyles();
   const [openSnackbar, setOpenSnackbar] = useState(false);

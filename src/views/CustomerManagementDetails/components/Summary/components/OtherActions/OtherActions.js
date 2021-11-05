@@ -13,7 +13,9 @@ import {
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
-
+import { deleteCustomer } from 'actions'; ////delete customer action
+import { useHistory } from 'react-router'; //////useHistory for routing
+import { message } from 'antd'; ////antd toast message
 const useStyles = makeStyles(theme => ({
   root: {},
   mainActions: {
@@ -37,9 +39,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 const OtherActions = props => {
-  const { className, ...rest } = props;
+  const { className, customerId, ...rest } = props;
+  const history = useHistory(); ////useHistory object
 
   const classes = useStyles();
+
+  /////onDelete function to delete single customer
+  const onDelete = () => {
+    deleteCustomer(customerId).then(res => {
+      message.success(res.data.msg);
+      history.push('/management/customers');
+    });
+  };
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -60,7 +71,8 @@ const OtherActions = props => {
           Remove this this customer’s data if he requested that, if not please
           be aware that what has been deleted can never brough back
         </Typography>
-        <Button className={classes.deleteButton}>
+        {/* delete button */}
+        <Button className={classes.deleteButton} onClick={onDelete}>
           <DeleteIcon className={classes.buttonIcon} />
           Delete Customer Account
         </Button>
