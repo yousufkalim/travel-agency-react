@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 import axios from 'utils/axios';
-import { Page, SearchBar } from 'components';
+import { Page } from 'components';
 import { Header, Results } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCustomers } from '../../actions';
@@ -51,7 +51,7 @@ const CustomerManagementList = () => {
   return (
     <Page className={classes.root} title="Customer Management List">
       <Header />
-      <SearchBar onFilter={handleFilter} onSearch={handleSearch} />
+      {/* <SearchBar onFilter={handleFilter} onSearch={handleSearch} /> */}
       {customers && (
         <Results className={classes.results} customers={customers} />
       )}

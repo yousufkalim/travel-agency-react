@@ -189,19 +189,20 @@ const Results = props => {
         {customers.length} Records found. Page {page + 1} of{' '}
         {Math.ceil(customers.length / rowsPerPage)}
       </Typography>
-      <Card>
+      {/* <Card>
         <CardHeader action={<GenericMoreButton />} title="All customers" />
         <Divider />
-        <CardContent className={classes.content}>
+        <CardContent className={classes.content}> */}
           <PerfectScrollbar>
             <div className={classes.inner}>
               <MaterialTable
+              title={<h2 style={{ marginTop: 10 }}>All Customers</h2>}
                 icons={tableIcons}
                 columns={tableHeader}
                 data={customers}
                 options={{
                   // filtering: true,
-                  showTitle: false,
+                  // showTitle: false,
                   selection: true,
                   headerStyle: { backgroundColor: '#fafafa', color: '#000' },
                   exportButton: true
@@ -299,7 +300,7 @@ const Results = props => {
               </Table> */}
             </div>
           </PerfectScrollbar>
-        </CardContent>
+        {/* </CardContent>
         <CardActions className={classes.actions}>
           <TablePagination
             component="div"
@@ -311,7 +312,7 @@ const Results = props => {
             rowsPerPageOptions={[5, 10, 25, 50, 100]}
           />
         </CardActions>
-      </Card>
+      </Card> */}
       <TableEditBar
         selected={selectedCustomers}
         onMarkPaid={() => console.log(selectedCustomers)}
