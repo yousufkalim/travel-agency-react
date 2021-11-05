@@ -19,3 +19,15 @@ export const fetchAllCustomers = () => async dispatch => {
 export const createCustomer = payload => {
   return axios.post('/agency/customer/new', payload, { withCredentials: true });
 };
+
+// update customer
+export const updateCustomer = (id, payload) => {
+  return axios.put(`/agency/customer/${id}`, payload, {
+    withCredentials: true
+  });
+};
+
+// get customer by id
+export const fetchCustomer = id => {
+  return axios.get(`/agency/customer/${id}`, { withCredentials: true });
+};
