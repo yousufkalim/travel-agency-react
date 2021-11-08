@@ -42,6 +42,9 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { message } from 'antd'; ////antd toast messages
+
+import { deleteManyCustomer } from 'actions'; ////deleteManyCustomer Action
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -183,6 +186,21 @@ const Results = props => {
       sorting: false
     }
   ];
+
+  const onDelete = () => {
+    // data object with array of customer ids
+    const data = {
+      ids: selectedCustomers
+    };
+    // passing data to delete many customer function and handling response
+    deleteManyCustomer(data).then(response => {
+      if (response.data.message) {
+        message.success(response.data.message);
+        window.location.reload();
+      }
+    });
+  };
+
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <Typography color="textSecondary" gutterBottom variant="body2">
@@ -193,23 +211,23 @@ const Results = props => {
         <CardHeader action={<GenericMoreButton />} title="All customers" />
         <Divider />
         <CardContent className={classes.content}> */}
-          <PerfectScrollbar>
-            <div className={classes.inner}>
-              <MaterialTable
-              title={<h2 style={{ marginTop: 10 }}>All Customers</h2>}
-                icons={tableIcons}
-                columns={tableHeader}
-                data={customers}
-                options={{
-                  // filtering: true,
-                  // showTitle: false,
-                  selection: true,
-                  headerStyle: { backgroundColor: '#fafafa', color: '#000' },
-                  exportButton: true
-                }}
-                onSelectionChange={rows => selectAllCustomer(rows)}
-              />
-              {/* <Table>
+      <PerfectScrollbar>
+        <div className={classes.inner}>
+          <MaterialTable
+            title={<h2 style={{ marginTop: 10 }}>All Customers</h2>}
+            icons={tableIcons}
+            columns={tableHeader}
+            data={customers}
+            options={{
+              // filtering: true,
+              // showTitle: false,
+              selection: true,
+              headerStyle: { backgroundColor: '#fafafa', color: '#000' },
+              exportButton: true
+            }}
+            onSelectionChange={rows => selectAllCustomer(rows)}
+          />
+          {/* <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell padding="checkbox">
@@ -298,9 +316,9 @@ const Results = props => {
                     ))}
                 </TableBody>
               </Table> */}
-            </div>
-          </PerfectScrollbar>
-        {/* </CardContent>
+        </div>
+      </PerfectScrollbar>
+      {/* </CardContent>
         <CardActions className={classes.actions}>
           <TablePagination
             component="div"
@@ -316,6 +334,7 @@ const Results = props => {
       <TableEditBar
         selected={selectedCustomers}
         onMarkPaid={() => console.log(selectedCustomers)}
+        onDelete={onDelete}
       />
     </div>
   );

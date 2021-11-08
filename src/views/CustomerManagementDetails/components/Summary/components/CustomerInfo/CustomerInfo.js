@@ -121,6 +121,7 @@ const CustomerInfo = props => {
           <EditIcon className={classes.buttonIcon} />
           Edit
         </Button>
+        {/* not required for now */}
         {/* <Button>
           <LockOpenIcon className={classes.buttonIcon} />
           Reset &amp; Send Password

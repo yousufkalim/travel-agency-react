@@ -37,10 +37,10 @@ export const deleteCustomer = id => {
   return axios.delete(`/agency/customer/${id}`, { withCredentials: true });
 };
 
-// deleteMany by customer
+// deleteMany customer
 export const deleteManyCustomer = payload => {
   return axios.delete(
-    `/customer/deleteMany`,
+    '/agency/deleteMultiple',
     {
       data: { ...payload }
     },
