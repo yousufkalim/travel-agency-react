@@ -16,6 +16,8 @@ import DeleteIcon from '@material-ui/icons/DeleteOutline';
 import { deleteCustomer } from 'actions'; ////delete customer action
 import { useHistory } from 'react-router'; //////useHistory for routing
 import { message } from 'antd'; ////antd toast message
+import { toggleActive } from 'actions'; ////toggle active status action
+
 const useStyles = makeStyles(theme => ({
   root: {},
   mainActions: {
@@ -38,8 +40,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   }
 }));
+
 const OtherActions = props => {
-  const { className, customerId, ...rest } = props;
+  const { className, customerId, activeStatus, ...rest } = props;
   const history = useHistory(); ////useHistory object
 
   const classes = useStyles();
@@ -52,20 +55,31 @@ const OtherActions = props => {
     });
   };
 
+  /////onToggle function to active/inactive account
+  const onToggle = () => {
+    toggleActive(customerId).then(res => {
+      message.success(res.data.message);
+      window.location.reload();
+    });
+  };
+
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Other actions" />
       <Divider />
       <CardContent>
         <div className={classes.mainActions}>
-          <Button>
+          <Button onClick={onToggle}>
             <NotInterestedIcon className={classes.buttonIcon} />
-            Close Customer Account
+            {activeStatus
+              ? 'Close Customer Account'
+              : 'Active Customer Account'}
           </Button>
-          <Button>
+          {/* not required for now */}
+          {/* <Button>
             <GetAppIcon className={classes.buttonIcon} />
             Export client data
-          </Button>
+          </Button> */}
         </div>
         <Typography className={classes.notice} variant="body2">
           Remove this this customer’s data if he requested that, if not please

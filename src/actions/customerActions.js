@@ -47,3 +47,10 @@ export const deleteManyCustomer = payload => {
     { withCredentials: true }
   );
 };
+
+// toggle active status
+export const toggleActive = id => {
+  return axios.put(`/agency/customer/toggleActive/${id}`, {
+    withCredentials: true
+  });
+};

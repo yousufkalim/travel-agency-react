@@ -113,6 +113,10 @@ const CustomerInfo = props => {
               <TableCell>NID</TableCell>
               <TableCell>{customer.info?.nid}</TableCell>
             </TableRow>
+            <TableRow>
+              <TableCell>Active</TableCell>
+              <TableCell>{customer.active ? 'true' : 'false'}</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </CardContent>
