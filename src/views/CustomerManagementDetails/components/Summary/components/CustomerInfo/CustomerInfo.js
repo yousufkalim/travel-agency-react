@@ -21,6 +21,7 @@ import PersonIcon from '@material-ui/icons/PersonOutline';
 
 import { Label } from 'components';
 import { CustomerEdit } from './components';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -40,7 +41,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomerInfo = props => {
-  const { customer, className, ...rest } = props;
+  ///customer and set customer from parent
+  const { customer, className, setCustomer, ...rest } = props;
 
   const classes = useStyles();
 
@@ -68,9 +70,9 @@ const CustomerInfo = props => {
                 <div>
                   <Label
                     color={
-                      customer.verified ? colors.green[600] : colors.orange[600]
+                      customer.password ? colors.green[600] : colors.orange[600]
                     }>
-                    {customer.verified
+                    {customer.password
                       ? 'Email verified'
                       : 'Email not verified'}
                   </Label>
@@ -82,20 +84,38 @@ const CustomerInfo = props => {
               <TableCell>{customer.phone}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>State/Region</TableCell>
-              <TableCell>{customer.state}</TableCell>
+              <TableCell>Gender</TableCell>
+              <TableCell>{customer.gender}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Date of Birth</TableCell>
+              <TableCell>
+                {moment(customer.birthday).format('DD-MM-yyyy')}
+              </TableCell>
             </TableRow>
             <TableRow selected>
               <TableCell>Country</TableCell>
               <TableCell>{customer.country}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Address 1</TableCell>
-              <TableCell>{customer.address1}</TableCell>
+              <TableCell>Address</TableCell>
+              <TableCell>{customer.address}</TableCell>
             </TableRow>
             <TableRow selected>
-              <TableCell>Address 2</TableCell>
-              <TableCell>{customer.address2}</TableCell>
+              <TableCell>Passport</TableCell>
+              <TableCell>{customer.info?.passportNo}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Nationality</TableCell>
+              <TableCell>{customer.info?.nationality}</TableCell>
+            </TableRow>
+            <TableRow selected>
+              <TableCell>NID</TableCell>
+              <TableCell>{customer.info?.nid}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Active</TableCell>
+              <TableCell>{customer.active ? 'true' : 'false'}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -105,19 +125,17 @@ const CustomerInfo = props => {
           <EditIcon className={classes.buttonIcon} />
           Edit
         </Button>
-        <Button>
+        {/* not required for now */}
+        {/* <Button>
           <LockOpenIcon className={classes.buttonIcon} />
           Reset &amp; Send Password
-        </Button>
-        <Button>
-          <PersonIcon className={classes.buttonIcon} />
-          Login as Customer
-        </Button>
+        </Button> */}
       </CardActions>
       <CustomerEdit
         customer={customer}
         onClose={handleEditClose}
         open={openEdit}
+        setCustomer={setCustomer}
       />
     </Card>
   );

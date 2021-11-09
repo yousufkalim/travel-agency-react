@@ -98,10 +98,6 @@ export default [
           {
             title: 'Create New Customer',
             href: '/management/customer/create'
-          },
-          {
-            title: 'Customer Details',
-            href: '/management/customers/1/summary'
           }
           // {
           //   title: 'Projects',

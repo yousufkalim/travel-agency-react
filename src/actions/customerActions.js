@@ -19,3 +19,38 @@ export const fetchAllCustomers = () => async dispatch => {
 export const createCustomer = payload => {
   return axios.post('/agency/customer/new', payload, { withCredentials: true });
 };
+
+// update customer
+export const updateCustomer = (id, payload) => {
+  return axios.put(`/agency/customer/${id}`, payload, {
+    withCredentials: true
+  });
+};
+
+// get customer by id
+export const fetchCustomer = id => {
+  return axios.get(`/agency/customer/${id}`, { withCredentials: true });
+};
+
+// delete by customer id
+export const deleteCustomer = id => {
+  return axios.delete(`/agency/customer/${id}`, { withCredentials: true });
+};
+
+// deleteMany customer
+export const deleteManyCustomer = payload => {
+  return axios.delete(
+    '/agency/deleteMultiple',
+    {
+      data: { ...payload }
+    },
+    { withCredentials: true }
+  );
+};
+
+// toggle active status
+export const toggleActive = id => {
+  return axios.put(`/agency/customer/toggleActive/${id}`, {
+    withCredentials: true
+  });
+};

@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Tabs, Tab, Divider, colors } from '@material-ui/core';
-
+import { fetchCustomer } from 'actions/customerActions';
 import { Page } from 'components';
 import { Header, Summary, Invoices, Logs } from './components';
-
+import { useParams, useHistory } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3)
@@ -23,18 +23,32 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomerManagementDetails = props => {
-  const { match, history } = props;
+  const params = useParams(); ////to get id from params
+  const history = useHistory(); ////for routing
   const classes = useStyles();
-  const { id, tab } = match.params;
+  const { id, tab } = params;
+  const [customer, setCustomer] = useState({});
+
+  ///useEfftct to get customer from db
+  useEffect(() => {
+    getCustomer();
+  }, []);
+
+  ////getting customer from db and setting in state
+  const getCustomer = async () => {
+    let temp = await fetchCustomer(id);
+    setCustomer(temp.data.customer);
+  };
 
   const handleTabsChange = (event, value) => {
     history.push(value);
   };
 
+  ////invoices and logs are not required for now
   const tabs = [
-    { value: 'summary', label: 'Summary' },
-    { value: 'invoices', label: 'Invoices' },
-    { value: 'logs', label: 'Logs' }
+    { value: 'summary', label: 'Summary' }
+    // { value: 'invoices', label: 'Invoices' },
+    // { value: 'logs', label: 'Logs' }
   ];
 
   if (!tab) {
@@ -47,7 +61,8 @@ const CustomerManagementDetails = props => {
 
   return (
     <Page className={classes.root} title="Customer Management Details">
-      <Header />
+      {/* passing customer name to header */}
+      <Header customerName={`${customer.firstName} ${customer.lastName}`} />
       <Tabs
         className={classes.tabs}
         onChange={handleTabsChange}
@@ -60,9 +75,12 @@ const CustomerManagementDetails = props => {
       </Tabs>
       <Divider className={classes.divider} />
       <div className={classes.content}>
-        {tab === 'summary' && <Summary />}
-        {tab === 'invoices' && <Invoices />}
-        {tab === 'logs' && <Logs />}
+        {/* passing customer to summary component */}
+        {tab === 'summary' && (
+          <Summary customer={customer} setCustomer={setCustomer} />
+        )}
+        {/* {tab === 'invoices' && <Invoices />}
+        {tab === 'logs' && <Logs />} */}
       </div>
     </Page>
   );
