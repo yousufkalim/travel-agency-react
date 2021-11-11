@@ -90,13 +90,6 @@ const CreateTrip = props => {
     suplimentPrice: 0
   });
 
-  const [cabin, setCabin] = useState({
-    interior: { adultPrice: 0, childPrice: 0 },
-    exterior: { adultPrice: 0, childPrice: 0 },
-    balcony: { adultPrice: 0, childPrice: 0 },
-    suite: { adultPrice: 0, childPrice: 0 }
-  });
-
   const [banner, setBanner] = useState('');
   // const [gallery, setGallery] = useState([]);
 
@@ -639,7 +632,7 @@ const CreateTrip = props => {
                         <FormControl fullWidth variant="outlined">
                           <InputLabel>Adult Price</InputLabel>
                           <OutlinedInput
-                            value={cabin.interior.adultPrice}
+                            value={values.interior.adultPrice}
                             name="interior.adultPrice"
                             onChange={handleCabinPrice}
                             startAdornment={
@@ -655,7 +648,7 @@ const CreateTrip = props => {
                         <FormControl fullWidth variant="outlined">
                           <InputLabel>Child Price</InputLabel>
                           <OutlinedInput
-                            value={cabin.interior.childPrice}
+                            value={values.interior.childPrice}
                             name="interior.childPrice"
                             onChange={handleCabinPrice}
                             startAdornment={
@@ -679,7 +672,7 @@ const CreateTrip = props => {
                         <FormControl fullWidth variant="outlined">
                           <InputLabel>Adult Price</InputLabel>
                           <OutlinedInput
-                            value={cabin.exterior.adultPrice}
+                            value={values.exterior.adultPrice}
                             name="exterior.adultPrice"
                             onChange={handleCabinPrice}
                             startAdornment={
@@ -695,7 +688,7 @@ const CreateTrip = props => {
                         <FormControl fullWidth variant="outlined">
                           <InputLabel>Child Price</InputLabel>
                           <OutlinedInput
-                            value={cabin.exterior.childPrice}
+                            value={values.exterior.childPrice}
                             name="exterior.childPrice"
                             onChange={handleCabinPrice}
                             startAdornment={
@@ -719,7 +712,7 @@ const CreateTrip = props => {
                         <FormControl fullWidth variant="outlined">
                           <InputLabel>Adult Price</InputLabel>
                           <OutlinedInput
-                            value={cabin.balcony.adultPrice}
+                            value={values.balcony.adultPrice}
                             name="balcony.adultPrice"
                             onChange={handleCabinPrice}
                             startAdornment={
@@ -735,7 +728,7 @@ const CreateTrip = props => {
                         <FormControl fullWidth variant="outlined">
                           <InputLabel>Child Price</InputLabel>
                           <OutlinedInput
-                            value={cabin.balcony.childPrice}
+                            value={values.balcony.childPrice}
                             name="balcony.childPrice"
                             onChange={handleCabinPrice}
                             startAdornment={
@@ -759,7 +752,7 @@ const CreateTrip = props => {
                         <FormControl fullWidth variant="outlined">
                           <InputLabel>Adult Price</InputLabel>
                           <OutlinedInput
-                            value={cabin.suite.adultPrice}
+                            value={values.suite.adultPrice}
                             name="suite.adultPrice"
                             onChange={handleCabinPrice}
                             startAdornment={
@@ -775,7 +768,7 @@ const CreateTrip = props => {
                         <FormControl fullWidth variant="outlined">
                           <InputLabel>Child Price</InputLabel>
                           <OutlinedInput
-                            value={cabin.suite.childPrice}
+                            value={values.suite.childPrice}
                             name="suite.childPrice"
                             onChange={handleCabinPrice}
                             startAdornment={
