@@ -13,6 +13,10 @@ import {
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
+import { deleteCustomer } from 'actions'; ////delete customer action
+import { useHistory } from 'react-router'; //////useHistory for routing
+import { message } from 'antd'; ////antd toast message
+import { toggleActive } from 'actions'; ////toggle active status action
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -36,10 +40,28 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   }
 }));
+
 const OtherActions = props => {
-  const { className, ...rest } = props;
+  const { className, customerId, activeStatus, ...rest } = props;
+  const history = useHistory(); ////useHistory object
 
   const classes = useStyles();
+
+  /////onDelete function to delete single customer
+  const onDelete = () => {
+    deleteCustomer(customerId).then(res => {
+      message.success(res.data.msg);
+      history.push('/management/customers');
+    });
+  };
+
+  /////onToggle function to active/inactive account
+  const onToggle = () => {
+    toggleActive(customerId).then(res => {
+      message.success(res.data.message);
+      window.location.reload();
+    });
+  };
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -47,20 +69,24 @@ const OtherActions = props => {
       <Divider />
       <CardContent>
         <div className={classes.mainActions}>
-          <Button>
+          <Button onClick={onToggle}>
             <NotInterestedIcon className={classes.buttonIcon} />
-            Close Customer Account
+            {activeStatus
+              ? 'Close Customer Account'
+              : 'Active Customer Account'}
           </Button>
-          <Button>
+          {/* not required for now */}
+          {/* <Button>
             <GetAppIcon className={classes.buttonIcon} />
             Export client data
-          </Button>
+          </Button> */}
         </div>
         <Typography className={classes.notice} variant="body2">
           Remove this this customer’s data if he requested that, if not please
           be aware that what has been deleted can never brough back
         </Typography>
-        <Button className={classes.deleteButton}>
+        {/* delete button */}
+        <Button className={classes.deleteButton} onClick={onDelete}>
           <DeleteIcon className={classes.buttonIcon} />
           Delete Customer Account
         </Button>
