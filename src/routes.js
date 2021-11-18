@@ -36,6 +36,8 @@ import ProjectList from 'views/ProjectList';
 import Settings from 'views/Settings';
 import SocialFeed from 'views/SocialFeed';
 import GettingStarted from 'views/GettingStarted';
+import Reservation from 'views/Reservation';
+import ReservationDetails from 'views/ReservationDetails';
 
 const routes = [
   {
@@ -101,6 +103,11 @@ const routes = [
         path: '/travel/triplist',
         exact: true,
         component: () => <TripList />
+      },
+      {
+        path: '/reservation/bookinglist',
+        exact: true,
+        component: () => <Reservation />
       },
       {
         path: '/travel/triparchive',
@@ -215,6 +222,16 @@ const routes = [
             <Redirect to="/auth/login" />
           ) : (
             <CustomerManagementDetails />
+          )
+      },
+      {
+        path: '/management/reservation/:id/:tab',
+        exact: true,
+        component: () =>
+          !localStorage.token ? (
+            <Redirect to="/auth/login" />
+          ) : (
+            <ReservationDetails />
           )
       },
       {

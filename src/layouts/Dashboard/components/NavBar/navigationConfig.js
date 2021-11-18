@@ -146,7 +146,14 @@ export default [
       {
         title: 'Reservation',
         href: '/reservation',
-        icon: BookingIcon
+        icon: BookingIcon,
+        children: [
+          {
+            title: 'Booking List',
+            href: '/reservation/bookinglist',
+            icon: ListIcon
+          }
+        ]
       },
       // {
       //   title: 'Social Feed',
