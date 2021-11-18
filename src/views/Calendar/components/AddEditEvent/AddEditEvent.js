@@ -19,6 +19,8 @@ import {
   colors
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/DeleteOutlined';
+import ReactQuill from 'react-quill'; ///// quill to show description
+import 'react-quill/dist/quill.snow.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,143 +51,63 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AddEditEvent = forwardRef((props, ref) => {
-  const {
-    event,
-    onDelete,
-    onCancel,
-    onAdd,
-    onEdit,
-    className,
-    ...rest
-  } = props;
+  const { event, className, onClose, ...rest } = props;
 
   const classes = useStyles();
 
-  const defaultEvent = {
-    title: 'Event title',
-    desc: 'Event description',
-    allDay: false,
-    start: moment().toDate(),
-    end: moment().toDate()
-  };
-
-  const [values, setValues] = useState(event || defaultEvent);
-
-  const mode = event ? 'edit' : 'add';
-
-  const handleFieldChange = e => {
-    e.persist();
-    setValues(values => ({
-      ...values,
-      [e.target.name]:
-        e.target.type === 'checkbox' ? e.target.checked : e.target.value
-    }));
-  };
-
-  const handleDelete = () => {
-    onDelete && onDelete(event);
-  };
-
-  const handleAdd = () => {
-    if (!values.title || !values.desc) {
-      return;
-    }
-
-    onAdd({ ...values, id: uuid() });
-  };
-
-  const handleEdit = () => {
-    if (!values.title || !values.desc) {
-      return;
-    }
-
-    onEdit(values);
-  };
+  const [values] = useState(event);
 
   return (
     <Card {...rest} className={clsx(classes.root, className)} ref={ref}>
       <form>
         <CardContent>
           <Typography align="center" gutterBottom variant="h3">
-            {mode === 'add' ? 'Add Event' : 'Edit Event'}
+            Trip
           </Typography>
           <TextField
             className={classes.field}
             fullWidth
+            disabled={true}
             label="Title"
             name="title"
-            onChange={handleFieldChange}
             value={values.title}
             variant="outlined"
           />
-          <TextField
-            className={classes.field}
-            fullWidth
-            label="Description"
-            name="desc"
-            onChange={handleFieldChange}
+          <br />
+          <br />
+          <ReactQuill
             value={values.desc}
-            variant="outlined"
-          />
-          <FormControlLabel
-            className={classes.field}
-            control={
-              <Switch
-                checked={values.allDay}
-                name="allDay"
-                onChange={handleFieldChange}
-              />
-            }
-            label="All day"
+            readOnly={true}
+            theme={'snow'}
+            style={{ color: 'grey' }}
           />
           <TextField
             className={classes.field}
-            defaultValue={moment(values.start).format('YYYY-MM-DDThh:mm:ss')}
+            defaultValue={moment(values.start).format('YYYY-MM-DD')}
             fullWidth
+            disabled={true}
             label="Start date"
             name="start"
-            onChange={handleFieldChange}
-            type="datetime-local"
             variant="outlined"
           />
           <TextField
             className={classes.field}
-            defaultValue={moment(values.end).format('YYYY-MM-DDThh:mm:ss')}
-            disabled={values.allDay}
+            defaultValue={moment(values.end).format('YYYY-MM-DD')}
+            disabled={true}
             fullWidth
             label="End date"
             name="end"
-            onChange={handleFieldChange}
-            type="datetime-local"
             variant="outlined"
           />
         </CardContent>
         <Divider />
         <CardActions>
-          <IconButton edge="start" onClick={handleDelete}>
-            <DeleteIcon />
-          </IconButton>
           <Button
             className={classes.cancelButton}
-            onClick={onCancel}
+            onClick={onClose}
             variant="contained">
-            Cancel
+            Close
           </Button>
-          {mode === 'add' ? (
-            <Button
-              className={classes.confirmButton}
-              onClick={handleAdd}
-              variant="contained">
-              Add
-            </Button>
-          ) : (
-            <Button
-              className={classes.confirmButton}
-              onClick={handleEdit}
-              variant="contained">
-              Save
-            </Button>
-          )}
         </CardActions>
       </form>
     </Card>

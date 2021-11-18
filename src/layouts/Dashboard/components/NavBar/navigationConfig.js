@@ -66,6 +66,11 @@ export default [
         //   }
         // ]
       },
+      {
+        title: 'Calendar',
+        href: '/calendar',
+        icon: BookingIcon
+      },
       // {
       //   title: 'Contacts',
       //   href: '/contacts',

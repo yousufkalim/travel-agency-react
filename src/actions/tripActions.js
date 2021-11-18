@@ -48,3 +48,8 @@ export const deleteTrip = payload => {
     { withCredentials: true }
   );
 };
+
+// trip events
+export const tripEvents = () => {
+  return axios.get('/trips/tripEvents', { withCredentials: true });
+};
