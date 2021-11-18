@@ -39,6 +39,9 @@ import { createTrip } from 'actions/tripActions';
 import { message, Upload } from 'antd';
 import { useHistory } from 'react-router-dom'; ///useHistory for redirecting
 
+import DatePicker from 'react-multi-date-picker'; ////import multiple date picker
+import DatePanel from 'react-multi-date-picker/plugins/date_panel'; //////to show selected dates on right
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: theme.breakpoints.values.lg,
@@ -80,8 +83,8 @@ const CreateTrip = props => {
     suite: { adultPrice: 0, childPrice: 0 },
 
     cabin: {},
-    departure: new Date(),
-    arrival: new Date(),
+    departure: [],
+    arrival: [],
     minReservation: 0,
     maxReservation: 0,
     adultPrice: 0,
@@ -92,6 +95,9 @@ const CreateTrip = props => {
 
   const [banner, setBanner] = useState('');
   // const [gallery, setGallery] = useState([]);
+  const format = 'MM/DD/YYYY'; ////format for departure and arrival date
+  const [departure, setDeparture] = useState([new Date()]);
+  const [arrival, setArrival] = useState([new Date()]);
 
   const handleChange = event => {
     setValues({
@@ -135,26 +141,44 @@ const CreateTrip = props => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    setLoading(true);
-    const formData = new FormData();
-    formData.append('data', JSON.stringify(values));
-    if (banner) {
-      formData.append('banner', banner.originFileObj);
-    }
-    gallery.forEach(element => {
-      formData.append('gallery', element.originFileObj);
-    });
-
-    createTrip(formData)
-      .then(res => {
-        setLoading(false);
-        message.success('trip created successfully!');
-        history.push('/travel/triplist');
-      })
-      .catch(err => {
-        setLoading(false);
-        console.log(err.response);
+    if (departure.length !== arrival.length) {
+      // check for arrival and departure length
+      message.error('Number of departures and number of arrival must be same!');
+    } else {
+      setLoading(true);
+      let data = values;
+      let tempDeparture = [];
+      let tempArrival = [];
+      departure.map(item => {
+        tempDeparture = [...tempDeparture, item.format()];
       });
+      arrival.map(item => {
+        tempArrival = [...tempArrival, item.format()];
+      });
+      ///// setting arrival and departure dates in data object
+      data.departure = tempDeparture;
+      data.arrival = tempArrival;
+
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(data));
+      if (banner) {
+        formData.append('banner', banner.originFileObj);
+      }
+      gallery.forEach(element => {
+        formData.append('gallery', element.originFileObj);
+      });
+
+      createTrip(formData)
+        .then(res => {
+          setLoading(false);
+          message.success('trip created successfully!');
+          history.push('/travel/triplist');
+        })
+        .catch(err => {
+          setLoading(false);
+          console.log(err.response);
+        });
+    }
   };
 
   const [gallery, setGallery] = useState([]);
@@ -413,31 +437,31 @@ const CreateTrip = props => {
                   </Card>
                 </Grid>
 
-                <Grid item md={3} xs={12}>
-                  <TextField
-                    InputLabelProps={{ shrink: true }}
-                    label="Departure Date"
-                    onChange={handleChange}
-                    value={values.departure}
-                    name="departure"
-                    type="date"
-                    variant="outlined"
-                    fullWidth
+                <Grid item md={6} xs={12}>
+                  <Typography>Departure Date</Typography>
+                  <DatePicker
+                    multiple
+                    sort
+                    value={departure}
+                    onChange={setDeparture}
+                    format={format}
+                    plugins={[<DatePanel />]}
+                    style={{ height: '3.3rem', width: '320%' }}
                   />
                 </Grid>
-                <Grid item md={3} xs={12}>
-                  <TextField
-                    InputLabelProps={{ shrink: true }}
-                    label="Arrival Date"
-                    onChange={handleChange}
-                    value={values.arrival}
-                    name="arrival"
-                    type="date"
-                    variant="outlined"
-                    fullWidth
+                <Grid item md={6} xs={12}>
+                  <Typography>Arrival Date</Typography>
+                  <DatePicker
+                    multiple
+                    sort
+                    value={arrival}
+                    onChange={setArrival}
+                    format={format}
+                    plugins={[<DatePanel />]}
+                    style={{ height: '3.3rem', width: '320%' }}
                   />
                 </Grid>
-                <Grid item md={3} xs={12}>
+                <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
                     label="Minimum Reservation"
@@ -448,7 +472,7 @@ const CreateTrip = props => {
                     variant="outlined"
                   />
                 </Grid>
-                <Grid item md={3} xs={12}>
+                <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
                     label="Maximum Reservation"

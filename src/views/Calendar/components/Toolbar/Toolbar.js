@@ -67,13 +67,8 @@ const Toolbar = props => {
             Calendar
           </Typography>
           <Typography component="h1" variant="h3">
-            Here's what you planned
+            Your Trips
           </Typography>
-        </Grid>
-        <Grid item>
-          <Button color="primary" onClick={onEventAdd} variant="contained">
-            Add event
-          </Button>
         </Grid>
       </Grid>
       <Grid alignItems="center" container justify="space-between" spacing={3}>
