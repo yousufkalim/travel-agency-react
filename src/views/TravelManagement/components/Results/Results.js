@@ -53,7 +53,19 @@ const useStyles = makeStyles(theme => ({
   inner: { minWidth: 700 },
   nameCell: { display: 'flex', alignItems: 'center' },
   avatar: { height: 42, width: 42, marginRight: theme.spacing(1) },
-  actions: { padding: theme.spacing(1), justifyContent: 'flex-end' }
+  actions: { padding: theme.spacing(1), justifyContent: 'flex-end' },
+  filters: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(6,minmax(0,1fr))',
+    ['@media (max-width:1150px)']: {
+      // eslint-disable-line no-useless-computed-key
+      gridTemplateColumns: 'repeat(3,minmax(0,1fr))'
+    },
+    ['@media (max-width:580px)']: {
+      // eslint-disable-line no-useless-computed-key
+      gridTemplateColumns: 'repeat(2,minmax(0,1fr))'
+    }
+  }
 }));
 
 const tableIcons = {
@@ -222,7 +234,14 @@ const Results = props => {
     } else {
       setFilteredList(triplist);
     }
-    setFilterValues({ ...filterValues, [name]: value });
+    setFilterValues({
+      category: name === 'category' ? value : '',
+      tripSize: name === 'tripSize' ? value : '',
+      dayType: name === 'dayType' ? value : '',
+      minReservation: name === 'minReservation' ? value : '',
+      maxReservation: name === 'maxReservation' ? value : '',
+      date: name === 'date' ? value : 'mm/dd/yyyy'
+    });
   };
 
   ////Delete function
@@ -244,11 +263,7 @@ const Results = props => {
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       {/* filter tabs state */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between'
-        }}>
+      <div className={classes.filters}>
         <select
           name="category"
           style={{
@@ -257,7 +272,7 @@ const Results = props => {
             marginBottom: 15,
             border: '1px solid 	rgb(128,128,128,0.4)'
           }}
-          defaultValue={filterValues.category}
+          value={filterValues.category}
           onChange={e => onFilter(e.target.value, e.target.name)}>
           <option value="" disabled selected>
             Category
@@ -276,7 +291,7 @@ const Results = props => {
             marginBottom: 15,
             border: '1px solid 	rgb(128,128,128,0.4)'
           }}
-          defaultValue={filterValues.tripSize}
+          value={filterValues.tripSize}
           onChange={e => onFilter(e.target.value, e.target.name)}>
           <option value="" disabled selected>
             Trip Size
@@ -295,7 +310,7 @@ const Results = props => {
             marginBottom: 15,
             border: '1px solid 	rgb(128,128,128,0.4)'
           }}
-          defaultValue={filterValues.dayType}
+          value={filterValues.dayType}
           onChange={e => onFilter(e.target.value, e.target.name)}>
           <option value="" disabled selected>
             Day Type
@@ -341,6 +356,7 @@ const Results = props => {
             border: '1px solid 	rgb(128,128,128,0.4)'
           }}
           onChange={e => onFilter(e.target.value, e.target.name)}
+          value={filterValues.date}
           placeholder="date"
           name="date"
           type="date"
