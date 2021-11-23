@@ -22,8 +22,31 @@ export const signup = async (payload, history) => {
         autoClose: 2000,
         pauseOnHover: false
       });
-      // redirecting to login
-      history.push('/');
+      if (data.subscription.type === 'Beginner') {
+        // redirecting to login
+        history.push('/');
+      } else {
+        let body = {
+          line_items: [
+            {
+              price_data: {
+                currency: 'usd',
+                product_data: {
+                  name: data.subscription.type
+                },
+                unit_amount: parseInt(data.subscription.price) * 100
+              },
+              quantity: 1
+            }
+          ],
+          metaData: {
+            agency: data.agency._id
+          }
+        };
+
+        let res = await checkout(body);
+        window.location = res.data.url;
+      }
     }
   } catch (error) {
     // error message
@@ -35,6 +58,7 @@ export const signup = async (payload, history) => {
   }
 };
 
+// login action
 export const login = (payload, router) => async dispatch => {
   try {
     const { data } = await axios.post('/auth/login/agency', payload, {
@@ -54,6 +78,7 @@ export const login = (payload, router) => async dispatch => {
   }
 };
 
+// logout action
 export const logout = history => async dispatch => {
   try {
     const { data } = await axios.get('/auth/logout', { withCredentials: true });
@@ -62,6 +87,21 @@ export const logout = history => async dispatch => {
       localStorage.removeItem('token');
       history.push('/auth/login');
     }
+  } catch (error) {
+    toast.error(error.response.data.error, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 2000,
+      pauseOnHover: false
+    });
+  }
+};
+
+// checkout action
+export const checkout = async payload => {
+  try {
+    return axios.post('/auth/checkout', payload, {
+      withCredentials: true
+    });
   } catch (error) {
     toast.error(error.response.data.error, {
       position: toast.POSITION.BOTTOM_RIGHT,
