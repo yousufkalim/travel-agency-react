@@ -110,3 +110,10 @@ export const checkout = async payload => {
     });
   }
 };
+
+// get current user
+export const getUser = () => {
+  return axios.get('/auth/profile', {
+    withCredentials: true
+  });
+};
