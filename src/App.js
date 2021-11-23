@@ -20,7 +20,7 @@ import './mixins/prismjs';
 import './mock';
 import './assets/scss/index.scss';
 import { getUser } from 'actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const history = createBrowserHistory();
 
@@ -29,6 +29,7 @@ const authPath = '/login'; // <-- You can change this
 
 const App = () => {
   const dispatch = useDispatch();
+  const { loggedIn } = useSelector(state => state.session);
 
   useEffect(() => {
     fetch();
@@ -50,7 +51,7 @@ const App = () => {
           <ScrollReset />
           <GoogleAnalytics />
           <CookiesNotification />
-          {renderRoutes(routes, { hello: true })}
+          {renderRoutes(routes(loggedIn), { hello: true })}
         </Router>
       </MuiPickersUtilsProvider>
     </ThemeProvider>
