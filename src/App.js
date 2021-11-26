@@ -21,7 +21,10 @@ import './mock';
 import './assets/scss/index.scss';
 import { getUser } from 'actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPEPK);
 const history = createBrowserHistory();
 
 const authed = false; // <-- You can change this
@@ -45,16 +48,18 @@ const App = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <Router history={history}>
-          <ScrollReset />
-          <GoogleAnalytics />
-          <CookiesNotification />
-          {renderRoutes(routes(loggedIn), { hello: true })}
-        </Router>
-      </MuiPickersUtilsProvider>
-    </ThemeProvider>
+    <Elements stripe={stripePromise}>
+      <ThemeProvider theme={theme}>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <Router history={history}>
+            <ScrollReset />
+            <GoogleAnalytics />
+            <CookiesNotification />
+            {renderRoutes(routes(loggedIn), { hello: true })}
+          </Router>
+        </MuiPickersUtilsProvider>
+      </ThemeProvider>
+    </Elements>
   );
 };
 

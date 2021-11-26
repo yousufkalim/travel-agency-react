@@ -38,6 +38,7 @@ import SocialFeed from 'views/SocialFeed';
 import GettingStarted from 'views/GettingStarted';
 import Reservation from 'views/Reservation';
 import ReservationDetails from 'views/ReservationDetails';
+import AddBank from 'views/TravelManagement/CreateTrip/addBank';
 
 const routes = loggedIn => {
   return [
@@ -115,6 +116,11 @@ const routes = loggedIn => {
           path: '/travels/trip/create',
           exact: true,
           component: () => <CreateTrip />
+        },
+        {
+          path: '/travels/trip/addbank',
+          exact: true,
+          component: () => <AddBank />
         },
         {
           path: '/travels/trip/edit/:id',

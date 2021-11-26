@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
 const Header = props => {
   const { className, compName, ...rest } = props; /// compName holding name of prev component
-
+  const { user } = useSelector(state => state.session);
+  const history = useHistory();
   const classes = useStyles();
 
   return (
@@ -38,8 +39,13 @@ const Header = props => {
             <Button
               color="primary"
               variant="contained"
-              component={Link}
-              to="/travels/trip/create">
+              onClick={() => {
+                if (user.bankAdded) {
+                  history.push('/travels/trip/create');
+                } else {
+                  history.push('/travels/trip/addbank');
+                }
+              }}>
               Create Trip
             </Button>
           </Grid>
