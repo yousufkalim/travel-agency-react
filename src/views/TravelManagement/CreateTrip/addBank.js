@@ -17,6 +17,7 @@ import { addAgencyBank } from 'actions/tripActions';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const steps = ['Person Details', 'Company Details', 'Bank Details'];
 
@@ -55,6 +56,7 @@ const AddBank = () => {
   const classes = useStyles();
   const stripe = useStripe();
   const { user } = useSelector(state => state.session);
+  const history = useHistory();
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -276,8 +278,10 @@ const AddBank = () => {
         routingNumber: bankDetails.routingNumber,
         bankName: bankDetails.name
       };
-      await addAgencyBank(data);
-      toast.success('Success');
+      await addAgencyBank(data).then(() => {
+        history.push('/travels/trip/create');
+        toast.success('Success');
+      });
     } catch (error) {
       if ({ ...error }) {
         toast.error({ ...error }.response.data.message);

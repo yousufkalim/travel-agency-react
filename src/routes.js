@@ -39,6 +39,7 @@ import GettingStarted from 'views/GettingStarted';
 import Reservation from 'views/Reservation';
 import ReservationDetails from 'views/ReservationDetails';
 import AddBank from 'views/TravelManagement/CreateTrip/addBank';
+import AddBankPT from 'views/TravelManagement/CreateTrip/addBankPT';
 
 const routes = loggedIn => {
   return [
@@ -121,6 +122,11 @@ const routes = loggedIn => {
           path: '/travels/trip/addbank',
           exact: true,
           component: () => <AddBank />
+        },
+        {
+          path: '/travels/trip/addbankpt',
+          exact: true,
+          component: () => <AddBankPT />
         },
         {
           path: '/travels/trip/edit/:id',

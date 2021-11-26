@@ -140,7 +140,10 @@ const RegisterForm = props => {
       type: 'AGENCY',
       password: formState.values.password,
       policy: formState.values.policy,
-      subscription: selected
+      subscription: selected,
+      address: {
+        country: formState.values.country
+      }
     };
     // passing data and history to signup action
     signup(data, history);
@@ -200,6 +203,22 @@ const RegisterForm = props => {
           value={formState.values.password || ''}
           variant="outlined"
         />
+        <select
+          name="country"
+          style={{
+            width: '100%',
+            padding: 10,
+            marginBottom: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+          value={formState.values.country || ''}
+          onChange={handleChange}>
+          <option value="" disabled selected>
+            Select Your Country
+          </option>
+          <option value="BR">Brazil</option>
+          <option value="PT">portagal</option>
+        </select>
         <div>
           <div className={classes.policy}>
             <Checkbox
@@ -229,7 +248,7 @@ const RegisterForm = props => {
       <Button
         className={classes.submitButton}
         color="secondary"
-        disabled={!formState.isValid}
+        disabled={!formState.isValid || !formState.values.country}
         size="large"
         type="submit"
         variant="contained">

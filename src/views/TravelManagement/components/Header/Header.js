@@ -43,7 +43,9 @@ const Header = props => {
                 if (user.bankAdded) {
                   history.push('/travels/trip/create');
                 } else {
-                  history.push('/travels/trip/addbank');
+                  user.address.country === 'PT'
+                    ? history.push('/travels/trip/addbankpt')
+                    : history.push('/travels/trip/addbank');
                 }
               }}>
               Create Trip
