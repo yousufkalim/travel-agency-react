@@ -66,7 +66,6 @@ export const login = (payload, router) => async dispatch => {
     });
     if (data) {
       dispatch({ type: SESSION_LOGIN, payload: data.user });
-      localStorage.setItem('token', data.token);
       router.history.push('/');
     }
   } catch (error) {
@@ -84,7 +83,6 @@ export const logout = history => async dispatch => {
     const { data } = await axios.get('/auth/logout', { withCredentials: true });
     if (data) {
       dispatch({ type: SESSION_LOGOUT, payload: data.data });
-      localStorage.removeItem('token');
       history.push('/auth/login');
     }
   } catch (error) {
@@ -109,4 +107,11 @@ export const checkout = async payload => {
       pauseOnHover: false
     });
   }
+};
+
+// get current user
+export const getUser = () => {
+  return axios.get('/auth/profile', {
+    withCredentials: true
+  });
 };

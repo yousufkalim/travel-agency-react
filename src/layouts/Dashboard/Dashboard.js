@@ -44,10 +44,10 @@ const Dashboard = props => {
   const { loggedIn, user } = useSelector(state => state.session);
   useEffect(() => {
     // if (!loggedIn) return props.history.push('/auth/login');
-    if (!localStorage.token) {
+    if (!loggedIn) {
       return props.history.push('/auth/login');
     }
-  }, []);
+  }, [loggedIn]);
   const classes = useStyles();
   const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
 
