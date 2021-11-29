@@ -58,3 +58,8 @@ export const tripEvents = () => {
 export const addAgencyBank = payload => {
   return axios.post('/agency/addbank', payload, { withCredentials: true });
 };
+
+// add Agency Bank
+export const addAgencyBankPT = payload => {
+  return axios.post('/agency/addbankpt', payload, { withCredentials: true });
+};
