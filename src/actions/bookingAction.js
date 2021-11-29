@@ -42,3 +42,10 @@ export const updateStatus = (payload, id) => {
     withCredentials: true
   });
 };
+
+// update booking status
+export const updatePaidStatus = (payload, id) => {
+  return axios.put(`/bookings/updatePaidStatus/${id}`, payload, {
+    withCredentials: true
+  });
+};

@@ -128,8 +128,12 @@ const Results = props => {
     },
     {
       title: 'Total Cost',
-      field: 'totalCosr',
+      field: 'totalCost',
       render: customer => <div>${customer.totalCost}</div>
+    },
+    {
+      title: 'Paid',
+      field: 'paid'
     },
     {
       title: 'Actions',
