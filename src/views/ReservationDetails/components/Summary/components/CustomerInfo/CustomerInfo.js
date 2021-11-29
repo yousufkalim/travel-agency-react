@@ -19,7 +19,7 @@ import {
 import { Label } from 'components';
 import moment from 'moment';
 
-import { updateStatus } from 'actions';
+import { updateStatus, updatePaidStatus } from 'actions';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -93,6 +93,28 @@ const CustomerInfo = props => {
                   <option value="Confirmed">Confirmed</option>
                   <option value="Cancelled">Cancelled</option>
                   <option value="Rejected">Rejected</option>
+                </TextField>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Paid</TableCell>
+              <TableCell>
+                <TextField
+                  fullWidth
+                  name="option"
+                  onChange={e => {
+                    updatePaidStatus({ status: e.target.value }, customer._id);
+                    setCustomer(prev => {
+                      prev.paid = e.target.value;
+                      return { ...prev };
+                    });
+                  }}
+                  select
+                  SelectProps={{ native: true }}
+                  value={customer.paid}
+                  variant="outlined">
+                  <option value="true">True</option>
+                  <option value="false">False</option>
                 </TextField>
               </TableCell>
             </TableRow>
