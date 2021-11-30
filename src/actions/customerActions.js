@@ -54,3 +54,10 @@ export const toggleActive = id => {
     withCredentials: true
   });
 };
+
+// send promotional email
+export const promotionalEmails = payload => {
+  return axios.post(`/agency/promotionalEmail`, payload, {
+    withCredentials: true
+  });
+};

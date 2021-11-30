@@ -44,7 +44,8 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { message } from 'antd'; ////antd toast messages
 
-import { deleteManyCustomer } from 'actions'; ////deleteManyCustomer Action
+import { deleteManyCustomer, promotionalEmails } from 'actions'; ////deleteManyCustomer Action
+import SendEmailModal from './SendEmailModal';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -85,6 +86,9 @@ const Results = props => {
   const classes = useStyles();
 
   const [selectedCustomers, setSelectedCustomers] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [subject, setSubject] = useState('');
+  const [mail, setMail] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [filteredList, setFilteredList] = useState([]); ///filtered List array
@@ -208,6 +212,35 @@ const Results = props => {
       if (response.data.message) {
         message.success(response.data.message);
         window.location.reload();
+      }
+    });
+  };
+
+  const onModalOpen = () => {
+    setOpenModal(true);
+  };
+  const onModalClose = () => {
+    setOpenModal(false);
+  };
+
+  const sendEmails = () => {
+    // array of emails
+    let emails = [];
+    selectedCustomers.map(item => {
+      customers.map(item2 => {
+        item2._id === item && emails.push(item2.email);
+      });
+    });
+    // data object
+    const data = {
+      emails,
+      subject,
+      message: mail
+    };
+    // passing data to send email
+    promotionalEmails(data).then(response => {
+      if (response.data.message) {
+        message.success(response.data.message);
       }
     });
   };
@@ -411,10 +444,21 @@ const Results = props => {
           />
         </CardActions>
       </Card> */}
+      <SendEmailModal
+        open={openModal}
+        handleClose={onModalClose}
+        subject={subject}
+        setSubject={setSubject}
+        mail={mail}
+        setMail={setMail}
+        onSubmit={sendEmails}
+      />
       <TableEditBar
         selected={selectedCustomers}
         onMarkPaid={() => console.log(selectedCustomers)}
         onDelete={onDelete}
+        sendEmails={onModalOpen}
+        componentName="customer"
       />
     </div>
   );
