@@ -7,7 +7,7 @@ import { Header, Results } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCustomers } from '../../actions';
 import { getAgencyTrip } from 'actions/tripActions';
-
+import { getTripByAgencyId } from 'actions/tripActions';
 const useStyles = makeStyles(theme => ({
   root: { padding: theme.spacing(3) },
   results: { marginTop: theme.spacing(3) }
@@ -16,20 +16,11 @@ const useStyles = makeStyles(theme => ({
 const TripList = () => {
   const classes = useStyles();
   const [tripList, setTripList] = useState([]);
+  const { user } = useSelector(state => state.session);
 
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchAllTrip = () => {
-      getAgencyTrip().then(({ data }) => {
-        if (mounted) {
-          setTripList(data.data);
-        }
-      });
-    };
-
-    fetchAllTrip();
-    return () => (mounted = false);
+  useEffect(async () => {
+    let temptrip = await getTripByAgencyId(user._id);
+    setTripList(temptrip.data.data);
   }, []);
 
   const handleFilter = () => {};

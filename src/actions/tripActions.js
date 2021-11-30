@@ -6,7 +6,10 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVERURL;
 export const getAgencyTrip = () => {
   return axios.get('/trips/getAll', { withCredentials: true });
 };
-
+// get trip by id of agency
+export const getTripByAgencyId = id => {
+  return axios.get(`/trips/getTripByAgencyId/${id}`, { withCredentials: true });
+};
 // get archive trip
 export const getArchive = () => {
   return axios.get('/trips/getArchived', { withCredentials: true });
