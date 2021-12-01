@@ -40,6 +40,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@material-ui/pickers": "^3.3.10",
+    "@date-io/date-fns": "^2.11.0",
     "@material-ui/styles": "^4.11.4",
     "@stripe/react-stripe-js": "^1.6.0",
     "@stripe/stripe-js": "^1.21.1",
