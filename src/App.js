@@ -43,7 +43,7 @@ const App = () => {
       const { data } = await getUser();
       dispatch({ type: 'SESSION_LOGIN', payload: data.user });
     } catch (error) {
-      console.log('error: ', error.response.data.error);
+      console.log('error: ', error?.response?.data?.error);
     }
   };
 

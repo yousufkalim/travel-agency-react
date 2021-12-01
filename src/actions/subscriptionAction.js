@@ -16,7 +16,7 @@ export const fetchSubscriptions = async () => {
     }
   } catch (error) {
     // error message
-    toast.error(error.response.data.error, {
+    toast.error(error?.response?.data?.error, {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2000,
       pauseOnHover: false

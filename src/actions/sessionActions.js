@@ -50,7 +50,7 @@ export const signup = async (payload, history) => {
     }
   } catch (error) {
     // error message
-    toast.error(error.response.data.error, {
+    toast.error(error?.response?.data?.error, {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2000,
       pauseOnHover: false
@@ -69,7 +69,7 @@ export const login = (payload, router) => async dispatch => {
       router.history.push('/');
     }
   } catch (error) {
-    toast.error(error.response.data.error, {
+    toast.error(error?.response?.data?.error, {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2000,
       pauseOnHover: false
@@ -86,7 +86,7 @@ export const logout = history => async dispatch => {
       history.push('/auth/login');
     }
   } catch (error) {
-    toast.error(error.response.data.error, {
+    toast.error(error?.response?.data?.error, {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2000,
       pauseOnHover: false
@@ -101,7 +101,7 @@ export const checkout = async payload => {
       withCredentials: true
     });
   } catch (error) {
-    toast.error(error.response.data.error, {
+    toast.error(error?.response?.data?.error, {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 2000,
       pauseOnHover: false

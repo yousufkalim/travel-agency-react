@@ -7,16 +7,16 @@ const ProfessionalPlan = ({ selected, setSelected, subscription }) => {
   return (
     <Card
       style={{
-        border: selected === subscription._id && '1px solid blue',
+        border: selected === subscription?._id && '1px solid blue',
         width: 400
       }}
-      onClick={() => setSelected(subscription._id)}>
+      onClick={() => setSelected(subscription?._id)}>
       <CardContent>
         <Typography variant="h2" component="div">
-          <b>{subscription.type} Plan</b>
+          <b>{subscription?.type} Plan</b>
         </Typography>
         <Typography variant="h4" component="div">
-          $<b>{subscription.price}</b>
+          $<b>{subscription?.price}</b>
         </Typography>
         <br />
         <br />
