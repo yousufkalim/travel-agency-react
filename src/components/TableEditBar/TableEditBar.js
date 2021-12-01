@@ -30,7 +30,8 @@ const TableEditBar = props => {
     selected,
     className,
     onMarkPaid,
-    onMarkUnpaid,
+    sendEmails,
+    componentName,
     onDelete,
     ...rest
   } = props;
@@ -60,10 +61,12 @@ const TableEditBar = props => {
                 <MessageIcon className={classes.buttonIcon} />
                 Send SMS
               </Button>
-              <Button onClick={onMarkUnpaid}>
-                <MailIcon className={classes.buttonIcon} />
-                Send Email
-              </Button>
+              {componentName === 'customer' && (
+                <Button onClick={sendEmails}>
+                  <MailIcon className={classes.buttonIcon} />
+                  Send Email
+                </Button>
+              )}
               <Button onClick={onDelete}>
                 <DeleteIcon className={classes.buttonIcon} />
                 Delete
