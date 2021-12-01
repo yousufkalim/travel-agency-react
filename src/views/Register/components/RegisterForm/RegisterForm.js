@@ -102,7 +102,7 @@ const RegisterForm = props => {
   useEffect(async () => {
     const temp = await fetchSubscriptions(setSubscription);
     setSubscription(temp);
-    setSelected(temp[0]._id);
+    temp && setSelected(temp[0]._id);
   }, []);
 
   const handleChange = event => {

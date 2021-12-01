@@ -80,7 +80,7 @@ const CustomerEdit = props => {
       setCustomer(formState);
       onClose();
     } catch (error) {
-      message.error(error.response.data.error);
+      message.error(error?.response?.data?.error);
     }
   };
 

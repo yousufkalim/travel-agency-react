@@ -41,12 +41,12 @@ const SubscriptionModal = ({
             <BeginnerPlan
               selected={selected}
               setSelected={setSelected}
-              subscription={subscription[0]}
+              subscription={subscription && subscription[0]}
             />
             <ProfessionalPlan
               selected={selected}
               setSelected={setSelected}
-              subscription={subscription[1]}
+              subscription={subscription && subscription[1]}
             />
           </div>
           <br />
