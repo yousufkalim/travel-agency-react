@@ -9,6 +9,13 @@ export const getAllBooking = () => {
   });
 };
 
+// get all bookings having id of agency
+export const getBookingByAgencyId = id => {
+  return axios.get(`/bookings/getBookingByAgencyId/${id}`, {
+    withCredentials: true
+  });
+};
+
 // get booking by id
 export const getBookingById = id => {
   return axios.get(`/bookings/getById/${id}`, {

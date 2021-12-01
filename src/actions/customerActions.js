@@ -32,6 +32,13 @@ export const fetchCustomer = id => {
   return axios.get(`/agency/customer/${id}`, { withCredentials: true });
 };
 
+// get customer by agency id
+export const getCustomerByAgencyId = id => {
+  return axios.get(`/agency/getCustomerByAgencyId/${id}`, {
+    withCredentials: true
+  });
+};
+
 // delete by customer id
 export const deleteCustomer = id => {
   return axios.delete(`/agency/customer/${id}`, { withCredentials: true });
