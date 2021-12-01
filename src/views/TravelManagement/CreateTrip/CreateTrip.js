@@ -96,8 +96,8 @@ const CreateTrip = props => {
   const [banner, setBanner] = useState('');
   // const [gallery, setGallery] = useState([]);
   const format = 'MM/DD/YYYY'; ////format for departure and arrival date
-  const [departure, setDeparture] = useState([new Date()]);
-  const [arrival, setArrival] = useState([new Date()]);
+  const [departure, setDeparture] = useState([]);
+  const [arrival, setArrival] = useState([]);
 
   const handleChange = event => {
     setValues({
@@ -442,6 +442,7 @@ const CreateTrip = props => {
                   <DatePicker
                     multiple
                     sort
+                    placeholder="mm/dd/yyyy"
                     value={departure}
                     onChange={setDeparture}
                     format={format}
@@ -454,6 +455,7 @@ const CreateTrip = props => {
                   <DatePicker
                     multiple
                     sort
+                    placeholder="mm/dd/yyyy"
                     value={arrival}
                     onChange={setArrival}
                     format={format}
