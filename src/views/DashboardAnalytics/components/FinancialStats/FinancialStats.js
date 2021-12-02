@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardHeader, CardContent, Divider } from '@material-ui/core';
-import { financialStats } from 'actions';
 import { GenericMoreButton } from 'components';
 import { Chart } from './components';
 
@@ -25,29 +24,28 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const FinancialStats = props => {
-  const { className, ...rest } = props;
+  const { financialData, className, ...rest } = props;
 
   const classes = useStyles();
 
   const [data, setData] = useState([]);
 
   useEffect(async () => {
-    const res = await financialStats();
     setData([
-      res.data.data.Jan,
-      res.data.data.Feb,
-      res.data.data.Mar,
-      res.data.data.Apr,
-      res.data.data.May,
-      res.data.data.Jun,
-      res.data.data.Jul,
-      res.data.data.Aug,
-      res.data.data.Sep,
-      res.data.data.Oct,
-      res.data.data.Nov,
-      res.data.data.Dec
+      financialData?.Jan,
+      financialData?.Feb,
+      financialData?.Mar,
+      financialData?.Apr,
+      financialData?.May,
+      financialData?.Jun,
+      financialData?.Jul,
+      financialData?.Aug,
+      financialData?.Sep,
+      financialData?.Oct,
+      financialData?.Nov,
+      financialData?.Dec
     ]);
-  }, []);
+  }, [financialData]);
 
   const labels = [
     'Jan',

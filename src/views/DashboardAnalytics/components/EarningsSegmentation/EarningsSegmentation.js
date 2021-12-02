@@ -10,10 +10,8 @@ import {
   Typography
 } from '@material-ui/core';
 
-import axios from 'utils/axios';
 import { GenericMoreButton } from 'components';
 import { Chart } from './components';
-import { earningSegmentation } from 'actions';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -45,35 +43,33 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EarningsSegmentation = props => {
-  const { className, ...rest } = props;
+  const { data, className, ...rest } = props;
 
   const classes = useStyles();
   const [earnings, setEarnings] = useState([]);
 
   useEffect(async () => {
-    let tempEarning = await earningSegmentation();
     setEarnings([
       {
         id: '1',
         label: 'Single Day Trip',
-        value: tempEarning.data.data.singleDayTripEarning,
+        value: data?.singleDayTripEarning,
         color: '#3f51b5'
       },
       {
         id: '2',
         label: 'Multi Day Trip',
-        value: tempEarning.data.data.multiDayTripEarning,
+        value: data?.multiDayTripEarning,
         color: '#7986cb'
       },
       {
         id: '3',
         label: 'Cruise Trip Earning',
-        value: tempEarning.data.data.cruiseTripEarning,
+        value: data?.cruiseTripEarning,
         color: '#c5cae9'
       }
     ]);
-    console.log(tempEarning.data.data);
-  }, []);
+  }, [data]);
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -82,7 +78,6 @@ const EarningsSegmentation = props => {
         title="Earnings Segmentation"
       />
       <Divider />
-      {console.log('eaninnng: ', earnings)}
       <CardContent className={classes.content}>
         <div className={classes.chartContainer}>
           <Chart className={classes.chart} data={earnings} />
