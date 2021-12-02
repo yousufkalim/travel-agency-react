@@ -54,15 +54,9 @@ const labelColors = {
 };
 
 const LatestOrders = props => {
-  const { className, ...rest } = props;
+  const { orders, className, ...rest } = props;
 
   const classes = useStyles();
-  const [orders, setOrders] = useState([]);
-
-  useEffect(async () => {
-    const res = await latestBookings();
-    setOrders(res.data.data);
-  }, []);
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -87,7 +81,6 @@ const LatestOrders = props => {
                     <TableCell>Total</TableCell>
                     <TableCell>Status</TableCell>
                   </TableRow>
-                  {console.log('ordersss:', orders)}
                 </TableHead>
                 <TableBody>
                   {orders.map(order => (

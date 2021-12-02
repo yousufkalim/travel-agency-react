@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Card, Typography, Grid, colors } from '@material-ui/core';
-import { Statistics } from 'actions';
 import { Label } from 'components';
 
 const useStyles = makeStyles(theme => ({
@@ -36,20 +35,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Overview = props => {
-  const { className, ...rest } = props;
+  const { data, className, ...rest } = props;
   const classes = useStyles();
-
-  const [data, setData] = useState({
-    NoOfBookings: '',
-    NoOfCustomers: '',
-    NoOfTrips: '',
-    totalIncome: ''
-  });
-
-  useEffect(async () => {
-    const statistics = await Statistics();
-    setData(statistics.data.data);
-  }, []);
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -59,7 +46,7 @@ const Overview = props => {
             Total Income
           </Typography>
           <div className={classes.valueContainer}>
-            <Typography variant="h3">${data.totalIncome}</Typography>
+            <Typography variant="h3">${data?.totalIncome}</Typography>
           </div>
         </Grid>
         <Grid className={classes.item} item md={3} sm={6} xs={12}>
@@ -67,7 +54,7 @@ const Overview = props => {
             Total No Of Trips
           </Typography>
           <div className={classes.valueContainer}>
-            <Typography variant="h3">{data.NoOfTrips}</Typography>
+            <Typography variant="h3">{data?.NoOfTrips}</Typography>
           </div>
         </Grid>
         <Grid className={classes.item} item md={3} sm={6} xs={12}>
@@ -75,7 +62,7 @@ const Overview = props => {
             Total No oF Customers
           </Typography>
           <div className={classes.valueContainer}>
-            <Typography variant="h3">{data.NoOfCustomers}</Typography>
+            <Typography variant="h3">{data?.NoOfCustomers}</Typography>
           </div>
         </Grid>
         <Grid className={classes.item} item md={3} sm={6} xs={12}>
@@ -83,7 +70,7 @@ const Overview = props => {
             Total No oF Bookings
           </Typography>
           <div className={classes.valueContainer}>
-            <Typography variant="h3">{data.NoOfBookings}</Typography>
+            <Typography variant="h3">{data?.NoOfBookings}</Typography>
           </div>
         </Grid>
       </Grid>

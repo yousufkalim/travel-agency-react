@@ -18,10 +18,6 @@ import {
   Link
 } from '@material-ui/core';
 
-import axios from 'utils/axios';
-import getInitials from 'utils/getInitials';
-import { activeCustomers } from 'actions';
-
 const useStyles = makeStyles(theme => ({
   root: {},
   statsContainer: {
@@ -43,15 +39,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomerActivity = props => {
-  const { className, ...rest } = props;
+  const { customers, className, ...rest } = props;
 
   const classes = useStyles();
-  const [customers, setCustomers] = useState();
-
-  useEffect(async () => {
-    let res = await activeCustomers();
-    setCustomers(res.data.data);
-  }, []);
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
