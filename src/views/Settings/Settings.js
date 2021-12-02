@@ -12,6 +12,7 @@ import {
   Notifications,
   Security
 } from './components';
+import { useHistory, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,9 +33,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Settings = props => {
-  const { match, history } = props;
+  const history = useHistory();
+  const params = useParams();
   const classes = useStyles();
-  const { tab } = match.params;
+  const { tab } = params;
 
   const handleTabsChange = (event, value) => {
     history.push(value);
@@ -42,8 +44,8 @@ const Settings = props => {
 
   const tabs = [
     { value: 'general', label: 'General' },
-    { value: 'subscription', label: 'Subscription' },
-    { value: 'notifications', label: 'Notifications' },
+    // { value: 'subscription', label: 'Subscription' },
+    // { value: 'notifications', label: 'Notifications' },
     { value: 'security', label: 'Security' }
   ];
 
@@ -71,8 +73,8 @@ const Settings = props => {
       <Divider className={classes.divider} />
       <div className={classes.content}>
         {tab === 'general' && <General />}
-        {tab === 'subscription' && <Subscription />}
-        {tab === 'notifications' && <Notifications />}
+        {/* {tab === 'subscription' && <Subscription />}
+        {tab === 'notifications' && <Notifications />} */}
         {tab === 'security' && <Security />}
       </div>
     </Page>
