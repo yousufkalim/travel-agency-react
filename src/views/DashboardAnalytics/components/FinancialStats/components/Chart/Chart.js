@@ -20,14 +20,9 @@ const Chart = props => {
   const data = {
     datasets: [
       {
-        label: 'This year',
+        label: 'This Month',
         backgroundColor: theme.palette.primary.main,
-        data: dataProp.thisYear
-      },
-      {
-        label: 'Last year',
-        backgroundColor: colors.grey[200],
-        data: dataProp.lastYear
+        data: dataProp
       }
     ],
     labels

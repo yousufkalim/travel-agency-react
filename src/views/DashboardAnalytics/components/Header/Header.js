@@ -74,7 +74,7 @@ const Header = props => {
             Finance Overview
           </Typography>
         </Grid>
-        <Grid className={classes.dates} item lg={6} xs={12}>
+        {/* <Grid className={classes.dates} item lg={6} xs={12}>
           <ButtonGroup variant="contained">
             <Button onClick={() => handleCalendarOpen('start')}>
               <CalendarTodayIcon className={classes.calendarTodayIcon} />
@@ -85,7 +85,7 @@ const Header = props => {
               {endDate.format('DD MM YYYY')}
             </Button>
           </ButtonGroup>
-        </Grid>
+        </Grid> */}
       </Grid>
       <DatePicker
         maxDate={moment()}
