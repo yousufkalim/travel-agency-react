@@ -20,6 +20,7 @@ import {
 
 import axios from 'utils/axios';
 import getInitials from 'utils/getInitials';
+import { activeCustomers } from 'actions';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -45,29 +46,16 @@ const CustomerActivity = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-  const [customers, setCustomers] = useState([]);
+  const [customers, setCustomers] = useState();
 
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchCustomers = () => {
-      axios.get('/api/dashboard/customer-activity').then(response => {
-        if (mounted) {
-          setCustomers(response.data.customers);
-        }
-      });
-    };
-
-    fetchCustomers();
-
-    return () => {
-      mounted = false;
-    };
+  useEffect(async () => {
+    let res = await activeCustomers();
+    setCustomers(res.data.data);
   }, []);
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
-      <CardHeader title="Customer Activity" />
+      <CardHeader title="Active Customer" />
       <Divider />
       <div className={classes.statsContainer}>
         <div className={classes.statsItem}>
@@ -76,10 +64,10 @@ const CustomerActivity = props => {
             component="h4"
             gutterBottom
             variant="overline">
-            Registered
+            Active
           </Typography>
           <Typography align="center" variant="h3">
-            15,245
+            {customers?.activeCustomers}
           </Typography>
         </div>
         <Divider />
@@ -89,55 +77,13 @@ const CustomerActivity = props => {
             component="h4"
             gutterBottom
             variant="overline">
-            Online
+            Inactive
           </Typography>
           <Typography align="center" variant="h3">
-            357
+            {customers?.inactiveCustomers}
           </Typography>
         </div>
       </div>
-      <Divider />
-      <CardContent className={classes.content}>
-        <List disablePadding>
-          {customers.map((customer, i) => (
-            <ListItem divider={i < customers.length - 1} key={customer.id}>
-              <ListItemAvatar>
-                <Avatar
-                  alt="Customer"
-                  component={RouterLink}
-                  src={customer.author.avatar}
-                  to="/management/customers/1">
-                  {getInitials(customer.author.name)}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                disableTypography
-                primary={
-                  <Typography
-                    component={RouterLink}
-                    to="/management/customers/1"
-                    variant="h6">
-                    {customer.author.name}
-                  </Typography>
-                }
-                secondary={
-                  <Typography variant="body2">
-                    {customer.description} |{' '}
-                    {customer.type === 'payment' && (
-                      <Link color="inherit" component={RouterLink} to="#">
-                        See invoice
-                      </Link>
-                    )}
-                  </Typography>
-                }
-              />
-              <Typography className={classes.date} variant="body2">
-                {moment(customer.created_at).fromNow()}
-              </Typography>
-            </ListItem>
-          ))}
-        </List>
-      </CardContent>
     </Card>
   );
 };

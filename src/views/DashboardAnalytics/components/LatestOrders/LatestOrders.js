@@ -24,6 +24,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import axios from 'utils/axios';
 import { Label, GenericMoreButton } from 'components';
+import { latestBookings } from 'actions';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -56,24 +57,11 @@ const LatestOrders = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-  const [orders, setOrders] = useState(null);
+  const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchOrders = () => {
-      axios.get('/api/dashboard/latest-orders').then(response => {
-        if (mounted) {
-          setOrders(response.data.orders);
-        }
-      });
-    };
-
-    fetchOrders();
-
-    return () => {
-      mounted = false;
-    };
+  useEffect(async () => {
+    const res = await latestBookings();
+    setOrders(res.data.data);
   }, []);
 
   return (
@@ -95,20 +83,20 @@ const LatestOrders = props => {
                       </Tooltip>
                     </TableCell>
                     <TableCell>Customer</TableCell>
-                    <TableCell>Items</TableCell>
+                    <TableCell>Trip</TableCell>
                     <TableCell>Total</TableCell>
                     <TableCell>Status</TableCell>
-                    <TableCell align="right">Actions</TableCell>
                   </TableRow>
+                  {console.log('ordersss:', orders)}
                 </TableHead>
                 <TableBody>
                   {orders.map(order => (
                     <TableRow hover key={order.id}>
-                      <TableCell>{order.ref}</TableCell>
-                      <TableCell>{order.customer.name}</TableCell>
-                      <TableCell>{order.items}</TableCell>
+                      <TableCell>{order.bookingDate}</TableCell>
+                      <TableCell>{order.fullName}</TableCell>
+                      <TableCell>{order.trip.name}</TableCell>
                       <TableCell className={classes.totalCell}>
-                        {order.currency} {order.value}
+                        ${order.totalCost}
                       </TableCell>
                       <TableCell>
                         <Label
@@ -116,16 +104,6 @@ const LatestOrders = props => {
                           variant="outlined">
                           {order.status}
                         </Label>
-                      </TableCell>
-                      <TableCell align="right">
-                        <Button
-                          color="primary"
-                          component={RouterLink}
-                          size="small"
-                          to={'management/orders/1'}
-                          variant="outlined">
-                          View
-                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -140,7 +118,7 @@ const LatestOrders = props => {
           color="primary"
           component={RouterLink}
           size="small"
-          to="management/orders"
+          to="reservation/bookinglist"
           variant="text">
           See all
           <ArrowForwardIcon className={classes.arrowForwardIcon} />

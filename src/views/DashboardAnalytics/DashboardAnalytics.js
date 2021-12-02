@@ -47,12 +47,12 @@ const DashboardAnalytics = () => {
         <Grid item lg={4} xs={12}>
           <CustomerActivity />
         </Grid>
-        <Grid item lg={8} xs={12}>
+        {/* <Grid item lg={8} xs={12}>
           <MostProfitableProducts />
         </Grid>
         <Grid item lg={4} xs={12}>
           <TopReferrals />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Page>
   );
