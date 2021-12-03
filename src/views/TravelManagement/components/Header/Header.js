@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import NoticeModal from '../../CreateTrip/NoticeModal';
+
 const useStyles = makeStyles(() => ({
   root: {}
 }));
@@ -14,6 +16,7 @@ const Header = props => {
   const { user } = useSelector(state => state.session);
   const history = useHistory();
   const classes = useStyles();
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
@@ -40,16 +43,20 @@ const Header = props => {
               color="primary"
               variant="contained"
               onClick={() => {
-                if (user.bankAdded) {
+                if (user.bankAdded || user.subscription.type === 'Beginner') {
                   history.push('/travels/trip/create');
                 } else {
-                  user.address.country === 'PT'
-                    ? history.push('/travels/trip/addbankpt')
-                    : history.push('/travels/trip/addbank');
+                  setModalOpen(true);
                 }
               }}>
               Create Trip
             </Button>
+            <NoticeModal
+              open={modalOpen}
+              setOpen={setModalOpen}
+              user={user}
+              history={history}
+            />
           </Grid>
         )}
       </Grid>
