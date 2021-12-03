@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Page } from 'components';
 import { Header, Results } from './components';
 import { getArchive } from 'actions/tripActions';
+import { useSelector } from 'react-redux';
 
 // make Styles
 const useStyles = makeStyles(theme => ({
@@ -14,13 +15,14 @@ const useStyles = makeStyles(theme => ({
 // trip archive component
 const TripArchived = () => {
   const classes = useStyles();
+  const { user } = useSelector(state => state.session);
   const [ArchiveList, setArchiveList] = useState([]); ////archived trip list
 
   useEffect(() => {
     let mounted = true;
     // fetching archive trips from db ans setting state
     const fetchAllTrip = () => {
-      getArchive().then(({ data }) => {
+      getArchive(user._id).then(({ data }) => {
         if (mounted) {
           setArchiveList(data.data);
         }
