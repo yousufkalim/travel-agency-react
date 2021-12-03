@@ -115,3 +115,17 @@ export const getUser = () => {
     withCredentials: true
   });
 };
+
+// get current user
+export const updateProfile = (id, payload) => {
+  return axios.put(`/auth/updateAgencyProfile/${id}`, payload, {
+    withCredentials: true
+  });
+};
+
+// change password
+export const changePassword = payload => {
+  return axios.put(`/auth/updatepassword`, payload, {
+    withCredentials: true
+  });
+};

@@ -4,6 +4,9 @@ import validate from 'validate.js';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Button, TextField, colors, Typography } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateProfile } from 'actions';
+import { message } from 'antd';
 
 const schema = {
   firstName: {
@@ -56,8 +59,8 @@ const useStyles = makeStyles(theme => ({
 
 const GeneralSettings = props => {
   const classes = useStyles();
-  const history = useHistory(); ///obj to access useRouter
-
+  const { user } = useSelector(state => state.session);
+  const dispatch = useDispatch();
   const [formState, setFormState] = useState({
     isValid: false,
     values: {},
@@ -74,6 +77,19 @@ const GeneralSettings = props => {
       errors: errors || {}
     }));
   }, [formState.values]);
+
+  useEffect(() => {
+    let nameArray = user.fullName?.split(' ');
+    setFormState(formState => ({
+      ...formState,
+      values: {
+        firstName: nameArray[0],
+        lastName: nameArray[1],
+        email: user.email,
+        country: user.address.country
+      }
+    }));
+  }, []);
 
   const handleChange = event => {
     event.persist();
@@ -94,6 +110,21 @@ const GeneralSettings = props => {
     }));
   };
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const data = {
+      fullName: `${formState.values.firstName} ${formState.values.lastName}`,
+      email: formState.values.email,
+      address: {
+        country: formState.values.country
+      }
+    };
+    updateProfile(user._id, data).then(res => {
+      message.success(res.data.message);
+      dispatch({ type: 'SESSION_LOGIN', payload: res.data.data });
+    });
+  };
+
   const hasError = field =>
     formState.touched[field] && formState.errors[field] ? true : false;
 
@@ -101,7 +132,7 @@ const GeneralSettings = props => {
     <form
       className={classes.root}
       style={{ backgroundColor: 'white', padding: 20 }}
-      onSubmit={() => console.log('submittt')}>
+      onSubmit={handleSubmit}>
       <div className={classes.fields}>
         <div style={{ width: '100%' }}>
           <Typography variant="h4">Profile</Typography>
