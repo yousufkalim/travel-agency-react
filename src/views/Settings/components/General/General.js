@@ -15,29 +15,6 @@ const General = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchProfile = () => {
-      axios.get('/api/account/profile').then(response => {
-        if (mounted) {
-          setProfile(response.data.profile);
-        }
-      });
-    };
-
-    fetchProfile();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  if (!profile) {
-    return null;
-  }
 
   return (
     <Grid
@@ -46,10 +23,10 @@ const General = props => {
       container
       spacing={3}>
       <Grid item lg={4} md={6} xl={3} xs={12}>
-        <ProfileDetails profile={profile} />
+        <ProfileDetails />
       </Grid>
       <Grid item lg={8} md={6} xl={9} xs={12}>
-        <GeneralSettings profile={profile} />
+        <GeneralSettings />
       </Grid>
     </Grid>
   );

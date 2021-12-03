@@ -13,6 +13,8 @@ import {
   TextField,
   colors
 } from '@material-ui/core';
+import { message } from 'antd';
+import { changePassword } from 'actions';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -31,7 +33,8 @@ const Security = props => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    password: '',
+    oldPassword: '',
+    newPassword: '',
     confirm: ''
   });
 
@@ -41,8 +44,25 @@ const Security = props => {
       [event.target.name]: event.target.value
     });
   };
-
-  const valid = values.password && values.password === values.confirm;
+  const handeleSubmit = e => {
+    e.preventDefault();
+    const valid = values.newPassword && values.newPassword === values.confirm;
+    if (!valid) {
+      message.error("New Password And Confirm Password Doesn't Match!");
+    } else {
+      let data = {
+        currentPassword: values.oldPassword,
+        newPassword: values.newPassword
+      };
+      changePassword(data)
+        .then(res => {
+          message.success(res.data.message);
+        })
+        .catch(error => {
+          message.error(error?.response?.data?.error);
+        });
+    }
+  };
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -54,18 +74,29 @@ const Security = props => {
             <Grid item md={4} sm={6} xs={12}>
               <TextField
                 fullWidth
-                label="Security"
-                name="password"
+                label="Current Password"
+                name="oldPassword"
                 onChange={handleChange}
                 type="password"
-                value={values.password}
+                value={values.oldPassword}
                 variant="outlined"
               />
             </Grid>
             <Grid item md={4} sm={6} xs={12}>
               <TextField
                 fullWidth
-                label="Confirm password"
+                label="New password"
+                name="newPassword"
+                onChange={handleChange}
+                type="password"
+                value={values.newPassword}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item md={4} sm={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Confirm New password"
                 name="confirm"
                 onChange={handleChange}
                 type="password"
@@ -80,7 +111,10 @@ const Security = props => {
       <CardActions>
         <Button
           className={classes.saveButton}
-          disabled={!valid}
+          disabled={
+            !values.oldPassword || !values.newPassword || !values.confirm
+          }
+          onClick={handeleSubmit}
           variant="contained">
           Save changes
         </Button>

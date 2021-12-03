@@ -6,6 +6,7 @@ import { Tabs, Tab, Divider, colors } from '@material-ui/core';
 
 import { Page } from 'components';
 import { Header, Timeline, Connections, Projects, Reviews } from './components';
+import { useHistory, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -24,9 +25,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Profile = props => {
-  const { match, history } = props;
+  const history = useHistory();
+  const params = useParams();
   const classes = useStyles();
-  const { id, tab } = match.params;
+  const { id, tab } = params;
 
   const handleTabsChange = (event, value) => {
     history.push(value);

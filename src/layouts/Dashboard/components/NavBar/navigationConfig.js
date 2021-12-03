@@ -264,14 +264,14 @@ export default [
             title: 'General',
             href: '/settings/general'
           },
-          {
-            title: 'Subscription',
-            href: '/settings/subscription'
-          },
-          {
-            title: 'Notifications',
-            href: '/settings/notifications'
-          },
+          // {
+          //   title: 'Subscription',
+          //   href: '/settings/subscription'
+          // },
+          // {
+          //   title: 'Notifications',
+          //   href: '/settings/notifications'
+          // },
           {
             title: 'Security',
             href: '/settings/security'

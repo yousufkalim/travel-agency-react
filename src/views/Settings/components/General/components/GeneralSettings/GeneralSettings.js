@@ -1,25 +1,53 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import validate from 'validate.js';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Grid,
-  Divider,
-  Switch,
-  TextField,
-  Typography,
-  colors
-} from '@material-ui/core';
+import { Button, TextField, colors, Typography } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateProfile } from 'actions';
+import { message } from 'antd';
 
-import SuccessSnackbar from '../SuccessSnackbar';
+const schema = {
+  firstName: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 32
+    }
+  },
+  lastName: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 32
+    }
+  },
+  email: {
+    presence: { allowEmpty: false, message: 'is required' },
+    email: true,
+    length: {
+      maximum: 64
+    }
+  }
+};
 
 const useStyles = makeStyles(theme => ({
   root: {},
+  fields: {
+    margin: theme.spacing(-1),
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      flexGrow: 1,
+      margin: theme.spacing(1)
+    }
+  },
+  policy: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  policyCheckbox: {
+    marginLeft: '-14px'
+  },
   saveButton: {
     color: theme.palette.white,
     backgroundColor: colors.green[600],
@@ -30,173 +58,152 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const GeneralSettings = props => {
-  const { profile, className, ...rest } = props;
-
   const classes = useStyles();
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [values, setValues] = useState({
-    firstName: profile.firstName,
-    lastName: profile.lastName,
-    email: profile.email,
-    phone: profile.phone,
-    state: profile.state,
-    country: profile.country,
-    isPublic: profile.isPublic,
-    canHire: profile.canHire
+  const { user } = useSelector(state => state.session);
+  const dispatch = useDispatch();
+  const [formState, setFormState] = useState({
+    isValid: false,
+    values: {},
+    touched: {},
+    errors: {}
   });
+
+  useEffect(() => {
+    const errors = validate(formState.values, schema);
+
+    setFormState(formState => ({
+      ...formState,
+      isValid: errors ? false : true,
+      errors: errors || {}
+    }));
+  }, [formState.values]);
+
+  useEffect(() => {
+    let nameArray = user.fullName?.split(' ');
+    setFormState(formState => ({
+      ...formState,
+      values: {
+        firstName: nameArray[0],
+        lastName: nameArray[1],
+        email: user.email,
+        country: user.address.country
+      }
+    }));
+  }, []);
 
   const handleChange = event => {
     event.persist();
 
-    setValues({
-      ...values,
-      [event.target.name]:
-        event.target.type === 'checkbox'
-          ? event.target.checked
-          : event.target.value
+    setFormState(formState => ({
+      ...formState,
+      values: {
+        ...formState.values,
+        [event.target.name]:
+          event.target.type === 'checkbox'
+            ? event.target.checked
+            : event.target.value
+      },
+      touched: {
+        ...formState.touched,
+        [event.target.name]: true
+      }
+    }));
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const data = {
+      fullName: `${formState.values.firstName} ${formState.values.lastName}`,
+      email: formState.values.email,
+      address: {
+        country: formState.values.country
+      }
+    };
+    updateProfile(user._id, data).then(res => {
+      message.success(res.data.message);
+      dispatch({ type: 'SESSION_LOGIN', payload: res.data.data });
     });
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    setOpenSnackbar(true);
-  };
-
-  const handleSnackbarClose = () => {
-    setOpenSnackbar(false);
-  };
-
-  const states = ['Alabama', 'New York', 'San Francisco'];
+  const hasError = field =>
+    formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
-    <Card {...rest} className={clsx(classes.root, className)}>
-      <form onSubmit={handleSubmit}>
-        <CardHeader title="Profile" />
-        <Divider />
-        <CardContent>
-          <Grid container spacing={4}>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                helperText="Please specify the first name"
-                label="First name"
-                name="firstName"
-                onChange={handleChange}
-                required
-                value={values.firstName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Last name"
-                name="lastName"
-                onChange={handleChange}
-                required
-                value={values.lastName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Email Address"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Phone Number"
-                name="phone"
-                onChange={handleChange}
-                type="text"
-                value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Select State"
-                name="state"
-                onChange={handleChange}
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined">
-                {states.map(state => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Country"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Typography variant="h6">Make Contact Info Public</Typography>
-              <Typography variant="body2">
-                Means that anyone viewing your profile will be able to see your
-                contacts details
-              </Typography>
-              <Switch
-                checked={values.isPublic}
-                color="secondary"
-                edge="start"
-                name="isPublic"
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Typography variant="h6">Available to hire</Typography>
-              <Typography variant="body2">
-                Toggling this will let your teamates know that you are available
-                for acquireing new projects
-              </Typography>
-              <Switch
-                checked={values.canHire}
-                color="secondary"
-                edge="start"
-                name="canHire"
-                onChange={handleChange}
-              />
-            </Grid>
-          </Grid>
-        </CardContent>
-        <Divider />
-        <CardActions>
-          <Button
-            className={classes.saveButton}
-            type="submit"
-            variant="contained">
-            Save Changes
-          </Button>
-        </CardActions>
-      </form>
-      <SuccessSnackbar onClose={handleSnackbarClose} open={openSnackbar} />
-    </Card>
+    <form
+      className={classes.root}
+      style={{ backgroundColor: 'white', padding: 20 }}
+      onSubmit={handleSubmit}>
+      <div className={classes.fields}>
+        <div style={{ width: '100%' }}>
+          <Typography variant="h4">Profile</Typography>
+        </div>
+
+        <TextField
+          error={hasError('firstName')}
+          helperText={
+            hasError('firstName') ? formState.errors.firstName[0] : null
+          }
+          label="First name"
+          name="firstName"
+          onChange={handleChange}
+          value={formState.values.firstName || ''}
+          variant="outlined"
+        />
+        <TextField
+          error={hasError('lastName')}
+          helperText={
+            hasError('lastName') ? formState.errors.lastName[0] : null
+          }
+          label="Last name"
+          name="lastName"
+          onChange={handleChange}
+          value={formState.values.lastName || ''}
+          variant="outlined"
+        />
+        <TextField
+          error={hasError('email')}
+          fullWidth
+          helperText={hasError('email') ? formState.errors.email[0] : null}
+          label="Email address"
+          name="email"
+          onChange={handleChange}
+          value={formState.values.email || ''}
+          variant="outlined"
+        />
+        <select
+          name="country"
+          style={{
+            width: '100%',
+            padding: 10,
+            marginBottom: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+          value={formState.values.country || ''}
+          onChange={handleChange}>
+          <option value="" disabled selected>
+            Select Your Country
+          </option>
+          <option value="BR">Brazil</option>
+          <option value="PT">portagal</option>
+        </select>
+      </div>
+      <div style={{ marginTop: 20, width: '100%', textAlign: 'right' }}>
+        <Button
+          className={classes.saveButton}
+          color="secondary"
+          disabled={!formState.isValid || !formState.values.country}
+          size="large"
+          type="submit"
+          variant="contained">
+          Save Changes
+        </Button>
+      </div>
+    </form>
   );
 };
 
 GeneralSettings.propTypes = {
-  className: PropTypes.string,
-  profile: PropTypes.object.isRequired
+  className: PropTypes.string
 };
 
 export default GeneralSettings;
