@@ -37,20 +37,11 @@ const Error401 = () => {
   const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Page
-      className={classes.root}
-      title="Error 401"
-    >
-      <Typography
-        align="center"
-        variant={mobileDevice ? 'h4' : 'h1'}
-      >
+    <Page className={classes.root} title="Error 401">
+      <Typography align="center" variant={mobileDevice ? 'h4' : 'h1'}>
         401: We are sorry but we are not able to authenticate you.
       </Typography>
-      <Typography
-        align="center"
-        variant="subtitle2"
-      >
+      <Typography align="center" variant="subtitle2">
         You either tried some shady route or you came here by mistake. Whichever
         it is, try using the navigation
       </Typography>
@@ -66,8 +57,7 @@ const Error401 = () => {
           color="primary"
           component={RouterLink}
           to="/"
-          variant="outlined"
-        >
+          variant="outlined">
           Back to home
         </Button>
       </div>

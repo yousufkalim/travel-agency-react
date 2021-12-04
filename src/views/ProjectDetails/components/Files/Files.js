@@ -20,29 +20,15 @@ const Files = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Card>
         <CardContent>
           <FilesDropzone />
         </CardContent>
       </Card>
-      <Grid
-        className={classes.files}
-        container
-        spacing={3}
-      >
+      <Grid className={classes.files} container spacing={3}>
         {files.map(file => (
-          <Grid
-            item
-            key={file.id}
-            lg={4}
-            md={4}
-            sm={6}
-            xs={12}
-          >
+          <Grid item key={file.id} lg={4} md={4} sm={6} xs={12}>
             <FileCard file={file} />
           </Grid>
         ))}

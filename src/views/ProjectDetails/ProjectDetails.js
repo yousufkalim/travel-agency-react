@@ -82,24 +82,16 @@ const ProjectDetails = props => {
   }
 
   return (
-    <Page
-      className={classes.root}
-      title="Project Details"
-    >
+    <Page className={classes.root} title="Project Details">
       <Header project={project} />
       <Tabs
         className={classes.tabs}
         onChange={handleTabsChange}
         scrollButtons="auto"
         value={tab}
-        variant="scrollable"
-      >
+        variant="scrollable">
         {tabs.map(tab => (
-          <Tab
-            key={tab.value}
-            label={tab.label}
-            value={tab.value}
-          />
+          <Tab key={tab.value} label={tab.label} value={tab.value} />
         ))}
       </Tabs>
       <Divider className={classes.divider} />

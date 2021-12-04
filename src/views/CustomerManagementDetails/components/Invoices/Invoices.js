@@ -63,15 +63,9 @@ const Invoices = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Card>
-        <CardHeader
-          action={<GenericMoreButton />}
-          title="Customer invoices"
-        />
+        <CardHeader action={<GenericMoreButton />} title="Customer invoices" />
         <Divider />
         <CardContent className={classes.content}>
           <PerfectScrollbar>
@@ -104,8 +98,7 @@ const Invoices = props => {
                       <TableCell>
                         <Label
                           color={statusColors[invoice.status]}
-                          variant="outlined"
-                        >
+                          variant="outlined">
                           {invoice.status}
                         </Label>
                       </TableCell>
@@ -115,8 +108,7 @@ const Invoices = props => {
                           component={RouterLink}
                           size="small"
                           to={'/management/invoices/1'}
-                          variant="outlined"
-                        >
+                          variant="outlined">
                           View
                         </Button>
                       </TableCell>

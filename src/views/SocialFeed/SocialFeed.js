@@ -47,19 +47,12 @@ const SocialFeed = () => {
   }, []);
 
   return (
-    <Page
-      className={classes.root}
-      title="Social Feed"
-    >
+    <Page className={classes.root} title="Social Feed">
       <Header />
       <AddPost className={classes.newPost} />
       <div className={classes.posts}>
         {posts.map(post => (
-          <PostCard
-            className={classes.post}
-            key={post.id}
-            post={post}
-          />
+          <PostCard className={classes.post} key={post.id} post={post} />
         ))}
       </div>
     </Page>

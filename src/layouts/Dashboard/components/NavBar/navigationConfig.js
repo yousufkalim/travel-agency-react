@@ -66,6 +66,11 @@ export default [
         //   }
         // ]
       },
+      {
+        title: 'Calendar',
+        href: '/calendar',
+        icon: BookingIcon
+      },
       // {
       //   title: 'Contacts',
       //   href: '/contacts',
@@ -98,10 +103,6 @@ export default [
           {
             title: 'Create New Customer',
             href: '/management/customer/create'
-          },
-          {
-            title: 'Customer Details',
-            href: '/management/customers/1/summary'
           }
           // {
           //   title: 'Projects',
@@ -126,6 +127,12 @@ export default [
             title: 'Trip List',
             href: '/travel/triplist',
             icon: ListIcon
+          },
+          {
+            ////archve trip sidebar option
+            title: 'Trip Archived',
+            href: '/travel/triparchive',
+            icon: ListIcon
           }
           // {
           //   title: '1 Day Tour',
@@ -144,7 +151,14 @@ export default [
       {
         title: 'Reservation',
         href: '/reservation',
-        icon: BookingIcon
+        icon: BookingIcon,
+        children: [
+          {
+            title: 'Booking List',
+            href: '/reservation/bookinglist',
+            icon: ListIcon
+          }
+        ]
       },
       // {
       //   title: 'Social Feed',
@@ -250,14 +264,14 @@ export default [
             title: 'General',
             href: '/settings/general'
           },
-          {
-            title: 'Subscription',
-            href: '/settings/subscription'
-          },
-          {
-            title: 'Notifications',
-            href: '/settings/notifications'
-          },
+          // {
+          //   title: 'Subscription',
+          //   href: '/settings/subscription'
+          // },
+          // {
+          //   title: 'Notifications',
+          //   href: '/settings/notifications'
+          // },
           {
             title: 'Security',
             href: '/settings/security'

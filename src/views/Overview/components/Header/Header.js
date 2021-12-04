@@ -27,55 +27,28 @@ const Header = props => {
   const session = useSelector(state => state.session);
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Grid
-        alignItems="center"
-        container
-        justify="space-between"
-        spacing={3}
-      >
-        <Grid
-          item
-          md={6}
-          xs={12}
-        >
-          <Typography
-            component="h2"
-            gutterBottom
-            variant="overline"
-          >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Grid alignItems="center" container justify="space-between" spacing={3}>
+        <Grid item md={6} xs={12}>
+          <Typography component="h2" gutterBottom variant="overline">
             Home
           </Typography>
-          <Typography
-            component="h1"
-            gutterBottom
-            variant="h3"
-          >
+          <Typography component="h1" gutterBottom variant="h3">
             Good Morning, {session.user.first_name}
           </Typography>
-          <Typography
-            gutterBottom
-            variant="subtitle1"
-          >
+          <Typography gutterBottom variant="subtitle1">
             Here’s what’s happening with your projects today
           </Typography>
           <Button
             className={classes.summaryButton}
             edge="start"
-            variant="contained"
-          >
+            variant="contained">
             <BarChartIcon className={classes.barChartIcon} />
             View summary
           </Button>
         </Grid>
         <Hidden smDown>
-          <Grid
-            item
-            md={6}
-          >
+          <Grid item md={6}>
             <img
               alt="Cover"
               className={classes.image}

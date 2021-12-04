@@ -123,10 +123,7 @@ const AboutProject = props => {
   const calendarValue = values[calendarTrigger];
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="About this project" />
       <CardContent>
         <form>
@@ -161,16 +158,12 @@ const AboutProject = props => {
               <Button
                 className={classes.addButton}
                 onClick={handleTagAdd}
-                size="small"
-              >
+                size="small">
                 <AddIcon className={classes.addIcon} />
                 Add
               </Button>
             </div>
-            <Typography
-              className={classes.fieldHint}
-              variant="body2"
-            >
+            <Typography className={classes.fieldHint} variant="body2">
               Tags will be colored depending the technology if the system
               recognises.
             </Typography>

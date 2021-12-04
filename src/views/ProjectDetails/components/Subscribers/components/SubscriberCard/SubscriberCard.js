@@ -46,14 +46,8 @@ const SubscriberCard = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardMedia
-        className={classes.media}
-        image={subscriber.cover}
-      />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <CardMedia className={classes.media} image={subscriber.cover} />
       <CardContent className={classes.content}>
         <div className={classes.avatarContainer}>
           <Avatar
@@ -69,26 +63,16 @@ const SubscriberCard = props => {
           component={RouterLink}
           display="block"
           to="/profile/1/timeline"
-          variant="h6"
-        >
+          variant="h6">
           {subscriber.name}
         </Typography>
-        <Typography
-          align="center"
-          variant="body2"
-        >
+        <Typography align="center" variant="body2">
           {subscriber.common_connections} connections in common
         </Typography>
         <Divider className={classes.divider} />
-        <Grid
-          container
-          spacing={1}
-        >
+        <Grid container spacing={1}>
           {subscriber.labels.map(label => (
-            <Grid
-              item
-              key={label}
-            >
+            <Grid item key={label}>
               <Label variant="outlined">{label}</Label>
             </Grid>
           ))}

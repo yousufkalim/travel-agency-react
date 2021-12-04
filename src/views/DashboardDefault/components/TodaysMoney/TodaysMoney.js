@@ -42,16 +42,9 @@ const TodaysMoney = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <div>
-        <Typography
-          component="h3"
-          gutterBottom
-          variant="overline"
-        >
+        <Typography component="h3" gutterBottom variant="overline">
           Todays money
         </Typography>
         <div className={classes.details}>
@@ -62,8 +55,7 @@ const TodaysMoney = props => {
           <Label
             className={classes.label}
             color={colors.green[600]}
-            variant="outlined"
-          >
+            variant="outlined">
             {data.difference}
           </Label>
         </div>

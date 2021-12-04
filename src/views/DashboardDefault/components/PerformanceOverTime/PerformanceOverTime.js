@@ -61,10 +61,7 @@ const PerformanceOverTime = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         action={<GenericMoreButton />}
         title="Performance Over Time"

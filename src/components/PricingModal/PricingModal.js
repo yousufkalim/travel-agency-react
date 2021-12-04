@@ -87,82 +87,50 @@ const PricingModal = props => {
   const classes = useStyles();
 
   return (
-    <Dialog
-      maxWidth="lg"
-      onClose={onClose}
-      open={open}
-    >
-      <div
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+    <Dialog maxWidth="lg" onClose={onClose} open={open}>
+      <div {...rest} className={clsx(classes.root, className)}>
         <div className={classes.header}>
-          <Typography
-            align="center"
-            gutterBottom
-            variant="h3"
-          >
+          <Typography align="center" gutterBottom variant="h3">
             Start with Freelancer today. Boost up your services!
           </Typography>
           <Typography
             align="center"
             className={classes.subtitle}
-            variant="subtitle2"
-          >
+            variant="subtitle2">
             Welcome to the first platform created for freelancers and agencies
             for showcasing and finding the best clients in the market. 30% of
             our income goes into Whale Charity
           </Typography>
         </div>
         <div className={classes.content}>
-          <Grid
-            container
-            spacing={4}
-          >
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
+          <Grid container spacing={4}>
+            <Grid item md={4} xs={12}>
               <Paper
                 className={classes.product}
                 elevation={1}
-                onClick={onClose}
-              >
+                onClick={onClose}>
                 <img
                   alt="Product"
                   className={classes.image}
                   src="/images/products/product_freelancer.svg"
                 />
-                <Typography
-                  component="h3"
-                  gutterBottom
-                  variant="overline"
-                >
+                <Typography component="h3" gutterBottom variant="overline">
                   Freelancer
                 </Typography>
                 <div>
-                  <Typography
-                    component="span"
-                    display="inline"
-                    variant="h3"
-                  >
+                  <Typography component="span" display="inline" variant="h3">
                     $5
                   </Typography>
                   <Typography
                     component="span"
                     display="inline"
-                    variant="subtitle2"
-                  >
+                    variant="subtitle2">
                     /month
                   </Typography>
                 </div>
                 <Typography variant="overline">Max 1 user</Typography>
                 <Divider className={classes.divider} />
-                <Typography
-                  className={classes.options}
-                  variant="subtitle2"
-                >
+                <Typography className={classes.options} variant="subtitle2">
                   <b>20</b> proposals/month <br />
                   <b>10</b> templates <br />
                   Analytics <b>dashboard</b> <br />
@@ -170,50 +138,33 @@ const PricingModal = props => {
                 </Typography>
               </Paper>
             </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
+            <Grid item md={4} xs={12}>
               <Paper
                 className={clsx(classes.product, classes.recommended)}
                 elevation={1}
-                onClick={onClose}
-              >
+                onClick={onClose}>
                 <img
                   alt="Product"
                   className={classes.image}
                   src="/images/products/product_agency--outlined.svg"
                 />
-                <Typography
-                  component="h3"
-                  gutterBottom
-                  variant="overline"
-                >
+                <Typography component="h3" gutterBottom variant="overline">
                   Agency
                 </Typography>
                 <div>
-                  <Typography
-                    component="span"
-                    display="inline"
-                    variant="h3"
-                  >
+                  <Typography component="span" display="inline" variant="h3">
                     $29
                   </Typography>
                   <Typography
                     component="span"
                     display="inline"
-                    variant="subtitle2"
-                  >
+                    variant="subtitle2">
                     /month
                   </Typography>
                 </div>
                 <Typography variant="overline">Max 3 user</Typography>
                 <Divider className={classes.divider} />
-                <Typography
-                  className={classes.options}
-                  variant="subtitle2"
-                >
+                <Typography className={classes.options} variant="subtitle2">
                   <b>20</b> proposals/month <br />
                   <b>10</b> templates <br />
                   Analytics <b>dashboard</b> <br />
@@ -221,50 +172,33 @@ const PricingModal = props => {
                 </Typography>
               </Paper>
             </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
+            <Grid item md={4} xs={12}>
               <Paper
                 className={classes.product}
                 elevation={1}
-                onClick={onClose}
-              >
+                onClick={onClose}>
                 <img
                   alt="Product"
                   className={classes.image}
                   src="/images/products/product_enterprise.svg"
                 />
-                <Typography
-                  component="h3"
-                  gutterBottom
-                  variant="overline"
-                >
+                <Typography component="h3" gutterBottom variant="overline">
                   Enterprise
                 </Typography>
                 <div>
-                  <Typography
-                    component="span"
-                    display="inline"
-                    variant="h3"
-                  >
+                  <Typography component="span" display="inline" variant="h3">
                     $259
                   </Typography>
                   <Typography
                     component="span"
                     display="inline"
-                    variant="subtitle2"
-                  >
+                    variant="subtitle2">
                     /month
                   </Typography>
                 </div>
                 <Typography variant="overline">Unlimited</Typography>
                 <Divider className={classes.divider} />
-                <Typography
-                  className={classes.options}
-                  variant="subtitle2"
-                >
+                <Typography className={classes.options} variant="subtitle2">
                   All from above <br />
                   <b>Unlimited</b> 24/7 support <br />
                   Personalised <b>Page</b> <br />
@@ -276,14 +210,9 @@ const PricingModal = props => {
           <Typography
             align="center"
             className={classes.contact}
-            variant="subtitle2"
-          >
+            variant="subtitle2">
             Have a larger team?{' '}
-            <Link
-              color="secondary"
-              component={RouterLink}
-              to="#"
-            >
+            <Link color="secondary" component={RouterLink} to="#">
               Contact us
             </Link>{' '}
             for information about more enterprise options.
@@ -293,8 +222,7 @@ const PricingModal = props => {
           <Button
             className={classes.startButton}
             onClick={onClose}
-            variant="contained"
-          >
+            variant="contained">
             Start with freelancer
           </Button>
         </div>

@@ -97,10 +97,7 @@ const MostProfitableProducts = props => {
   }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         action={<GenericMoreButton />}
         title="Most Profitable Products"
@@ -112,10 +109,7 @@ const MostProfitableProducts = props => {
             <Table>
               <TableBody>
                 {products.map(product => (
-                  <TableRow
-                    hover
-                    key={product.id}
-                  >
+                  <TableRow hover key={product.id}>
                     <TableCell>
                       <div className={classes.details}>
                         <img
@@ -136,10 +130,7 @@ const MostProfitableProducts = props => {
                     </TableCell>
                     <TableCell>
                       <Typography variant="h6">Price</Typography>
-                      <Typography
-                        className={classes.price}
-                        variant="subtitle2"
-                      >
+                      <Typography className={classes.price} variant="subtitle2">
                         <span className={classes.value}>
                           {product.currency}
                           {product.price}
@@ -150,10 +141,7 @@ const MostProfitableProducts = props => {
                     <TableCell>
                       <div className={classes.conversion}>
                         <div className={classes.conversionStats}>
-                          <Typography
-                            align="right"
-                            variant="h6"
-                          >
+                          <Typography align="right" variant="h6">
                             {product.progress}%
                           </Typography>
                           <Typography variant="subtitle2">
@@ -177,8 +165,7 @@ const MostProfitableProducts = props => {
           component={RouterLink}
           size="small"
           to="#"
-          variant="text"
-        >
+          variant="text">
           See all
           <ArrowForwardIcon className={classes.arrowForwardIcon} />
         </Button>

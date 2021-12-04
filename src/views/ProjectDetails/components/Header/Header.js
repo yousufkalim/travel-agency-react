@@ -44,52 +44,31 @@ const Header = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Grid
-        alignItems="flex-end"
-        container
-        justify="space-between"
-        spacing={3}
-      >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Grid alignItems="flex-end" container justify="space-between" spacing={3}>
         <Grid item>
-          <Typography
-            component="h2"
-            gutterBottom
-            variant="overline"
-          >
+          <Typography component="h2" gutterBottom variant="overline">
             Browse projects
           </Typography>
-          <Typography
-            component="h1"
-            gutterBottom
-            variant="h3"
-          >
+          <Typography component="h1" gutterBottom variant="h3">
             {project.title}
           </Typography>
           <Label
             className={classes.label}
             color={colors.green[600]}
-            variant="outlined"
-          >
+            variant="outlined">
             Active project
           </Label>
         </Grid>
         <Grid item>
-          <Button
-            className={classes.shareButton}
-            variant="contained"
-          >
+          <Button className={classes.shareButton} variant="contained">
             <ShareIcon className={classes.shareIcon} />
             Share
           </Button>
           <Button
             className={classes.applyButton}
             onClick={handleApplicationOpen}
-            variant="contained"
-          >
+            variant="contained">
             Apply for a role
           </Button>
         </Grid>

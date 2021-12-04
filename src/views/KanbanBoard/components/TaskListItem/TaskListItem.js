@@ -64,8 +64,7 @@ const TaskListItem = props => {
         },
         className
       )}
-      style={{ ...style, ...provided.draggableProps.style }}
-    >
+      style={{ ...style, ...provided.draggableProps.style }}>
       <CardHeader
         action={<GenericMoreButton />}
         subheader={`#${task.ref}`}
@@ -75,10 +74,7 @@ const TaskListItem = props => {
       />
       <CardContent className={classes.content}>
         <div className={classes.stats}>
-          <StackAvatars
-            avatars={task.members}
-            limit={4}
-          />
+          <StackAvatars avatars={task.members} limit={4} />
           {task.files > 0 && (
             <div className={classes.files}>
               <AttachFileIcon />
@@ -93,8 +89,7 @@ const TaskListItem = props => {
           <Typography
             className={classes.date}
             color="textSecondary"
-            variant="body2"
-          >
+            variant="body2">
             {moment(task.deadline).format('D MMM')}
           </Typography>
         </div>

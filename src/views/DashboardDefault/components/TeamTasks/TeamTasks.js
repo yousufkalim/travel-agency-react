@@ -59,14 +59,8 @@ const TeamTasks = props => {
   }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        action={<GenericMoreButton />}
-        title="Team Tasks"
-      />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <CardHeader action={<GenericMoreButton />} title="Team Tasks" />
       <Divider />
       <CardContent className={classes.content}>
         <PerfectScrollbar>
@@ -90,8 +84,7 @@ const TeamTasks = props => {
           component={RouterLink}
           size="small"
           to="/kanban-board"
-          variant="text"
-        >
+          variant="text">
           See all
           <ArrowForwardIcon className={classes.arrowForwardIcon} />
         </Button>

@@ -37,10 +37,7 @@ const Holder = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         avatar={
           <Avatar
@@ -48,8 +45,7 @@ const Holder = props => {
             className={classes.avatar}
             component={RouterLink}
             src={project.author.avatar}
-            to="/profile/1/timeline"
-          >
+            to="/profile/1/timeline">
             {getInitials(project.author.name)}
           </Avatar>
         }
@@ -59,55 +55,35 @@ const Holder = props => {
           <Typography
             component={RouterLink}
             to="/profile/1/timeline"
-            variant="h5"
-          >
+            variant="h5">
             {project.author.name}
           </Typography>
         }
         title={
-          <Typography
-            display="block"
-            variant="overline"
-          >
+          <Typography display="block" variant="overline">
             Contest holder
           </Typography>
         }
       />
       <CardContent className={classes.content}>
         <List>
-          <ListItem
-            className={classes.listItem}
-            disableGutters
-            divider
-          >
+          <ListItem className={classes.listItem} disableGutters divider>
             <Typography variant="subtitle2">Deadline</Typography>
             <Typography variant="h6">
               {moment(project.deadline).format('DD MMM YYYY')}
             </Typography>
           </ListItem>
-          <ListItem
-            className={classes.listItem}
-            disableGutters
-            divider
-          >
+          <ListItem className={classes.listItem} disableGutters divider>
             <Typography variant="subtitle2">Per Project</Typography>
             <Typography variant="h6">
               {project.price} {project.currency}
             </Typography>
           </ListItem>
-          <ListItem
-            className={classes.listItem}
-            disableGutters
-            divider
-          >
+          <ListItem className={classes.listItem} disableGutters divider>
             <Typography variant="subtitle2">Main Technology</Typography>
             <Label color={project.tags[0].color}>{project.tags[0].text}</Label>
           </ListItem>
-          <ListItem
-            className={classes.listItem}
-            disableGutters
-            divider
-          >
+          <ListItem className={classes.listItem} disableGutters divider>
             <Typography variant="subtitle2">Last Update</Typography>
             <Typography variant="h6">
               {moment(project.updated_at).format('DD MMM YYYY')}

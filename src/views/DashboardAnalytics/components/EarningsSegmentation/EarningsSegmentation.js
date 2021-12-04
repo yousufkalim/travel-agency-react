@@ -10,7 +10,6 @@ import {
   Typography
 } from '@material-ui/core';
 
-import axios from 'utils/axios';
 import { GenericMoreButton } from 'components';
 import { Chart } from './components';
 
@@ -44,34 +43,36 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EarningsSegmentation = props => {
-  const { className, ...rest } = props;
+  const { data, className, ...rest } = props;
 
   const classes = useStyles();
   const [earnings, setEarnings] = useState([]);
 
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchEarnings = () => {
-      axios.get('/api/dashboard/earnings').then(response => {
-        if (mounted) {
-          setEarnings(response.data.earnings);
-        }
-      });
-    };
-
-    fetchEarnings();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  useEffect(async () => {
+    setEarnings([
+      {
+        id: '1',
+        label: 'Single Day Trip',
+        value: data?.singleDayTripEarning,
+        color: '#3f51b5'
+      },
+      {
+        id: '2',
+        label: 'Multi Day Trip',
+        value: data?.multiDayTripEarning,
+        color: '#7986cb'
+      },
+      {
+        id: '3',
+        label: 'Cruise Trip Earning',
+        value: data?.cruiseTripEarning,
+        color: '#c5cae9'
+      }
+    ]);
+  }, [data]);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         action={<GenericMoreButton />}
         title="Earnings Segmentation"
@@ -79,30 +80,20 @@ const EarningsSegmentation = props => {
       <Divider />
       <CardContent className={classes.content}>
         <div className={classes.chartContainer}>
-          <Chart
-            className={classes.chart}
-            data={earnings}
-          />
+          <Chart className={classes.chart} data={earnings} />
         </div>
         <Divider />
         <div className={classes.statsContainer}>
           {earnings.map(earning => (
-            <div
-              className={classes.statsItem}
-              key={earning.id}
-            >
+            <div className={classes.statsItem} key={earning.id}>
               <Typography
                 align="center"
                 component="h6"
                 gutterBottom
-                variant="overline"
-              >
+                variant="overline">
                 {earning.label}
               </Typography>
-              <Typography
-                align="center"
-                variant="h4"
-              >
+              <Typography align="center" variant="h4">
                 {earning.value}%
               </Typography>
             </div>

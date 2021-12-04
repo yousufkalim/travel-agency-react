@@ -19,28 +19,13 @@ const Header = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Grid
-        alignItems="flex-end"
-        container
-        justify="space-between"
-        spacing={3}
-      >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Grid alignItems="flex-end" container justify="space-between" spacing={3}>
         <Grid item>
-          <Typography
-            component="h2"
-            gutterBottom
-            variant="overline"
-          >
+          <Typography component="h2" gutterBottom variant="overline">
             Browse projects
           </Typography>
-          <Typography
-            component="h1"
-            variant="h3"
-          >
+          <Typography component="h1" variant="h3">
             See the latest opportunities
           </Typography>
         </Grid>
@@ -49,8 +34,7 @@ const Header = props => {
             color="primary"
             component={RouterLink}
             to="/projects/create"
-            variant="contained"
-          >
+            variant="contained">
             <AddIcon className={classes.addIcon} />
             Submit project
           </Button>

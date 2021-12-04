@@ -12,28 +12,29 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Summary = props => {
-  const { className, ...rest } = props;
+  ////getting customer and setCustomer from parent component
+  const { className, customer, setCustomer, ...rest } = props;
 
   const classes = useStyles();
-  const [customer, setCustomer] = useState();
+  // const [customer, setCustomer] = useState();
 
-  useEffect(() => {
-    let mounted = true;
+  // useEffect(() => {
+  //   let mounted = true;
 
-    const fetchCustomer = () => {
-      axios.get('/api/management/customers/1/summary').then(response => {
-        if (mounted) {
-          setCustomer(response.data.summary);
-        }
-      });
-    };
+  //   const fetchCustomer = () => {
+  //     axios.get('/api/management/customers/1/summary').then(response => {
+  //       if (mounted) {
+  //         setCustomer(response.data.summary);
+  //       }
+  //     });
+  //   };
 
-    fetchCustomer();
+  //   fetchCustomer();
 
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, []);
 
   if (!customer) {
     return null;
@@ -44,43 +45,23 @@ const Summary = props => {
       {...rest}
       className={clsx(classes.root, className)}
       container
-      spacing={3}
-    >
-      <Grid
-        item
-        lg={4}
-        md={6}
-        xl={3}
-        xs={12}
-      >
-        <CustomerInfo customer={customer} />
+      spacing={3}>
+      {/* passing customer and set customer to customer info */}
+      <Grid item lg={6} md={6} xl={3} xs={12}>
+        <CustomerInfo customer={customer} setCustomer={setCustomer} />
       </Grid>
-      <Grid
-        item
-        lg={4}
-        md={6}
-        xl={3}
-        xs={12}
-      >
+      {/* invoices and send email not required for now */}
+      {/* <Grid item lg={4} md={6} xl={3} xs={12}>
         <Invoices customer={customer} />
-      </Grid>
-      <Grid
-        item
-        lg={4}
-        md={6}
-        xl={3}
-        xs={12}
-      >
+      </Grid> */}
+      {/* <Grid item lg={4} md={6} xl={3} xs={12}>
         <SendEmails customer={customer} />
-      </Grid>
-      <Grid
-        item
-        lg={4}
-        md={6}
-        xl={3}
-        xs={12}
-      >
-        <OtherActions />
+      </Grid> */}
+      <Grid item lg={6} md={6} xl={3} xs={12}>
+        <OtherActions
+          customerId={customer._id}
+          activeStatus={customer.active}
+        />
       </Grid>
     </Grid>
   );

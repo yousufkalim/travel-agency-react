@@ -48,28 +48,25 @@ const AboutAuthor = props => {
   const options = [
     {
       value: 'freelancer',
-      title: 'I\'m a freelancer',
-      description: 'I\'m looking for teamates to join in a personal project'
+      title: "I'm a freelancer",
+      description: "I'm looking for teamates to join in a personal project"
     },
     {
       value: 'projectOwner',
       title: 'I’m a project owner',
       description:
-        'I\'m looking for freelancer or contractors to take care of my project'
+        "I'm looking for freelancer or contractors to take care of my project"
     },
     {
       value: 'affiliate',
       title: 'I want to join affiliate',
       description:
-        'I\'m looking for freelancer or contractors to take care of my project'
+        "I'm looking for freelancer or contractors to take care of my project"
     }
   ];
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader title="Who are you exactly?" />
       <CardContent>
         {options.map(option => (
@@ -77,8 +74,7 @@ const AboutAuthor = props => {
             className={clsx(classes.option, {
               [classes.selectedOption]: selected === option.value
             })}
-            key={option.value}
-          >
+            key={option.value}>
             <Radio
               checked={selected === option.value}
               className={classes.optionRadio}
@@ -86,10 +82,7 @@ const AboutAuthor = props => {
               onClick={event => handleChange(event, option)}
             />
             <div className={classes.optionDetails}>
-              <Typography
-                gutterBottom
-                variant="h5"
-              >
+              <Typography gutterBottom variant="h5">
                 {option.title}
               </Typography>
               <Typography variant="body1">{option.description}</Typography>

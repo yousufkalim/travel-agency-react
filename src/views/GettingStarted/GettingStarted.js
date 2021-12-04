@@ -30,14 +30,8 @@ const GettingStarted = () => {
   }, []);
 
   return (
-    <Page
-      className={classes.root}
-      title="Getting Started"
-    >
-      <Typography
-        gutterBottom
-        variant="overline"
-      >
+    <Page className={classes.root} title="Getting Started">
+      <Typography gutterBottom variant="overline">
         Development
       </Typography>
       <Typography variant="h3">Getting Started</Typography>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import validate from 'validate.js';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -12,8 +12,8 @@ import {
   Typography,
   Link
 } from '@material-ui/core';
-
-import useRouter from 'utils/useRouter';
+import { signup, fetchSubscriptions } from 'actions'; ////signup from session actions
+import SubscriptionModal from '../Subscription/SubscriptionModal'; //// Pan modal to show on signup
 
 const schema = {
   firstName: {
@@ -38,7 +38,8 @@ const schema = {
   password: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
-      maximum: 128
+      maximum: 128,
+      minimum: 6 //// minimum requirement 6 characters
     }
   },
   policy: {
@@ -75,7 +76,7 @@ const RegisterForm = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-  const { history } = useRouter();
+  const history = useHistory(); ///obj to access useRouter
 
   const [formState, setFormState] = useState({
     isValid: false,
@@ -83,6 +84,9 @@ const RegisterForm = props => {
     touched: {},
     errors: {}
   });
+  const [subscription, setSubscription] = useState([]); ///state for subcription data from
+  const [modalOpen, setModalOpen] = useState(false); //state to open plan modal
+  const [selected, setSelected] = useState(); ///state for selected subscription
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -93,6 +97,13 @@ const RegisterForm = props => {
       errors: errors || {}
     }));
   }, [formState.values]);
+
+  // use effect to fetch all subscription and save into state
+  useEffect(async () => {
+    const temp = await fetchSubscriptions(setSubscription);
+    setSubscription(temp);
+    temp && setSelected(temp[0]._id);
+  }, []);
 
   const handleChange = event => {
     event.persist();
@@ -115,7 +126,27 @@ const RegisterForm = props => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    history.push('/');
+    // opening modal on submit
+    setModalOpen(true);
+    // data to send to backend
+  };
+
+  // dunction to create agency account
+  const onCreateAccount = async () => {
+    // data to submit to db
+    const data = {
+      fullName: `${formState.values.firstName} ${formState.values.lastName}`,
+      email: formState.values.email,
+      type: 'AGENCY',
+      password: formState.values.password,
+      policy: formState.values.policy,
+      subscription: selected,
+      address: {
+        country: formState.values.country
+      }
+    };
+    // passing data and history to signup action
+    signup(data, history);
   };
 
   const hasError = field =>
@@ -125,8 +156,7 @@ const RegisterForm = props => {
     <form
       {...rest}
       className={clsx(classes.root, className)}
-      onSubmit={handleSubmit}
-    >
+      onSubmit={handleSubmit}>
       <div className={classes.fields}>
         <TextField
           error={hasError('firstName')}
@@ -173,6 +203,22 @@ const RegisterForm = props => {
           value={formState.values.password || ''}
           variant="outlined"
         />
+        <select
+          name="country"
+          style={{
+            width: '100%',
+            padding: 10,
+            marginBottom: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+          value={formState.values.country || ''}
+          onChange={handleChange}>
+          <option value="" disabled selected>
+            Select Your Country
+          </option>
+          <option value="BR">Brazil</option>
+          <option value="PT">portagal</option>
+        </select>
         <div>
           <div className={classes.policy}>
             <Checkbox
@@ -182,18 +228,14 @@ const RegisterForm = props => {
               name="policy"
               onChange={handleChange}
             />
-            <Typography
-              color="textSecondary"
-              variant="body1"
-            >
+            <Typography color="textSecondary" variant="body1">
               I have read the{' '}
               <Link
                 color="secondary"
                 component={RouterLink}
                 to="#"
                 underline="always"
-                variant="h6"
-              >
+                variant="h6">
                 Terms and Conditions
               </Link>
             </Typography>
@@ -206,13 +248,21 @@ const RegisterForm = props => {
       <Button
         className={classes.submitButton}
         color="secondary"
-        disabled={!formState.isValid}
+        disabled={!formState.isValid || !formState.values.country}
         size="large"
         type="submit"
-        variant="contained"
-      >
-        Create account
+        variant="contained">
+        Select Plan
       </Button>
+      {/* modal on select plan button */}
+      <SubscriptionModal
+        open={modalOpen}
+        setOpen={setModalOpen}
+        selected={selected}
+        setSelected={setSelected}
+        subscription={subscription}
+        onCreateAccount={onCreateAccount}
+      />
     </form>
   );
 };

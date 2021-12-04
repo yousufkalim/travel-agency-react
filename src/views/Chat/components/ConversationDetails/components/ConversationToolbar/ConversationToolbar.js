@@ -83,17 +83,13 @@ const ConversationToolbar = props => {
   };
 
   return (
-    <Toolbar
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Toolbar {...rest} className={clsx(classes.root, className)}>
       <Tooltip title="Back">
         <IconButton
           className={classes.backButton}
           component={RouterLink}
           edge="start"
-          to="/chat"
-        >
+          to="/chat">
           <KeyboardBackspaceIcon />
         </IconButton>
       </Tooltip>
@@ -116,10 +112,7 @@ const ConversationToolbar = props => {
           )}
         </div>
       </div>
-      <Paper
-        className={classes.search}
-        elevation={1}
-      >
+      <Paper className={classes.search} elevation={1}>
         <SearchIcon className={classes.searchIcon} />
         <Input
           className={classes.searchInput}
@@ -128,10 +121,7 @@ const ConversationToolbar = props => {
         />
       </Paper>
       <Tooltip title="More options">
-        <IconButton
-          onClick={handleMenuOpen}
-          ref={moreRef}
-        >
+        <IconButton onClick={handleMenuOpen} ref={moreRef}>
           <MoreIcon />
         </IconButton>
       </Tooltip>
@@ -139,8 +129,7 @@ const ConversationToolbar = props => {
         anchorEl={moreRef.current}
         keepMounted
         onClose={handleMenuClose}
-        open={openMenu}
-      >
+        open={openMenu}>
         <MenuItem>
           <ListItemIcon>
             <BlockIcon />

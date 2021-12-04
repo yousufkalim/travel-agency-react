@@ -60,18 +60,9 @@ const CommentForm = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Avatar
-        alt="Person"
-        src={sender.avatar}
-      />{' '}
-      <Paper
-        className={classes.paper}
-        elevation={1}
-      >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Avatar alt="Person" src={sender.avatar} />{' '}
+      <Paper className={classes.paper} elevation={1}>
         <Input
           className={classes.input}
           disableUnderline
@@ -86,26 +77,16 @@ const CommentForm = props => {
       </Tooltip>
       <Divider className={classes.divider} />
       <Tooltip title="Attach image">
-        <IconButton
-          edge="end"
-          onClick={handleAttach}
-        >
+        <IconButton edge="end" onClick={handleAttach}>
           <AddPhotoIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title="Attach file">
-        <IconButton
-          edge="end"
-          onClick={handleAttach}
-        >
+        <IconButton edge="end" onClick={handleAttach}>
           <AttachFileIcon />
         </IconButton>
       </Tooltip>
-      <input
-        className={classes.fileInput}
-        ref={fileInputRef}
-        type="file"
-      />
+      <input className={classes.fileInput} ref={fileInputRef} type="file" />
     </div>
   );
 };

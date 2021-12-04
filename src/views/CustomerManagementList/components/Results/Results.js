@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -42,6 +42,10 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { message } from 'antd'; ////antd toast messages
+
+import { deleteManyCustomer, promotionalEmails } from 'actions'; ////deleteManyCustomer Action
+import SendEmailModal from './SendEmailModal';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -82,8 +86,21 @@ const Results = props => {
   const classes = useStyles();
 
   const [selectedCustomers, setSelectedCustomers] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [subject, setSubject] = useState('');
+  const [mail, setMail] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [filteredList, setFilteredList] = useState([]); ///filtered List array
+  const [filterValues, setFilterValues] = useState({
+    gender: '',
+    type: ''
+  }); ///state for filter tabs
+
+  // useEffect to set filtered list with the current trips list
+  useEffect(() => {
+    setFilteredList(customers);
+  }, [customers]);
 
   const handleSelectAll = event => {
     const selectedCustomers = event.target.checked
@@ -159,6 +176,7 @@ const Results = props => {
     { title: 'City', field: 'city' },
     { title: 'Country', field: 'country' },
     { title: 'Gender', field: 'gender' },
+    { title: 'Type', field: 'type' },
     {
       title: 'Tags',
       field: 'tags',
@@ -183,32 +201,146 @@ const Results = props => {
       sorting: false
     }
   ];
+
+  const onDelete = () => {
+    // data object with array of customer ids
+    const data = {
+      ids: selectedCustomers
+    };
+    // passing data to delete many customer function and handling response
+    deleteManyCustomer(data).then(response => {
+      if (response.data.message) {
+        message.success(response.data.message);
+        window.location.reload();
+      }
+    });
+  };
+
+  const onModalOpen = () => {
+    setOpenModal(true);
+  };
+  const onModalClose = () => {
+    setOpenModal(false);
+  };
+
+  const sendEmails = () => {
+    // array of emails
+    let emails = [];
+    selectedCustomers.map(item => {
+      customers.map(item2 => {
+        item2._id === item && emails.push(item2.email);
+      });
+    });
+    // data object
+    const data = {
+      emails,
+      subject,
+      message: mail
+    };
+    // passing data to send email
+    promotionalEmails(data).then(response => {
+      if (response.data.message) {
+        message.success(response.data.message);
+      }
+    });
+  };
+
+  // Filter function
+  const onFilter = (value, name) => {
+    let tempArray = [];
+    if (value !== 'all' && value !== '') {
+      tempArray.push(
+        ...customers.filter(item => {
+          // check for all dropdowns
+          return item[name] === value;
+        })
+      );
+      setFilteredList(tempArray);
+    } else {
+      setFilteredList(customers);
+    }
+    setFilterValues({
+      gender: name === 'gender' ? value : '',
+      type: name === 'type' ? value : ''
+    });
+  };
+
   return (
     <div {...rest} className={clsx(classes.root, className)}>
+      {/* filter fields */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-start'
+        }}>
+        {/* gender filter */}
+        <select
+          name="gender"
+          style={{
+            width: 180,
+            padding: 10,
+            marginBottom: 15,
+            marginRight: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+          value={filterValues.gender}
+          onChange={e => onFilter(e.target.value, e.target.name)}>
+          <option value="" disabled selected>
+            Gender
+          </option>
+          <option value="all">All</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Others">Others</option>
+        </select>
+
+        {/* type filter */}
+        <select
+          name="type"
+          style={{
+            width: 180,
+            padding: 10,
+            marginBottom: 15,
+            marginRight: 15,
+            border: '1px solid 	rgb(128,128,128,0.4)'
+          }}
+          value={filterValues.type}
+          onChange={e => onFilter(e.target.value, e.target.name)}>
+          <option value="" disabled selected>
+            Type
+          </option>
+          <option value="all">All</option>
+          <option value="Customer">Customer</option>
+          <option value="Provider">Provider</option>
+          <option value="Affiliate">Affiliate</option>
+        </select>
+      </div>
+
       <Typography color="textSecondary" gutterBottom variant="body2">
         {customers.length} Records found. Page {page + 1} of{' '}
         {Math.ceil(customers.length / rowsPerPage)}
       </Typography>
-      <Card>
+      {/* <Card>
         <CardHeader action={<GenericMoreButton />} title="All customers" />
         <Divider />
-        <CardContent className={classes.content}>
-          <PerfectScrollbar>
-            <div className={classes.inner}>
-              <MaterialTable
-                icons={tableIcons}
-                columns={tableHeader}
-                data={customers}
-                options={{
-                  // filtering: true,
-                  showTitle: false,
-                  selection: true,
-                  headerStyle: { backgroundColor: '#fafafa', color: '#000' },
-                  exportButton: true
-                }}
-                onSelectionChange={rows => selectAllCustomer(rows)}
-              />
-              {/* <Table>
+        <CardContent className={classes.content}> */}
+      <PerfectScrollbar>
+        <div className={classes.inner}>
+          <MaterialTable
+            title={<h2 style={{ marginTop: 10 }}>All Customers</h2>}
+            icons={tableIcons}
+            columns={tableHeader}
+            data={filteredList}
+            options={{
+              // filtering: true,
+              // showTitle: false,
+              selection: true,
+              headerStyle: { backgroundColor: '#fafafa', color: '#000' },
+              exportButton: true
+            }}
+            onSelectionChange={rows => selectAllCustomer(rows)}
+          />
+          {/* <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell padding="checkbox">
@@ -297,9 +429,9 @@ const Results = props => {
                     ))}
                 </TableBody>
               </Table> */}
-            </div>
-          </PerfectScrollbar>
-        </CardContent>
+        </div>
+      </PerfectScrollbar>
+      {/* </CardContent>
         <CardActions className={classes.actions}>
           <TablePagination
             component="div"
@@ -311,10 +443,22 @@ const Results = props => {
             rowsPerPageOptions={[5, 10, 25, 50, 100]}
           />
         </CardActions>
-      </Card>
+      </Card> */}
+      <SendEmailModal
+        open={openModal}
+        handleClose={onModalClose}
+        subject={subject}
+        setSubject={setSubject}
+        mail={mail}
+        setMail={setMail}
+        onSubmit={sendEmails}
+      />
       <TableEditBar
         selected={selectedCustomers}
         onMarkPaid={() => console.log(selectedCustomers)}
+        onDelete={onDelete}
+        sendEmails={onModalOpen}
+        componentName="customer"
       />
     </div>
   );

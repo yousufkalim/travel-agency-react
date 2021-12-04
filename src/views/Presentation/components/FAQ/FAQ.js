@@ -36,7 +36,7 @@ const FAQ = props => {
     {
       title: 'What do we use for styling our components?',
       description:
-        'We use Material-ui\'s hooks api as we think it’s the best way of avoiding clutter.'
+        "We use Material-ui's hooks api as we think it’s the best way of avoiding clutter."
     },
     {
       title:
@@ -52,15 +52,9 @@ const FAQ = props => {
   ];
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.inner}>
-        <Typography
-          align="center"
-          variant="h3"
-        >
+        <Typography align="center" variant="h3">
           FAQ
         </Typography>
         <div className={classes.content}>

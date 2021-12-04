@@ -94,32 +94,21 @@ const ChatBar = props => {
         elevation={1}
         onClose={handleClose}
         open={open}
-        variant="temporary"
-      >
-        <div
-          {...rest}
-          className={clsx(classes.root, className)}
-        >
+        variant="temporary">
+        <div {...rest} className={clsx(classes.root, className)}>
           {data.groups.map(group => (
             <List
               className={classes.list}
               key={group.id}
               subheader={
-                <ListSubheader
-                  disableGutters
-                  disableSticky
-                >
+                <ListSubheader disableGutters disableSticky>
                   {group.name}
                 </ListSubheader>
-              }
-            >
+              }>
               {data.connections
                 .filter(connection => group.id === connection.group)
                 .map(connection => (
-                  <ListItem
-                    disableGutters
-                    key={connection.id}
-                  >
+                  <ListItem disableGutters key={connection.id}>
                     <ListItemAvatar>
                       <Avatar
                         alt="Person"
@@ -137,22 +126,17 @@ const ChatBar = props => {
                           display="block"
                           noWrap
                           to="/profile/1/timeline"
-                          variant="h6"
-                        >
+                          variant="h6">
                           {connection.name}
                         </Typography>
                       }
                     />
                     {connection.active ? (
-                      <StatusBullet
-                        color="success"
-                        size="small"
-                      />
+                      <StatusBullet color="success" size="small" />
                     ) : (
                       <Typography
                         className={classes.lastActivity}
-                        variant="body2"
-                      >
+                        variant="body2">
                         {moment(connection.lastActivity).fromNow()}
                       </Typography>
                     )}
@@ -165,16 +149,9 @@ const ChatBar = props => {
       <span
         className={clsx(classes.fab, {
           [classes.shiftFab]: open
-        })}
-      >
-        <Badge
-          badgeContent={onlineConnections}
-          color="error"
-        >
-          <Fab
-            color="primary"
-            onClick={handleOpen}
-          >
+        })}>
+        <Badge badgeContent={onlineConnections} color="error">
+          <Fab color="primary" onClick={handleOpen}>
             <PeopleIcon />
           </Fab>
         </Badge>

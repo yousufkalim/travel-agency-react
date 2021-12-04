@@ -30,7 +30,8 @@ const TableEditBar = props => {
     selected,
     className,
     onMarkPaid,
-    onMarkUnpaid,
+    sendEmails,
+    componentName,
     onDelete,
     ...rest
   } = props;
@@ -44,49 +45,32 @@ const TableEditBar = props => {
       open={open}
       // eslint-disable-next-line react/jsx-sort-props
       PaperProps={{ elevation: 1 }}
-      variant="persistent"
-    >
-      <div
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
-        <Grid
-          alignItems="center"
-          container
-          spacing={2}
-        >
+      variant="persistent">
+      <div {...rest} className={clsx(classes.root, className)}>
+        <Grid alignItems="center" container spacing={2}>
           <Hidden smDown>
-            <Grid
-              item
-              md={3}
-            >
-              <Typography
-                color="textSecondary"
-                variant="subtitle1"
-              >
+            <Grid item md={3}>
+              <Typography color="textSecondary" variant="subtitle1">
                 {selected.length} selected
               </Typography>
             </Grid>
           </Hidden>
-          <Grid
-            item
-            md={6}
-            xs={12}
-          >
+          <Grid item md={6} xs={12}>
             <div className={classes.actions}>
               <Button onClick={onMarkPaid}>
                 <MessageIcon className={classes.buttonIcon} />
                 Send SMS
               </Button>
-              <Button onClick={onMarkUnpaid}>
-                <MailIcon className={classes.buttonIcon} />
-                Send Email
-              </Button>
+              {componentName === 'customer' && (
+                <Button onClick={sendEmails}>
+                  <MailIcon className={classes.buttonIcon} />
+                  Send Email
+                </Button>
+              )}
               <Button onClick={onDelete}>
                 <DeleteIcon className={classes.buttonIcon} />
                 Delete
               </Button>
-         
             </div>
           </Grid>
         </Grid>

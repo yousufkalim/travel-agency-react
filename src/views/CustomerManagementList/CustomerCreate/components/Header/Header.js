@@ -19,7 +19,7 @@ const Header = props => {
         New Customer
       </Typography>
       <Typography component="h1" variant="h3">
-        Careate new customer
+        Create new customer
       </Typography>
     </div>
   );

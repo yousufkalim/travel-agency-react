@@ -47,7 +47,7 @@ Ekaterina Tankova
       labels: [],
       subject: 'Amazing work',
       message:
-        'Hey, nice projects! I really liked the one in react. What\'s your quote on kinda similar project?',
+        "Hey, nice projects! I really liked the one in react. What's your quote on kinda similar project?",
       receiver: {
         name: 'Adam Denisov',
         email: 'adam.denisov@devias.io',

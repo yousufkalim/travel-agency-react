@@ -1,3 +1,4 @@
+// init
 import React, { useState, useRef, useEffect } from 'react';
 import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
@@ -23,7 +24,11 @@ import '@fullcalendar/list/main.css';
 import axios from 'utils/axios';
 import { Page } from 'components';
 import { AddEditEvent, Toolbar } from './components';
+import { tripEvents } from 'actions/tripActions'; ///get trip action
+import tippy from 'tippy.js'; /////tippy to show tool tip
+import 'tippy.js/animations/scale-subtle.css';
 
+// styles
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
@@ -88,37 +93,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+// calendar component
 const Calendar = () => {
-  const classes = useStyles();
-  const calendarRef = useRef(null);
-  const theme = useTheme();
-  const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
+  const classes = useStyles(); ///useStyles object
+  const calendarRef = useRef(null); /////calendar referance
+  const theme = useTheme(); ////useTheme obj
+  const mobileDevice = useMediaQuery(theme.breakpoints.down('sm')); ////mobile screen breakpoints
+  // states
   const [view, setView] = useState(mobileDevice ? 'listWeek' : 'dayGridMonth');
-  const [date, setDate] = useState(moment('2019-07-30 08:00:00').toDate());
+  const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const [eventModal, setEventModal] = useState({
     open: false,
     event: null
   });
 
+  // useEffect to fetch data
   useEffect(() => {
-    let mounted = true;
-
-    const fetchEvents = () => {
-      if (mounted) {
-        axios
-          .get('/api/calendar')
-          .then(response => setEvents(response.data.events));
-      }
-    };
-
-    fetchEvents();
-
-    return () => {
-      mounted = false;
-    };
+    fetchData();
   }, []);
 
+  ////useEffect for mobile view
   useEffect(() => {
     const calendarApi = calendarRef.current.getApi();
     const newView = mobileDevice ? 'listWeek' : 'dayGridMonth';
@@ -127,30 +122,42 @@ const Calendar = () => {
     setView(newView);
   }, [mobileDevice]);
 
-  const handleEventClick = info => {
-    const selected = events.find(event => event.id === info.event.id);
+  // fetch data from db
+  const fetchData = async () => {
+    const tempData = await tripEvents();
+    tempData.data.map(item => {
+      //// trips already passed in red others in green
+      if (
+        moment(item.end).format('YYYY-MM-DD') <
+        moment(new Date()).format('YYYY-MM-DD')
+      ) {
+        item.color = 'red';
+      } else {
+        item.color = 'green';
+      }
+    });
+    setEvents(tempData.data);
+  };
 
+  // click on calendar event
+  const handleEventClick = info => {
+    // setting selected event and opening modal
+    const selected = events.find(item => {
+      return (
+        item._id === info.event.id &&
+        moment(item.start).format('YYYY-MM-DD') ===
+          moment(info.event._instance.range.start).format('YYYY-MM-DD') &&
+        moment(item.end).format('YYYY-MM-DD') ===
+          moment(info.event._instance.range.end).format('YYYY-MM-DD')
+      );
+    });
     setEventModal({
       open: true,
       event: selected
     });
   };
 
-  const handleEventNew = () => {
-    setEventModal({
-      open: true,
-      event: null
-    });
-  };
-
-  const handleEventDelete = event => {
-    setEvents(events => events.filter(e => e.id !== event.id));
-    setEventModal({
-      open: false,
-      event: null
-    });
-  };
-
+  // modal close
   const handleModalClose = () => {
     setEventModal({
       open: false,
@@ -158,22 +165,7 @@ const Calendar = () => {
     });
   };
 
-  const handleEventAdd = event => {
-    setEvents(events => [...events, event]);
-    setEventModal({
-      open: false,
-      event: null
-    });
-  };
-
-  const handleEventEdit = event => {
-    setEvents(events => events.map(e => (e.id === event.id ? event : e)));
-    setEventModal({
-      open: false,
-      event: null
-    });
-  };
-
+  // current date
   const handleDateToday = () => {
     const calendarApi = calendarRef.current.getApi();
 
@@ -181,6 +173,7 @@ const Calendar = () => {
     setDate(calendarApi.getDate());
   };
 
+  // changes view
   const handleViewChange = view => {
     const calendarApi = calendarRef.current.getApi();
 
@@ -188,6 +181,7 @@ const Calendar = () => {
     setView(view);
   };
 
+  // go to previous date
   const handleDatePrev = () => {
     const calendarApi = calendarRef.current.getApi();
 
@@ -195,6 +189,7 @@ const Calendar = () => {
     setDate(calendarApi.getDate());
   };
 
+  // go to upcoming date
   const handleDateNext = () => {
     const calendarApi = calendarRef.current.getApi();
 
@@ -202,17 +197,41 @@ const Calendar = () => {
     setDate(calendarApi.getDate());
   };
 
+  // when mouse enter an event
+  let tooltip = null;
+  const handleMouseEnter = arg => {
+    console.log('arg', arg);
+    tooltip = tippy(arg.el, {
+      content: `<div style="color:white; padding:10px;border-radius: 10px;background-color:grey;"><strong>${
+        arg.event._def.title
+      }</strong><br>${arg.event._def.extendedProps.desc}${moment(
+        arg.event._instance.range.start
+      ).format('MMMM Do YYYY')} to ${moment(
+        arg.event._instance.range.end
+      ).format('MMMM Do YYYY')}</div>`,
+      allowHTML: true,
+      placement: 'top',
+      arrow: true,
+      duration: 150,
+      delay: 150,
+      interactive: true,
+      animation: 'scale-subtle'
+    });
+    tooltip.show();
+  };
+
+  const handleMouseLeave = () => {
+    tooltip !== null && tooltip.destroy();
+  };
+
+  // return jsx
   return (
-    <Page
-      className={classes.root}
-      title="Calendar"
-    >
+    <Page className={classes.root} title="Calendar">
       <Toolbar
         date={date}
         onDateNext={handleDateNext}
         onDatePrev={handleDatePrev}
         onDateToday={handleDateToday}
-        onEventAdd={handleEventNew}
         onViewChange={handleViewChange}
         view={view}
       />
@@ -236,6 +255,9 @@ const Calendar = () => {
               listPlugin,
               timelinePlugin
             ]}
+            displayEventTime={false}
+            eventMouseEnter={handleMouseEnter}
+            eventMouseLeave={handleMouseLeave}
             ref={calendarRef}
             rerenderDelay={10}
             selectable
@@ -243,17 +265,8 @@ const Calendar = () => {
           />
         </CardContent>
       </Card>
-      <Modal
-        onClose={handleModalClose}
-        open={eventModal.open}
-      >
-        <AddEditEvent
-          event={eventModal.event}
-          onAdd={handleEventAdd}
-          onCancel={handleModalClose}
-          onDelete={handleEventDelete}
-          onEdit={handleEventEdit}
-        />
+      <Modal onClose={handleModalClose} open={eventModal.open}>
+        <AddEditEvent event={eventModal.event} onClose={handleModalClose} />
       </Modal>
     </Page>
   );

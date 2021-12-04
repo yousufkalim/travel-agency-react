@@ -36,27 +36,14 @@ const Details = props => {
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent className={classes.content}>
-        <Grid
-          container
-          justify="space-between"
-        >
+        <Grid container justify="space-between">
           <Grid item>
-            <img
-              alt="Brand"
-              src="/images/logos/logo--dark.svg"
-            />
+            <img alt="Brand" src="/images/logos/logo--dark.svg" />
           </Grid>
           <Grid item>
-            <Typography
-              align="right"
-              component="h3"
-              variant="h1"
-            >
+            <Typography align="right" component="h3" variant="h1">
               PAID
             </Typography>
           </Grid>
@@ -65,8 +52,7 @@ const Details = props => {
           alignItems="center"
           className={classes.marginTop}
           container
-          justify="space-between"
-        >
+          justify="space-between">
           <Grid item>
             <Typography variant="h5">www.devias.io</Typography>
           </Grid>
@@ -76,11 +62,7 @@ const Details = props => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid
-          className={classes.marginTop}
-          container
-          justify="space-between"
-        >
+        <Grid className={classes.marginTop} container justify="space-between">
           <Grid item>
             <Typography>
               Street King William, 123 <br />
@@ -104,14 +86,9 @@ const Details = props => {
         <Grid
           className={clsx(classes.marginTop, classes.dates)}
           container
-          justify="space-between"
-        >
+          justify="space-between">
           <Grid item>
-            <Typography
-              component="h4"
-              gutterBottom
-              variant="overline"
-            >
+            <Typography component="h4" gutterBottom variant="overline">
               Due date
             </Typography>
             <Typography>
@@ -119,11 +96,7 @@ const Details = props => {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography
-              component="h4"
-              gutterBottom
-              variant="overline"
-            >
+            <Typography component="h4" gutterBottom variant="overline">
               Date of issue
             </Typography>
             <Typography>
@@ -131,22 +104,14 @@ const Details = props => {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography
-              component="h4"
-              gutterBottom
-              variant="overline"
-            >
+            <Typography component="h4" gutterBottom variant="overline">
               Reference
             </Typography>
             <Typography>{invoice.ref}</Typography>
           </Grid>
         </Grid>
         <div className={classes.marginTop}>
-          <Typography
-            component="h4"
-            gutterBottom
-            variant="overline"
-          >
+          <Typography component="h4" gutterBottom variant="overline">
             Billed to
           </Typography>
           <Typography>
@@ -202,11 +167,7 @@ const Details = props => {
           </TableBody>
         </Table>
         <div className={classes.marginTop}>
-          <Typography
-            component="h4"
-            gutterBottom
-            variant="overline"
-          >
+          <Typography component="h4" gutterBottom variant="overline">
             Notes
           </Typography>
           <Typography>

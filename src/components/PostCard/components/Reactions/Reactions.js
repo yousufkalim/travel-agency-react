@@ -49,17 +49,13 @@ const Reactions = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       {liked ? (
         <Tooltip title="Unlike">
           <IconButton
             className={classes.likedButton}
             onClick={handleUnlike}
-            size="small"
-          >
+            size="small">
             <FavoriteIcon />
           </IconButton>
         </Tooltip>
@@ -68,23 +64,15 @@ const Reactions = props => {
           <IconButton
             className={classes.likeButton}
             onClick={handleLike}
-            size="small"
-          >
+            size="small">
             <FavoriteBorderIcon />
           </IconButton>
         </Tooltip>
       )}
-      <Typography
-        color="textSecondary"
-        variant="h6"
-      >
+      <Typography color="textSecondary" variant="h6">
         {likes}
       </Typography>
-      <Button
-        className={classes.shareButton}
-        size="small"
-        variant="contained"
-      >
+      <Button className={classes.shareButton} size="small" variant="contained">
         <ShareIcon className={classes.shareIcon} />
         Share
       </Button>

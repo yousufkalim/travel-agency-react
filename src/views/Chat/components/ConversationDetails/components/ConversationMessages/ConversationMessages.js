@@ -23,10 +23,7 @@ const ConversationMessages = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <PerfectScrollbar>
         <div className={classes.inner}>
           {messages.map(message => {

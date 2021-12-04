@@ -36,8 +36,7 @@ const NotificationsPopover = props => {
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'center'
-      }}
-    >
+      }}>
       <div className={classes.root}>
         <CardHeader title="Notifications" />
         <Divider />
@@ -48,11 +47,7 @@ const NotificationsPopover = props => {
         )}
         <Divider />
         <CardActions className={classes.actions}>
-          <Button
-            component={RouterLink}
-            size="small"
-            to="#"
-          >
+          <Button component={RouterLink} size="small" to="#">
             See all
           </Button>
         </CardActions>

@@ -27,20 +27,14 @@ const ConversationPlaceholder = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.inner}>
         <img
           alt="Select conversation"
           className={classes.image}
           src="/images/undraw_work_chat_erdt.svg"
         />
-        <Typography
-          className={classes.title}
-          variant="h4"
-        >
+        <Typography className={classes.title} variant="h4">
           Select conversation to display
         </Typography>
         <Typography variant="subtitle1">

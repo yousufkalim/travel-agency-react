@@ -84,16 +84,10 @@ const Subscription = props => {
   }
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         action={
-          <Button
-            size="small"
-            variant="contained"
-          >
+          <Button size="small" variant="contained">
             Upgrade plan
           </Button>
         }
@@ -105,17 +99,11 @@ const Subscription = props => {
         <Card>
           <CardContent className={classes.overview}>
             <div>
-              <Typography
-                display="inline"
-                variant="h4"
-              >
+              <Typography display="inline" variant="h4">
                 {subscription.currency}
                 {subscription.price}
               </Typography>
-              <Typography
-                display="inline"
-                variant="subtitle1"
-              >
+              <Typography display="inline" variant="subtitle1">
                 /mo
               </Typography>
             </div>
@@ -157,17 +145,10 @@ const Subscription = props => {
           </CardContent>
           <Divider />
         </Card>
-        <Typography
-          className={classes.notice}
-          variant="body2"
-        >
+        <Typography className={classes.notice} variant="body2">
           The refunds don't work once you have the subscription, but you can
           always{' '}
-          <Link
-            color="secondary"
-            component={RouterLink}
-            to="#"
-          >
+          <Link color="secondary" component={RouterLink} to="#">
             Cancel your subscription
           </Link>
           .

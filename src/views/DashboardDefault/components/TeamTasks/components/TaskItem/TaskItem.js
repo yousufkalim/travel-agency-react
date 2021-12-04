@@ -60,8 +60,7 @@ const TaskItem = props => {
         classes.root,
         { [classes.critical]: critical },
         className
-      )}
-    >
+      )}>
       <ListItemIcon>
         <span className={classes.indicator} />
       </ListItemIcon>
@@ -71,16 +70,9 @@ const TaskItem = props => {
         primaryTypographyProps={{ variant: 'h6', noWrap: true }}
         secondary={deadline}
       />
-      <StackAvatars
-        avatars={task.members}
-        limit={3}
-      />
+      <StackAvatars avatars={task.members} limit={3} />
       <Tooltip title="View task">
-        <IconButton
-          className={classes.viewButton}
-          edge="end"
-          size="small"
-        >
+        <IconButton className={classes.viewButton} edge="end" size="small">
           <OpenInNewIcon />
         </IconButton>
       </Tooltip>

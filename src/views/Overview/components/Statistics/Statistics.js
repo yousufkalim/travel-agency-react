@@ -68,85 +68,36 @@ const Statistics = props => {
   }
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Grid
-        alignItems="center"
-        container
-        justify="space-between"
-      >
-        <Grid
-          className={classes.item}
-          item
-          md={3}
-          sm={6}
-          xs={12}
-        >
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <Grid alignItems="center" container justify="space-between">
+        <Grid className={classes.item} item md={3} sm={6} xs={12}>
           <Typography variant="h2">${statistics.payout}</Typography>
-          <Typography
-            className={classes.overline}
-            variant="overline"
-          >
+          <Typography className={classes.overline} variant="overline">
             Next payout
           </Typography>
         </Grid>
-        <Grid
-          className={classes.item}
-          item
-          md={3}
-          sm={6}
-          xs={12}
-        >
+        <Grid className={classes.item} item md={3} sm={6} xs={12}>
           <Typography variant="h2">${statistics.projects}</Typography>
-          <Typography
-            className={classes.overline}
-            variant="overline"
-          >
+          <Typography className={classes.overline} variant="overline">
             Total products
           </Typography>
         </Grid>
-        <Grid
-          className={classes.item}
-          item
-          md={3}
-          sm={6}
-          xs={12}
-        >
+        <Grid className={classes.item} item md={3} sm={6} xs={12}>
           <Typography variant="h2">{statistics.visitors}</Typography>
-          <Typography
-            className={classes.overline}
-            variant="overline"
-          >
+          <Typography className={classes.overline} variant="overline">
             Today's Visitors
           </Typography>
         </Grid>
-        <Grid
-          className={classes.item}
-          item
-          md={3}
-          sm={6}
-          xs={12}
-        >
+        <Grid className={classes.item} item md={3} sm={6} xs={12}>
           <div className={classes.titleWrapper}>
-            <Typography
-              component="span"
-              variant="h2"
-            >
+            <Typography component="span" variant="h2">
               {statistics.watching}
             </Typography>
-            <Label
-              className={classes.label}
-              color={colors.green[600]}
-            >
+            <Label className={classes.label} color={colors.green[600]}>
               Live
             </Label>
           </div>
-          <Typography
-            className={classes.overline}
-            variant="overline"
-          >
+          <Typography className={classes.overline} variant="overline">
             Watching now
           </Typography>
         </Grid>

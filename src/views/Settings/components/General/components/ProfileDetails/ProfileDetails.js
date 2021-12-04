@@ -10,6 +10,8 @@ import {
   Typography,
   Button
 } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -32,48 +34,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProfileDetails = props => {
-  const { profile, className, ...rest } = props;
+  const { className, ...rest } = props;
+  const { user } = useSelector(state => state.session);
 
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent className={classes.content}>
         <Avatar
           className={classes.avatar}
-          src={profile.avatar}
+          src="/images/avatars/defaultAvatar.png"
         />
-        <Typography
-          className={classes.name}
-          gutterBottom
-          variant="h3"
-        >
-          {profile.firstName} {profile.lastName}
+        <Typography className={classes.name} gutterBottom variant="h3">
+          {user.fullName}
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body1"
-        >
-          {profile.state}, {profile.country}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {profile.timezone}
+        <Typography color="textSecondary" variant="body1">
+          Member Since: {moment(user.createdAt).format('MMMM Do YYYY')}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button
-          className={classes.removeBotton}
-          variant="text"
-        >
-          Remove picture
-        </Button>
-      </CardActions>
     </Card>
   );
 };

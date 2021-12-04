@@ -24,6 +24,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import axios from 'utils/axios';
 import { Label, GenericMoreButton } from 'components';
+import { latestBookings } from 'actions';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -53,38 +54,13 @@ const labelColors = {
 };
 
 const LatestOrders = props => {
-  const { className, ...rest } = props;
+  const { orders, className, ...rest } = props;
 
   const classes = useStyles();
-  const [orders, setOrders] = useState(null);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchOrders = () => {
-      axios.get('/api/dashboard/latest-orders').then(response => {
-        if (mounted) {
-          setOrders(response.data.orders);
-        }
-      });
-    };
-
-    fetchOrders();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        action={<GenericMoreButton />}
-        title="Latest Orders"
-      />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <CardHeader action={<GenericMoreButton />} title="Latest Orders" />
       <Divider />
       <CardContent className={classes.content}>
         <PerfectScrollbar options={{ suppressScrollY: true }}>
@@ -94,55 +70,33 @@ const LatestOrders = props => {
                 <TableHead>
                   <TableRow>
                     <TableCell sortDirection="desc">
-                      <Tooltip
-                        enterDelay={300}
-                        title="Sort"
-                      >
-                        <TableSortLabel
-                          active
-                          direction="desc"
-                        >
+                      <Tooltip enterDelay={300} title="Sort">
+                        <TableSortLabel active direction="desc">
                           Date
                         </TableSortLabel>
                       </Tooltip>
                     </TableCell>
                     <TableCell>Customer</TableCell>
-                    <TableCell>Items</TableCell>
+                    <TableCell>Trip</TableCell>
                     <TableCell>Total</TableCell>
                     <TableCell>Status</TableCell>
-                    <TableCell align="right">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {orders.map(order => (
-                    <TableRow
-                      hover
-                      key={order.id}
-                    >
-                      <TableCell>{order.ref}</TableCell>
-                      <TableCell>{order.customer.name}</TableCell>
-                      <TableCell>{order.items}</TableCell>
+                    <TableRow hover key={order.id}>
+                      <TableCell>{order.bookingDate}</TableCell>
+                      <TableCell>{order.fullName}</TableCell>
+                      <TableCell>{order.trip.name}</TableCell>
                       <TableCell className={classes.totalCell}>
-                        {order.currency} {order.value}
+                        ${order.totalCost}
                       </TableCell>
                       <TableCell>
                         <Label
                           color={labelColors[order.status]}
-                          variant="outlined"
-                        >
+                          variant="outlined">
                           {order.status}
                         </Label>
-                      </TableCell>
-                      <TableCell align="right">
-                        <Button
-                          color="primary"
-                          component={RouterLink}
-                          size="small"
-                          to={'management/orders/1'}
-                          variant="outlined"
-                        >
-                          View
-                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -157,9 +111,8 @@ const LatestOrders = props => {
           color="primary"
           component={RouterLink}
           size="small"
-          to="management/orders"
-          variant="text"
-        >
+          to="reservation/bookinglist"
+          variant="text">
           See all
           <ArrowForwardIcon className={classes.arrowForwardIcon} />
         </Button>

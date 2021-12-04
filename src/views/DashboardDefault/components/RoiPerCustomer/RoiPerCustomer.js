@@ -38,33 +38,23 @@ const RoiPerCustomer = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <div>
         <Typography
           color="inherit"
           component="h3"
           gutterBottom
-          variant="overline"
-        >
+          variant="overline">
           Roi per customer
         </Typography>
         <div className={classes.details}>
-          <Typography
-            color="inherit"
-            variant="h3"
-          >
+          <Typography color="inherit" variant="h3">
             {data.currency}
             {data.value}
           </Typography>
         </div>
       </div>
-      <Avatar
-        className={classes.avatar}
-        color="inherit"
-      >
+      <Avatar className={classes.avatar} color="inherit">
         <AttachMoneyIcon />
       </Avatar>
     </Card>

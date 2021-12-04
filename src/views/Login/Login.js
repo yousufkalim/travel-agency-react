@@ -82,17 +82,11 @@ const Login = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Login"
-    >
+    <Page className={classes.root} title="Login">
       <Card className={classes.card}>
         <CardContent className={classes.content}>
           <LockIcon className={classes.icon} />
-          <Typography
-            gutterBottom
-            variant="h3"
-          >
+          <Typography gutterBottom variant="h3">
             Sign in
           </Typography>
           <Typography variant="subtitle2">
@@ -106,20 +100,15 @@ const Login = () => {
             component={RouterLink}
             to="/auth/register"
             underline="always"
-            variant="subtitle2"
-          >
+            variant="subtitle2">
             Don't have an account?
           </Link>
         </CardContent>
         <CardMedia
           className={classes.media}
           image="/images/auth.png"
-          title="Cover"
-        >
-          <Typography
-            color="inherit"
-            variant="subtitle1"
-          >
+          title="Cover">
+          <Typography color="inherit" variant="subtitle1">
             Hella narvwhal Cosby sweater McSweeney's, salvia kitsch before they
             sold out High Life.
           </Typography>
@@ -130,16 +119,10 @@ const Login = () => {
               src="/images/avatars/avatar_2.png"
             />
             <div>
-              <Typography
-                color="inherit"
-                variant="body1"
-              >
+              <Typography color="inherit" variant="body1">
                 Ekaterina Tankova
               </Typography>
-              <Typography
-                color="inherit"
-                variant="body2"
-              >
+              <Typography color="inherit" variant="body2">
                 Manager at inVision
               </Typography>
             </div>

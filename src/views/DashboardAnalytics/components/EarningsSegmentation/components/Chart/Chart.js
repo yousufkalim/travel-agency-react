@@ -71,14 +71,8 @@ const Chart = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Doughnut
-        data={data}
-        options={options}
-      />
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Doughnut data={data} options={options} />
     </div>
   );
 };

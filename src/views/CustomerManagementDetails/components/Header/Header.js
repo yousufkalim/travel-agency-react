@@ -9,31 +9,17 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Header = props => {
-  const { className, ...rest } = props;
+  const { className, customerName, ...rest } = props;
 
   const classes = useStyles();
 
-  const customer = {
-    name: 'Ekaterina Tankova'
-  };
-
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Typography
-        component="h2"
-        gutterBottom
-        variant="overline"
-      >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Typography component="h2" gutterBottom variant="overline">
         Customers
       </Typography>
-      <Typography
-        component="h1"
-        variant="h3"
-      >
-        {customer.name}
+      <Typography component="h1" variant="h3">
+        {customerName}
       </Typography>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -14,6 +14,8 @@ import {
   Button,
   colors
 } from '@material-ui/core';
+import { updateCustomer } from 'actions'; ////update customer function
+import { message } from 'antd'; ///toast message from antd
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,13 +46,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CustomerEdit = props => {
-  const { open, onClose, customer, className, ...rest } = props;
+  const { open, onClose, customer, setCustomer, className, ...rest } = props;
 
   const classes = useStyles();
 
-  const [formState, setFormState] = useState({
-    ...customer
-  });
+  const [formState, setFormState] = useState({});
+
+  ////setting customer data to formstates
+  useEffect(() => {
+    setFormState(customer);
+  }, [customer]);
 
   if (!open) {
     return null;
@@ -67,34 +72,48 @@ const CustomerEdit = props => {
     }));
   };
 
+  // upating data to db
+  const onSave = async () => {
+    try {
+      const res = await updateCustomer(formState._id, formState);
+      res.data.success && message.success('Customer Upadted!');
+      setCustomer(formState);
+      onClose();
+    } catch (error) {
+      message.error(error?.response?.data?.error);
+    }
+  };
+
   return (
-    <Modal
-      onClose={onClose}
-      open={open}
-    >
-      <Card
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+    <Modal onClose={onClose} open={open}>
+      <Card {...rest} className={clsx(classes.root, className)}>
         <form>
           <CardContent>
-            <Typography
-              align="center"
-              gutterBottom
-              variant="h3"
-            >
+            <Typography align="center" gutterBottom variant="h3">
               Edit Customer
             </Typography>
-            <Grid
-              className={classes.container}
-              container
-              spacing={3}
-            >
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+            <Grid className={classes.container} container spacing={3}>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullWidth
+                  label="First Name"
+                  name="firstName"
+                  onChange={handleFieldChange}
+                  value={formState.firstName}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullWidth
+                  label="Last Name"
+                  name="lastName"
+                  onChange={handleFieldChange}
+                  value={formState.lastName}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Email address"
@@ -104,25 +123,7 @@ const CustomerEdit = props => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Full name"
-                  name="name"
-                  onChange={handleFieldChange}
-                  value={formState.name}
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Phone number"
@@ -132,25 +133,7 @@ const CustomerEdit = props => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="State/Region"
-                  name="state"
-                  onChange={handleFieldChange}
-                  value={formState.state}
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
                   label="Country"
@@ -160,40 +143,72 @@ const CustomerEdit = props => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
-                  label="Address 1"
-                  name="address1"
+                  label="Address"
+                  name="address"
                   onChange={handleFieldChange}
-                  value={formState.address1}
+                  value={formState.address}
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <TextField
                   fullWidth
-                  label="Address 2"
-                  name="address2"
-                  onChange={handleFieldChange}
-                  value={formState.address2}
+                  label="Passport"
+                  name="passport"
+                  onChange={e => {
+                    setFormState(formState => ({
+                      ...formState,
+                      info: {
+                        ...formState.info,
+                        passportNo: e.target.value
+                      }
+                    }));
+                  }}
+                  value={formState.info?.passportNo}
                   variant="outlined"
                 />
               </Grid>
-              <Grid item />
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullWidth
+                  label="Nationality"
+                  name="nationality"
+                  onChange={e => {
+                    setFormState(formState => ({
+                      ...formState,
+                      info: {
+                        ...formState.info,
+                        nationality: e.target.value
+                      }
+                    }));
+                  }}
+                  value={formState.info?.nationality}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullWidth
+                  label="NID"
+                  name="nid"
+                  onChange={e => {
+                    setFormState(formState => ({
+                      ...formState,
+                      info: {
+                        ...formState.info,
+                        nid: e.target.value
+                      }
+                    }));
+                  }}
+                  value={formState.info?.nid}
+                  variant="outlined"
+                />
+              </Grid>
+              {/* <Grid item />
+              <Grid item md={6} xs={12}>
                 <Typography variant="h5">Email Verified</Typography>
                 <Typography variant="body2">
                   Disabling this will automatically send the user a verification
@@ -208,11 +223,7 @@ const CustomerEdit = props => {
                   value={formState.verified}
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
+              <Grid item md={6} xs={12}>
                 <Typography variant="h5">Discounted Prices</Typography>
                 <Typography variant="body2">
                   This will give the user discountedprices for all products
@@ -225,21 +236,17 @@ const CustomerEdit = props => {
                   onChange={handleFieldChange}
                   value={formState.discountedPrices}
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
           </CardContent>
           <CardActions className={classes.actions}>
-            <Button
-              onClick={onClose}
-              variant="contained"
-            >
+            <Button onClick={onClose} variant="contained">
               Close
             </Button>
             <Button
               className={classes.saveButton}
-              onClick={onClose}
-              variant="contained"
-            >
+              onClick={onSave}
+              variant="contained">
               Save
             </Button>
           </CardActions>

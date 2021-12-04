@@ -69,28 +69,18 @@ const TopReferrals = props => {
   }, []);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        action={<GenericMoreButton />}
-        title="Top Referrals"
-      />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <CardHeader action={<GenericMoreButton />} title="Top Referrals" />
       <Divider />
       <CardContent className={classes.content}>
         <List disablePadding>
           {referrals.map((referral, i) => (
-            <ListItem
-              divider={i < referrals.length - 1}
-              key={referral.id}
-            >
+            <ListItem divider={i < referrals.length - 1} key={referral.id}>
               <ListItemAvatar>
                 <Avatar
                   className={classes.avatar}
                   size="small"
-                  style={{ backgroundColor: referral.color }}
-                >
+                  style={{ backgroundColor: referral.color }}>
                   {referral.initials}
                 </Avatar>
               </ListItemAvatar>
@@ -107,8 +97,7 @@ const TopReferrals = props => {
           component={RouterLink}
           size="small"
           to="#"
-          variant="text"
-        >
+          variant="text">
           See all
           <ArrowForwardIcon className={classes.arrowForwardIcon} />
         </Button>

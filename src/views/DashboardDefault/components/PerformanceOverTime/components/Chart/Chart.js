@@ -117,10 +117,7 @@ const Chart = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Line
         data={data}
         options={options}

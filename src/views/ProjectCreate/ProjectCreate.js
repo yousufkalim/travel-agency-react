@@ -43,10 +43,7 @@ const ProjectCreate = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Project Create"
-    >
+    <Page className={classes.root} title="Project Create">
       <Header />
       <AboutAuthor className={classes.aboutAuthor} />
       <AboutProject className={classes.aboutProject} />
@@ -54,10 +51,7 @@ const ProjectCreate = () => {
       <ProjectDetails className={classes.projectDetails} />
       <Preferences className={classes.preferences} />
       <div className={classes.actions}>
-        <Button
-          color="primary"
-          variant="contained"
-        >
+        <Button color="primary" variant="contained">
           Create project
         </Button>
       </div>

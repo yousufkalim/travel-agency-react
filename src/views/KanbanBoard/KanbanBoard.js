@@ -103,31 +103,23 @@ const KanbanBoard = () => {
   };
 
   return (
-    <Page
-      className={classes.root}
-      title="Kanban Board"
-    >
+    <Page className={classes.root} title="Kanban Board">
       <Header onListAdd={handleListAdd} />
       <div className={classes.content}>
         <DragDropContext onDragEnd={handleDragEnd}>
           {lists.map(list => (
-            <Droppable
-              droppableId={list.id}
-              key={list.id}
-            >
+            <Droppable droppableId={list.id} key={list.id}>
               {(provided, snapshot) => (
                 <TaskList
                   provided={provided}
                   snapshot={snapshot}
                   title={list.title}
-                  total={list.items.length}
-                >
+                  total={list.items.length}>
                   {list.items.map((task, index) => (
                     <Draggable
                       draggableId={task.id}
                       index={index}
-                      key={task.id}
-                    >
+                      key={task.id}>
                       {(provided, snapshot) => (
                         <TaskListItem
                           onOpen={() => handleTaskOpen(task)}

@@ -94,8 +94,7 @@ const Mail = () => {
         [classes.root]: true,
         [classes.openFolder]: openFolder
       })}
-      title="Mail"
-    >
+      title="Mail">
       <EmailFolders
         className={classes.emailFolders}
         onFolderOpen={handleFolderOpen}

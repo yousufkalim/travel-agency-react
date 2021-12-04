@@ -64,41 +64,17 @@ const Header = props => {
   const open = Boolean(selectEdge);
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Grid
-        container
-        justify="space-between"
-        spacing={3}
-      >
-        <Grid
-          item
-          lg={6}
-          xs={12}
-        >
-          <Typography
-            component="h2"
-            gutterBottom
-            variant="overline"
-          >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Grid container justify="space-between" spacing={3}>
+        <Grid item lg={6} xs={12}>
+          <Typography component="h2" gutterBottom variant="overline">
             Analytics
           </Typography>
-          <Typography
-            component="h1"
-            gutterBottom
-            variant="h3"
-          >
+          <Typography component="h1" gutterBottom variant="h3">
             Finance Overview
           </Typography>
         </Grid>
-        <Grid
-          className={classes.dates}
-          item
-          lg={6}
-          xs={12}
-        >
+        {/* <Grid className={classes.dates} item lg={6} xs={12}>
           <ButtonGroup variant="contained">
             <Button onClick={() => handleCalendarOpen('start')}>
               <CalendarTodayIcon className={classes.calendarTodayIcon} />
@@ -109,7 +85,7 @@ const Header = props => {
               {endDate.format('DD MM YYYY')}
             </Button>
           </ButtonGroup>
-        </Grid>
+        </Grid> */}
       </Grid>
       <DatePicker
         maxDate={moment()}

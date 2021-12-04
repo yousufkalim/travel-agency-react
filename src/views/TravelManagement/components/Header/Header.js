@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import NoticeModal from '../../CreateTrip/NoticeModal';
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
 const Header = props => {
-  const { className, ...rest } = props;
-
+  const { className, compName, ...rest } = props; /// compName holding name of prev component
+  const { user } = useSelector(state => state.session);
+  const history = useHistory();
   const classes = useStyles();
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
@@ -21,19 +25,40 @@ const Header = props => {
           <Typography component="h2" gutterBottom variant="overline">
             Travels
           </Typography>
-          <Typography component="h1" variant="h3">
-            Trip List
-          </Typography>
+          {/* checking previous component and showing title */}
+          {compName === 'archived' ? (
+            <Typography component="h1" variant="h3">
+              Trip Archive
+            </Typography>
+          ) : (
+            <Typography component="h1" variant="h3">
+              Trip List
+            </Typography>
+          )}
         </Grid>
-        <Grid item>
-          <Button
-            color="primary"
-            variant="contained"
-            component={Link}
-            to="/travels/trip/create">
-            Create Trip
-          </Button>
-        </Grid>
+        {/* Showing create button if prev component is not archived */}
+        {compName !== 'archived' && (
+          <Grid item>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={() => {
+                if (user.bankAdded || user.subscription.type === 'Beginner') {
+                  history.push('/travels/trip/create');
+                } else {
+                  setModalOpen(true);
+                }
+              }}>
+              Create Trip
+            </Button>
+            <NoticeModal
+              open={modalOpen}
+              setOpen={setModalOpen}
+              user={user}
+              history={history}
+            />
+          </Grid>
+        )}
       </Grid>
     </div>
   );

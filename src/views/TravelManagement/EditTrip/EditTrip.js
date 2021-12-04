@@ -46,6 +46,11 @@ import {
 import { message, Upload } from 'antd';
 import { useEffect } from 'react';
 
+import { useParams, useHistory } from 'react-router-dom'; ///useParams to get id and useHistory for redirecting
+
+import DatePicker from 'react-multi-date-picker'; ////import multiple date picker
+import DatePanel from 'react-multi-date-picker/plugins/date_panel'; //////to show selected dates on right
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: theme.breakpoints.values.lg,
@@ -59,9 +64,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EditTrip = props => {
-  const { match, history } = props;
   const classes = useStyles();
-
+  const params = useParams(); ///useParams obj
+  const history = useHistory(); ///useHistory obj
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     name: '',
@@ -72,8 +77,7 @@ const EditTrip = props => {
     description: '',
     includes: [],
     excludes: [],
-    activeOnSite: true,
-    archived: false,
+    status: 'published', //////status can either be published or archived
     address: '',
     city: '',
     zipcode: '',
@@ -98,6 +102,9 @@ const EditTrip = props => {
     reservationSignal: 0,
     suplimentPrice: 0
   });
+  const [departure, setDeparture] = useState([]);
+  const [arrival, setArrival] = useState([]);
+  const format = 'MM/DD/YYYY'; ////format for departure and arrival date
 
   const [cabin, setCabin] = useState({
     interior: { adultPrice: 0, childPrice: 0 },
@@ -110,16 +117,20 @@ const EditTrip = props => {
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
-    getSingleTrip(match.params.id).then(({ data }) => {
-      setValues({ ...values, ...data.data });
+    getSingleTrip(params.id).then(({ data }) => {
+      setValues({ ...values, ...data.trip }); ///data.trip from db response
       setTimeout(() => {
-        setValues({ ...values, ...data.data });
-        if (data.data?.gallery) {
-          setGallery(data.data?.gallery);
+        setValues({ ...values, ...data.trip }); ///setting intial values
+        ////checling for trip and getting gallery
+        if (data.trip?.gallery) {
+          setGallery(data.trip?.gallery);
         }
-        if (data.data?.banner) {
-          setBanner([data.data.banner]);
+        ////checling for trip and getting banner
+        if (data.trip?.banner) {
+          setBanner([data.trip.banner]);
         }
+        setDeparture(data.trip.departure);
+        setArrival(data.trip.arrival);
       }, 500);
     });
   }, []);
@@ -166,33 +177,57 @@ const EditTrip = props => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    setLoading(true);
-    const formData = new FormData();
-    formData.append('data', JSON.stringify(values));
-    if (banner.length) {
-      formData.append('banner', banner[0].originFileObj);
-    }
-    gallery.forEach(element => {
-      formData.append('gallery', element.originFileObj);
-    });
-
-    updateTrip(match.params.id, formData)
-      .then(res => {
-        setLoading(false);
-        message.success('trip updated successfully!');
-        history.push('/travel/triplist');
-      })
-      .catch(err => {
-        setLoading(false);
-        console.log(err.response);
+    if (departure.length !== arrival.length) {
+      // check for arrival and departure length
+      message.error('Number of departures and number of arrival must be same!');
+    } else {
+      setLoading(true);
+      let data = values;
+      let tempDeparture = [];
+      let tempArrival = [];
+      departure.map(item => {
+        tempDeparture =
+          typeof item !== 'string'
+            ? [...tempDeparture, item.format()]
+            : [...tempDeparture, item];
       });
+      arrival.map(item => {
+        tempArrival =
+          typeof item !== 'string'
+            ? [...tempArrival, item.format()]
+            : [...tempArrival, item];
+      });
+      ///// setting arrival and departure dates in data object
+      data.departure = tempDeparture;
+      data.arrival = tempArrival;
+      // formData
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(data));
+      if (banner.length) {
+        formData.append('banner', banner[0].originFileObj);
+      }
+      gallery.forEach(element => {
+        formData.append('gallery', element.originFileObj);
+      });
+
+      updateTrip(params.id, formData)
+        .then(res => {
+          setLoading(false);
+          message.success('trip updated successfully!');
+          history.push('/travel/triplist');
+        })
+        .catch(err => {
+          setLoading(false);
+          console.log(err.response);
+        });
+    }
   };
 
   const handleDeleteBanner = img => {
-    deleteBannerImage(match.params.id, img).then(res => console.log(res));
+    deleteBannerImage(params.id, img).then(res => console.log(res));
   };
   const handleDeleteGallery = img => {
-    deleteGalleryImage(match.params.id, img).then(res => console.log(res));
+    deleteGalleryImage(params.id, img).then(res => console.log(res));
   };
   return (
     <Page className={classes.root} title="Create New Trip">
@@ -451,31 +486,33 @@ const EditTrip = props => {
                   </Card>
                 </Grid>
 
-                <Grid item md={3} xs={12}>
-                  <TextField
-                    InputLabelProps={{ shrink: true }}
-                    label="Departure Date"
-                    onChange={handleChange}
-                    value={values.departure}
-                    name="departure"
-                    type="date"
-                    variant="outlined"
-                    fullWidth
+                <Grid item md={6} xs={12}>
+                  <Typography>Departure Date</Typography>
+                  <DatePicker
+                    multiple
+                    sort
+                    placeholder="mm/dd/yyyy"
+                    value={departure}
+                    onChange={setDeparture}
+                    format={format}
+                    plugins={[<DatePanel />]}
+                    style={{ height: '3.3rem', width: '320%' }}
                   />
                 </Grid>
-                <Grid item md={3} xs={12}>
-                  <TextField
-                    InputLabelProps={{ shrink: true }}
-                    label="Arrival Date"
-                    onChange={handleChange}
-                    value={values.arrival}
-                    name="arrival"
-                    type="date"
-                    variant="outlined"
-                    fullWidth
+                <Grid item md={6} xs={12}>
+                  <Typography>Arrival Date</Typography>
+                  <DatePicker
+                    multiple
+                    sort
+                    placeholder="mm/dd/yyyy"
+                    value={arrival}
+                    onChange={setArrival}
+                    format={format}
+                    plugins={[<DatePanel />]}
+                    style={{ height: '3.3rem', width: '320%' }}
                   />
                 </Grid>
-                <Grid item md={3} xs={12}>
+                <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
                     label="Minimum Reservation"
@@ -486,7 +523,7 @@ const EditTrip = props => {
                     variant="outlined"
                   />
                 </Grid>
-                <Grid item md={3} xs={12}>
+                <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
                     label="Maximum Reservation"
@@ -884,12 +921,13 @@ const EditTrip = props => {
                     </FormControl>
                   </Grid>
                 </Grid>
-                <Grid item md={2} xs={12}>
+                {/* <Grid item md={2} xs={12}>
                   <FormControlLabel
                     control={
                       <Checkbox
                         name="activeOnSite"
                         color="primary"
+                        checked={values.activeOnSite} ////default value
                         onChange={e => {
                           setValues({
                             ...values,
@@ -900,17 +938,24 @@ const EditTrip = props => {
                     }
                     label="Active on site"
                   />
-                </Grid>
+                </Grid> */}
                 <Grid item md={2} xs={12}>
                   <FormControlLabel
                     control={
                       <Checkbox
                         name="archived"
+                        checked={values.status === 'archived'} ////default value
                         onChange={e => {
-                          setValues({
-                            ...values,
-                            [e.target.name]: e.target.checked
-                          });
+                          // if checked then its archived else it is pubished
+                          e.target.checked
+                            ? setValues({
+                                ...values,
+                                status: 'archived'
+                              })
+                            : setValues({
+                                ...values,
+                                status: 'published'
+                              });
                         }}
                         color="primary"
                       />
@@ -923,6 +968,7 @@ const EditTrip = props => {
                     control={
                       <Checkbox
                         name="organizer"
+                        checked={values.organizer} ////default value
                         onChange={e => {
                           setValues({
                             ...values,
@@ -972,7 +1018,7 @@ const EditTrip = props => {
                 color="primary"
                 type="submit"
                 disabled={loading}>
-                Create Trip
+                Update Trip
               </Button>
             </CardActions>
           </Card>

@@ -6,6 +6,7 @@ import { Tabs, Tab, Divider, colors } from '@material-ui/core';
 
 import { Page } from 'components';
 import { Header, Timeline, Connections, Projects, Reviews } from './components';
+import { useHistory, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -24,9 +25,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Profile = props => {
-  const { match, history } = props;
+  const history = useHistory();
+  const params = useParams();
   const classes = useStyles();
-  const { id, tab } = match.params;
+  const { id, tab } = params;
 
   const handleTabsChange = (event, value) => {
     history.push(value);
@@ -48,24 +50,16 @@ const Profile = props => {
   }
 
   return (
-    <Page
-      className={classes.root}
-      title="Profile"
-    >
+    <Page className={classes.root} title="Profile">
       <Header />
       <div className={classes.inner}>
         <Tabs
           onChange={handleTabsChange}
           scrollButtons="auto"
           value={tab}
-          variant="scrollable"
-        >
+          variant="scrollable">
           {tabs.map(tab => (
-            <Tab
-              key={tab.value}
-              label={tab.label}
-              value={tab.value}
-            />
+            <Tab key={tab.value} label={tab.label} value={tab.value} />
           ))}
         </Tabs>
         <Divider className={classes.divider} />

@@ -62,19 +62,9 @@ const EmailForm = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <Avatar
-        alt="Person"
-        className={classes.avatar}
-        src={sender.avatar}
-      />
-      <Paper
-        className={classes.paper}
-        elevation={1}
-      >
+    <div {...rest} className={clsx(classes.root, className)}>
+      <Avatar alt="Person" className={classes.avatar} src={sender.avatar} />
+      <Paper className={classes.paper} elevation={1}>
         <TextareaAutosize
           className={classes.textArea}
           onChange={handleChange}
@@ -86,8 +76,7 @@ const EmailForm = props => {
           <Button
             className={classes.sendButton}
             color="primary"
-            variant="contained"
-          >
+            variant="contained">
             Send
           </Button>
           <Tooltip title="Attach image">
@@ -102,11 +91,7 @@ const EmailForm = props => {
           </Tooltip>
         </div>
       </Paper>
-      <input
-        className={classes.fileInput}
-        ref={fileInputRef}
-        type="file"
-      />
+      <input className={classes.fileInput} ref={fileInputRef} type="file" />
     </div>
   );
 };

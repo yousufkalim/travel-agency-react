@@ -75,16 +75,10 @@ const ProjectCard = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         avatar={
-          <Avatar
-            alt="Author"
-            src={project.author.avatar}
-          >
+          <Avatar alt="Author" src={project.author.avatar}>
             {getInitials(project.author.name)}
           </Avatar>
         }
@@ -97,8 +91,7 @@ const ProjectCard = props => {
               color="textPrimary"
               component={RouterLink}
               to="/profile/1/timeline"
-              variant="h6"
-            >
+              variant="h6">
               {project.author.name}
             </Link>{' '}
             | Updated: {moment(project.updated_at).fromNow()}
@@ -109,28 +102,21 @@ const ProjectCard = props => {
             color="textPrimary"
             component={RouterLink}
             to="/projects/1/overview"
-            variant="h5"
-          >
+            variant="h5">
             {project.title}
           </Link>
         }
       />
       <CardContent className={classes.content}>
         <div className={classes.description}>
-          <Typography
-            colo="textSecondary"
-            variant="subtitle2"
-          >
+          <Typography colo="textSecondary" variant="subtitle2">
             We're looking for experienced Developers and Product Designers to
             come aboard and help us build succesful businesses through softare.
           </Typography>
         </div>
         <div className={classes.tags}>
           {project.tags.map(tag => (
-            <Label
-              color={tag.color}
-              key={tag.text}
-            >
+            <Label color={tag.color} key={tag.text}>
               {tag.text}
             </Label>
           ))}
@@ -141,8 +127,7 @@ const ProjectCard = props => {
             alignItems="center"
             container
             justify="space-between"
-            spacing={3}
-          >
+            spacing={3}>
             <Grid item>
               <Typography variant="h5">${project.price}</Typography>
               <Typography variant="body2">Per Project</Typography>
@@ -161,8 +146,7 @@ const ProjectCard = props => {
                   <IconButton
                     className={classes.likedButton}
                     onClick={handleUnlike}
-                    size="small"
-                  >
+                    size="small">
                     <FavoriteIcon />
                   </IconButton>
                 </Tooltip>
@@ -171,17 +155,13 @@ const ProjectCard = props => {
                   <IconButton
                     className={classes.likeButton}
                     onClick={handleLike}
-                    size="small"
-                  >
+                    size="small">
                     <FavoriteBorderIcon />
                   </IconButton>
                 </Tooltip>
               )}
               <Tooltip title="Share">
-                <IconButton
-                  className={classes.shareButton}
-                  size="small"
-                >
+                <IconButton className={classes.shareButton} size="small">
                   <ShareIcon />
                 </IconButton>
               </Tooltip>
@@ -189,8 +169,7 @@ const ProjectCard = props => {
                 className={classes.learnMoreButton}
                 component={RouterLink}
                 size="small"
-                to="/projects/1/overview"
-              >
+                to="/projects/1/overview">
                 Learn more
               </Button>
             </Grid>
