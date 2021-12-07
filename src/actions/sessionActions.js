@@ -83,6 +83,7 @@ export const logout = history => async dispatch => {
   try {
     const { data } = await axios.get('/auth/logout', { withCredentials: true });
     if (data) {
+      localStorage.removeItem('token');
       dispatch({ type: SESSION_LOGOUT, payload: data.data });
       history.push('/auth/login');
     }
