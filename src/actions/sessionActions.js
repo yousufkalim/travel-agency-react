@@ -112,13 +112,8 @@ export const checkout = async payload => {
 
 // get current user
 export const getUser = () => {
-  const token = localStorage.getItem('token');
   return axios.get('/auth/profile', {
-    withCredentials: true,
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
+    withCredentials: true
   });
 };
 
