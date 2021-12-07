@@ -65,6 +65,7 @@ export const login = (payload, router) => async dispatch => {
       withCredentials: true
     });
     if (data) {
+      localStorage.setItem('token', data.token);
       dispatch({ type: SESSION_LOGIN, payload: data.user });
       router.history.push('/');
     }
@@ -111,8 +112,13 @@ export const checkout = async payload => {
 
 // get current user
 export const getUser = () => {
+  const token = localStorage.getItem('token');
   return axios.get('/auth/profile', {
-    withCredentials: true
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
   });
 };
 
