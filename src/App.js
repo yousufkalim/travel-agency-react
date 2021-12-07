@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import MomentUtils from '@date-io/moment';
@@ -23,6 +23,7 @@ import { getUser } from 'actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import Loader from 'components/Loader';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPEPK);
 const history = createBrowserHistory();
@@ -33,7 +34,7 @@ const authPath = '/login'; // <-- You can change this
 const App = () => {
   const dispatch = useDispatch();
   const { loggedIn } = useSelector(state => state.session);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch();
   }, []);
@@ -42,7 +43,9 @@ const App = () => {
     try {
       const { data } = await getUser();
       dispatch({ type: 'SESSION_LOGIN', payload: data.user });
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log('error: ', error?.response);
     }
   };
@@ -55,7 +58,11 @@ const App = () => {
             <ScrollReset />
             <GoogleAnalytics />
             <CookiesNotification />
-            {renderRoutes(routes(loggedIn), { hello: true })}
+            {loading ? (
+              <Loader />
+            ) : (
+              renderRoutes(routes(loggedIn), { hello: true })
+            )}
           </Router>
         </MuiPickersUtilsProvider>
       </ThemeProvider>
