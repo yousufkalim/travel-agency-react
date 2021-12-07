@@ -27,6 +27,7 @@ import { AddEditEvent, Toolbar } from './components';
 import { tripEvents } from 'actions/tripActions'; ///get trip action
 import tippy from 'tippy.js'; /////tippy to show tool tip
 import 'tippy.js/animations/scale-subtle.css';
+import { useSelector } from 'react-redux';
 
 // styles
 const useStyles = makeStyles(theme => ({
@@ -107,6 +108,7 @@ const Calendar = () => {
     open: false,
     event: null
   });
+  const { user } = useSelector(state => state.session);
 
   // useEffect to fetch data
   useEffect(() => {
@@ -124,7 +126,7 @@ const Calendar = () => {
 
   // fetch data from db
   const fetchData = async () => {
-    const tempData = await tripEvents();
+    const tempData = await tripEvents(user._id);
     tempData.data.map(item => {
       //// trips already passed in red others in green
       if (

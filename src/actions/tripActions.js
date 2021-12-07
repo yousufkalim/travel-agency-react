@@ -53,8 +53,8 @@ export const deleteTrip = payload => {
 };
 
 // trip events
-export const tripEvents = () => {
-  return axios.get('/trips/tripEvents', { withCredentials: true });
+export const tripEvents = id => {
+  return axios.get(`/trips/tripEvents/${id}`, { withCredentials: true });
 };
 
 // add Agency Bank
