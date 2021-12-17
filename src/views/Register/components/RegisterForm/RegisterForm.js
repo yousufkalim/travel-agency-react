@@ -28,6 +28,12 @@ const schema = {
       maximum: 32
     }
   },
+  agencyName: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 32
+    }
+  },
   email: {
     presence: { allowEmpty: false, message: 'is required' },
     email: true,
@@ -136,6 +142,7 @@ const RegisterForm = props => {
     // data to submit to db
     const data = {
       fullName: `${formState.values.firstName} ${formState.values.lastName}`,
+      agencyName: formState.values.agencyName,
       email: formState.values.email,
       type: 'AGENCY',
       password: formState.values.password,
@@ -178,6 +185,17 @@ const RegisterForm = props => {
           name="lastName"
           onChange={handleChange}
           value={formState.values.lastName || ''}
+          variant="outlined"
+        />
+        <TextField
+          error={hasError('agencyName')}
+          helperText={
+            hasError('agencyName') ? formState.errors.agencyName[0] : null
+          }
+          label="Agency name"
+          name="agencyName"
+          onChange={handleChange}
+          value={formState.values.agencyName || ''}
           variant="outlined"
         />
         <TextField

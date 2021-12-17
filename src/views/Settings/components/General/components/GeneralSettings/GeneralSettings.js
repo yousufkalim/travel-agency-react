@@ -21,6 +21,12 @@ const schema = {
       maximum: 32
     }
   },
+  agencyName: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 32
+    }
+  },
   email: {
     presence: { allowEmpty: false, message: 'is required' },
     email: true,
@@ -85,6 +91,7 @@ const GeneralSettings = props => {
       values: {
         firstName: nameArray[0],
         lastName: nameArray[1],
+        agencyName: user.agencyName,
         email: user.email,
         country: user.address.country
       }
@@ -114,6 +121,7 @@ const GeneralSettings = props => {
     e.preventDefault();
     const data = {
       fullName: `${formState.values.firstName} ${formState.values.lastName}`,
+      agencyName: formState.values.agencyName,
       email: formState.values.email,
       address: {
         country: formState.values.country
@@ -158,6 +166,17 @@ const GeneralSettings = props => {
           name="lastName"
           onChange={handleChange}
           value={formState.values.lastName || ''}
+          variant="outlined"
+        />
+        <TextField
+          error={hasError('agencyName')}
+          helperText={
+            hasError('agencyName') ? formState.errors.agencyName[0] : null
+          }
+          label="Agency name"
+          name="agencyName"
+          onChange={handleChange}
+          value={formState.values.agencyName || ''}
           variant="outlined"
         />
         <TextField
