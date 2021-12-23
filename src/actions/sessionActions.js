@@ -67,6 +67,9 @@ export const login = (payload, router) => async dispatch => {
     if (data) {
       localStorage.setItem('token', data.token);
       dispatch({ type: SESSION_LOGIN, payload: data.user });
+      axios.defaults.headers = {
+        Authorization: `Bearer ${data.token}`
+      };
       router.history.push('/');
     }
   } catch (error) {
